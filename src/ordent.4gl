@@ -15,9 +15,8 @@ CONSTANT PRGNAME = "Ordent"
 CONSTANT PRGDESC = "Order Entry Demo"
 CONSTANT PRGAUTH = "Neil J.Martin"
 
-&include "lib/gitver.inc"
 &define ABOUT 		ON ACTION about \
-			CALL gl_about( GITVER )
+			CALL gl_about( NULL )
 &define TIMELOG CALL timeLogIt(PRGNAME,__LINE__)
 &include "schema.inc"
 &include "ordent.inc"

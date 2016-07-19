@@ -29,7 +29,6 @@
 
 IMPORT os
 
-&include "gitver.inc"
 &include "genero_lib1.inc" -- Contains GL_DBGMSG & g_dbgLev
 
 -- These are used in gl_about.
@@ -46,6 +45,7 @@ DEFINE m_styleList om.DomNode
 DEFINE m_key STRING
 DEFINE m_pics STRING
 DEFINE m_langname, m_user_agent STRING
+DEFINE m_gitver STRING
 --------------------------------------------------------------------------------
 #+ Initialize Function
 #+
@@ -485,7 +485,7 @@ FUNCTION gl_setInfo(p_version, p_splash, p_progicon, p_progname, p_progdesc, p_p
 	LET gl_progname = p_progname
 	LET gl_progdesc = p_progdesc
 	LET gl_progauth = p_progauth
-	DISPLAY "Started: ",base.Application.getProgramName()," Build:",GITVER," - ",p_progname," ",p_progdesc
+	DISPLAY "Started: ",base.Application.getProgramName()," Build:",gl_getGitver()," - ",p_progname," ",p_progdesc
 
 END FUNCTION --}}}
 ----------------------------------------------------------------------------------
@@ -641,9 +641,8 @@ FUNCTION gl_titleWin( titl ) --{{{
 	IF gl_version IS NOT NULL THEN
 		LET new = new.trim()," ",gl_verFmt(gl_version)
 	ELSE
-		LET new = new.trim()," ("||GITVER||")"
+		LET new = new.trim()," ("||gl_getGitVer()||")"
 	END IF
-
 
 	GL_DBGMSG(1, "gl_titleWin: new '"||new||"' titl:"||titl)
 	CALL win.setText( new )
@@ -1426,7 +1425,7 @@ FUNCTION gl_about(gl_ver) --{{{
 		LET gl_progname = base.Application.getProgramName()
 	END IF
 	IF gl_ver IS NULL THEN
-		LET gl_ver = GITVER
+		LET gl_ver = gl_getGitver()
 	END IF
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.program"),"right","black")
 	CALL gl_addLabel(g,10,y,gl_progname||" - "||gl_ver,NULL,"black") LET y = y + 1
@@ -1563,7 +1562,7 @@ FUNCTION gl_verFmt( ver ) --{{{
 
 	LET x = ver.getIndexOf(":",1)
 
-	RETURN ver.subString(X+2, ver.getLength() - 1 )||"("||GITVER||")"
+	RETURN ver.subString(X+2, ver.getLength() - 1 )||"("||gl_getGitver()||")"
 END FUNCTION --}}}
 ----------------------------------------------------------------------------------
 #+ Get FrontEnd type and Version String.
@@ -3652,4 +3651,19 @@ FUNCTION fgl_db_driver_type()
 		LET dbdrv = fgl_getresource("dbi.default.driver")
 	END IF
 	RETURN dbdrv
+END FUNCTION
+--------------------------------------------------------------------------------
+#+ read ../etc/gitver.txt
+FUNCTION gl_getGitver()
+	DEFINE c base.Channel
+	IF m_gitVer IS NOT NULL THEN RETURN m_gitver END IF
+	LET c = base.Channel.create()
+	TRY
+		CALL c.openFile("../etc/gitver.txt","r")
+	CATCH
+		RETURN "No Git Ver File!"
+	END TRY
+	LET m_gitver = c.readLine()
+	CALL c.close()
+	RETURN m_gitver
 END FUNCTION

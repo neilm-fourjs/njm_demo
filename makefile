@@ -5,13 +5,13 @@ GITVER=$(shell git describe --always)
 GARNAME=njm_demo
 GARFILE=$(GARNAME).gar
 
-all: src/lib/gitver.inc app 
+all: etc/gitver.txt app 
+
+etc/gitver.txt:
+	echo $(GITVER) > etc/gitver.txt
 
 app:
 	gsmake njm_demo300.4pw
-
-src/lib/gitver.inc: 
-	echo "CONSTANT GITVER=\"$(GITVER)\"" > src/lib/gitver.inc
 
 run: all
 	run.sh menu.42r
@@ -22,9 +22,9 @@ run2: all
 clean:
 	rm -f *.gar;
 	rm -f *.tgz;
-	rm -f src/lib/gitver.inc;
 	rm -f *.4pw??;
 	rm -f gbc/njm_gbc.tgz;
+	rm -f etc/gitver.txt;
 	find . -name \*.42? -exec rm {} \;
 	find . -name \*.err -exec rm {} \;
 	find . -name \*.out -exec rm {} \;

@@ -9,7 +9,6 @@ CONSTANT PRGAUTH = "Neil J.Martin"
 CONSTANT D_IDLETIME = 300
 
 &define TIMELOG CALL timeLogIt(PRGNAME,__LINE__)
-&include "lib/gitver.inc"
 &include "schema.inc"
 DEFINE m_compno SMALLINT
 DEFINE m_user, m_titl VARCHAR(60)
@@ -142,7 +141,7 @@ MAIN
 					CALL DIALOG.setCurrentRow("menu",1)
 			END CASE
 		ON ACTION about
-			CALL gl_about( GITVER )
+			CALL gl_about( NULL )
 		ON ACTION exit 
 			IF ARG_VAL(1) = "MDI" THEN
 				IF ui.Interface.getChildCount() > 0 THEN
