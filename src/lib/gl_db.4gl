@@ -4,16 +4,14 @@
 #+ $Id: gl_db.4gl 795 2010-09-15 08:32:16Z  $
 
 IMPORT os
+
 &include "genero_lib1.inc"
 CONSTANT VER = "$Rev: 795 $"
 CONSTANT PRG = "gl_db"
 CONSTANT PRGDESC = "Library code DB"
 CONSTANT PRGAUTH = "Neil J.Martin"
 
-CONSTANT DEF_DBDRIVER="dbmifx9x"
-CONSTANT DEF_DBNAME="genero_demos"
-CONSTANT DEF_DBDSN="genero_dsn"
-CONSTANT DEF_DBDIR="sqlite_db"
+&include "db.inc"
 
 DEFINE m_dbtyp, m_dbnam, m_dbsrc,  m_dbdrv,  m_dbcon STRING
 
@@ -54,11 +52,6 @@ GL_MODULE_ERROR_HANDLER
 				LET m_dbnam = "Informix "||drv.subString(7,9)
 				LET src = fgl_getEnv("INFORMIXSERVER")
 				LET con = db
-			WHEN "ads"
-				LET src = fgl_getEnv("ANTS_DSN")
-				IF src IS NULL OR src = " " THEN LET src = DEF_DBDSN END IF
-				LET m_dbnam = "GeneroDB "||drv.subString(7,9)
-				LET con = "db+driver='"||drv||"',source='"||src||"'"
 			WHEN "sqt"	
 				LET src = fgl_getEnv("SQLITEDB")
 				IF src IS NULL OR src = " " THEN LET src = dbdir||os.path.separator()||db||".db" END IF

@@ -1470,7 +1470,7 @@ FUNCTION gl_about(gl_ver) --{{{
 	CALL gl_addLabel(g,10,y,fgl_getEnv("DBNAME"),NULL,NULL) LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.dbtype"),"right","black")
-	CALL gl_addLabel(g,10,y,UPSHIFT( fgl_db_driver_type() ),NULL,"black") LET y = y + 1
+	CALL gl_addLabel(g,10,y, fgl_db_driver_type() ,NULL,"black") LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.dbdate"),"right","black")
 	CALL gl_addLabel(g,10,y,fgl_getEnv("DBDATE"),NULL,"black") LET y = y + 1
@@ -3640,7 +3640,6 @@ FUNCTION gl_floatKeys(o_c) --{{{
 
 END FUNCTION --}}}
 --------------------------------------------------------------------------------
-&ifndef genero23x
 #+ Special - this function is built in to 2.3x
 FUNCTION fgl_db_driver_type()
 	DEFINE dbname, dbdrv STRING
@@ -3649,7 +3648,8 @@ FUNCTION fgl_db_driver_type()
 	IF dbname IS NULL THEN LET dbname = "unknown" END IF
 	GL_DBGMSG(0, "fgl_db_driver_type, dbname:"||dbname)
 	LET dbdrv = fgl_getresource("dbi.database."||dbname||".driver")
-	IF dbdrv IS NULL THEN LET dbdrv = "???" END IF
-	RETURN dbdrv.subString(4,6)
+	IF dbdrv IS NULL THEN
+		LET dbdrv = fgl_getresource("dbi.default.driver")
+	END IF
+	RETURN dbdrv
 END FUNCTION
-&endif

@@ -8,7 +8,7 @@ IMPORT os
 
 &include "db.inc"
 
-CONSTANT DEF_DB_DIR="sqlite_db"
+CONSTANT DB_EXP = "../db/njm_demo.exp/"
 
 DEFINE db VARCHAR(20)
 DEFINE dbdir,dbfil, drv STRING
@@ -19,16 +19,16 @@ MAIN
 	CALL startlog( base.application.getProgramName()||".log" )
 
 	LET db = fgl_getenv("DBNAME")
-	IF db IS NULL OR db = " " THEN LET db = DEF_DB_NAME END IF
+	IF db IS NULL OR db = " " THEN LET db = DEF_DBNAME END IF
 
 	LET dbdir = fgl_getenv("DBDIR")
-	IF dbdir IS NULL OR dbdir = " " THEN LET dbdir = DEF_DB_DIR END IF
+	IF dbdir IS NULL OR dbdir = " " THEN LET dbdir = DEF_DBDIR END IF
 
 	LET drv = fgl_getenv("DBDRIVER")
-	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DB_DRIVER END IF
+	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DBDRIVER END IF
 
 	IF drv.subString(4,6) != "sqt" THEN
-		CALL fgl_winMessage("ERROR","This program is only intended for SQLite!","exclamation")
+		CALL fgl_winMessage("ERROR","This program is only intended for SQLite!\n"||drv,"exclamation")
 		EXIT PROGRAM
 	END IF
 
@@ -43,16 +43,13 @@ MAIN
 	LET con = "db+driver='"||drv||"',source='"||dbfil||"'"
 
 	IF NOT connect( con ) THEN
-		EXIT PROGRAM
+		CREATE DATABASE dbfil
+		CONNECT TO dbfil
 	END IF
 
 	CALL doit()
 
 END MAIN
----------------------------------------------------
-#+ Custom load routine for database specific loading
-FUNCTION load()
-END FUNCTION
 ---------------------------------------------------
 FUNCTION create()
 	DISPLAY "Creating tables..."
@@ -249,4 +246,88 @@ FUNCTION create()
 			PRIMARY KEY (menu_key, role_key)
 	)
 	DISPLAY "Done."
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION load()
+	DEFINE l_dbfil, l_line, l_line2 STRING
+	DEFINE c base.Channel
+	LET c = base.Channel.create()
+	CALL c.openFile( DB_EXP||"njm_demo.sql","r")
+	WHILE NOT c.isEof()
+		LET l_line = c.readLine()
+		IF l_line.subString(1,7) = "{ TABLE" THEN
+			LET l_line2 = c.readLine()
+			IF l_line2.getLength() < 8 OR l_line2.subString(1,8) != "{ unload" THEN
+				LET l_line2 = c.readLine()
+			END IF
+			CALL process_line( l_line, l_line2 ) 
+		END IF
+	END WHILE
+
+	CALL insert_system()
+
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION process_line( l_line1, l_line2 )
+	DEFINE l_line1, l_line2 STRING
+	DEFINe l_tab, l_fil STRING
+	DEFINE l_st base.StringTokenizer
+	IF l_line2.subString(1,8) != "{ unload" THEN RETURN END IF
+
+	--DISPLAY "Line1:",l_line1
+	--DISPLAY "Line2:",l_line2
+
+	LET l_st = base.StringTokenizer.create(l_line1," ")
+	LET l_tab = l_st.nextToken() # { 
+	LET l_tab = l_st.nextToken() # TABLE
+	LET l_tab = l_st.nextToken() # table name
+
+	LET l_st = base.StringTokenizer.create(l_line2," ")
+	LET l_fil = l_st.nextToken() # {
+	LET l_fil = l_st.nextToken() # unload
+	LET l_fil = l_st.nextToken() # file
+	LET l_fil = l_st.nextToken() # name
+	LET l_fil = l_st.nextToken() # =
+	LET l_fil = l_st.nextToken() # file-name
+
+	DISPLAY "Tab:",l_tab, " File:",l_fil
+
+	EXECUTE IMMEDIATE "delete from "||l_tab
+	TRY
+		CASE l_tab 
+			WHEN "addresses"
+				LOAD FROM DB_EXP||l_fil INSERT INTO addresses
+			WHEN "countries"
+				LOAD FROM DB_EXP||l_fil INSERT INTO countries
+			WHEN "customer"
+				LOAD FROM DB_EXP||l_fil INSERT INTO customer
+			WHEN "disc"
+				LOAD FROM DB_EXP||l_fil INSERT INTO disc
+			WHEN "ord_detail"
+				LOAD FROM DB_EXP||l_fil INSERT INTO ord_detail
+			WHEN "ord_head"
+				LOAD FROM DB_EXP||l_fil INSERT INTO ord_head
+			WHEN "ord_payment"
+				LOAD FROM DB_EXP||l_fil INSERT INTO ord_payment
+			WHEN "pack_items"
+				LOAD FROM DB_EXP||l_fil INSERT INTO pack_items
+			WHEN "stock"
+				LOAD FROM DB_EXP||l_fil INSERT INTO stock
+			WHEN "stock_cat"
+				LOAD FROM DB_EXP||l_fil INSERT INTO stock_cat
+			WHEN "supplier"
+				LOAD FROM DB_EXP||l_fil INSERT INTO supplier
+		{	WHEN "sys_menu_roles"
+				LOAD FROM DB_EXP||l_fil INSERT INTO sys_menu_roles
+			WHEN "sys_menus"
+				LOAD FROM DB_EXP||l_fil INSERT INTO sys_menus
+			WHEN "sys_roles"
+				LOAD FROM DB_EXP||l_fil INSERT INTO sys_roles
+			WHEN "sys_users"
+				LOAD FROM DB_EXP||l_fil INSERT INTO sys_users }
+		END CASE
+	CATCH
+		DISPLAY "Failed:",SQLCA.SQLERRD[2],":",SQLERRMESSAGE
+	END TRY
+
 END FUNCTION

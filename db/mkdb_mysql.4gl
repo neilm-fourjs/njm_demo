@@ -20,13 +20,13 @@ MAIN
 	CALL startlog( base.application.getProgramName()||".log" )
 
 	LET db = fgl_getenv("DBNAME")
-	IF db IS NULL OR db = " " THEN LET db = DEF_DB_NAME END IF
+	IF db IS NULL OR db = " " THEN LET db = DEF_DBNAME END IF
 
 	LET dbdir = fgl_getenv("DATADIR")
-	IF dbdir IS NULL OR dbdir = " " THEN LET dbdir = DEF_DB_DIR END IF
+	IF dbdir IS NULL OR dbdir = " " THEN LET dbdir = DEF_DBDIR END IF
 
 	LET drv = fgl_getenv("DBDRIVER")
-	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DB_DRIVER END IF
+	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DBDRIVER END IF
 
 	IF drv.subString(4,6) != "mys" THEN
 		CALL fgl_winMessage("ERROR","This program is only intended for MySQL!","exclamation")
@@ -79,10 +79,6 @@ FUNCTION mkdb(db,un,pw)
 	RUN cmd
 
 	DISPLAY "mkdb: Done."
-END FUNCTION
----------------------------------------------------
--- Custom load routine for database specific loading
-FUNCTION load()
 END FUNCTION
 ---------------------------------------------------
 FUNCTION create()
@@ -281,4 +277,8 @@ FUNCTION create()
 			PRIMARY KEY (menu_key, role_key)
 	)
 	DISPLAY "Done."
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION load()
+	RUN "fglrun pop_db"
 END FUNCTION

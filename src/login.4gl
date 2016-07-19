@@ -1,4 +1,7 @@
 
+IMPORT FGL genero_lib1
+IMPORT FGL fjs_lib
+
 CONSTANT VER = "$Rev: 747 $"
 CONSTANT PRGNAME = "Login"
 CONSTANT PRGDESC = "Fjs Demos Suite"
@@ -20,7 +23,7 @@ FUNCTION login()
 	DEFINE l_result INTEGER
 
 	WHENEVER ANY ERROR CALL gl_error
-	LET l_cookie = "NJM User:",fgl_getEnv("USERNAME")," RS:",fgl_getEnv("FGLRESOURCEPATH")
+	LET l_cookie = "User:",fgl_getEnv("USERNAME")," RS:",fgl_getEnv("FGLRESOURCEPATH")
 	DISPLAY "login: ",l_cookie
 	CALL errorlog(l_cookie)
 
@@ -32,7 +35,7 @@ FUNCTION login()
 	END IF
 
 	OPEN WINDOW login WITH FORM "login"
-	CALL gl_titleWin(NULL)
+	CALL genero_lib1.gl_titleWin(NULL)
 
 	WHILE TRUE
 		LET int_flag = FALSE
@@ -50,16 +53,14 @@ FUNCTION login()
 				SELECT user_key,username INTO l_user_key,l_user FROM sys_users 
 					WHERE username = l_username AND password = l_password
 				IF STATUS = NOTFOUND THEN
-					CALL fgl_winMessage("Failed","Login failed ...\nInvalid username or password!","exclamaation")
+					CALL genero_lib1.gl_winMessage("Failed","Login failed ...\nInvalid username or password!","exclamaation")
 					LET l_username = ""
 					LET l_password = ""
 					NEXT FIELD l_username
 				END IF
-			{ON ACTION dialogtouched
-				DISPLAY "Touched:",l_username}
 		END INPUT
 		IF NOT int_flag THEN
-			IF NOT checkUserRoles(l_user_key,"Login",TRUE) THEN
+			IF NOT fjs_lib.checkUserRoles(l_user_key,"Login",TRUE) THEN
 				CONTINUE WHILE
 			END IF
 			IF UPSHIFT(ui.Interface.getFrontEndName()) != "GDC" THEN

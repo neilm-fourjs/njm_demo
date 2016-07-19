@@ -20,7 +20,7 @@ DEFINE m_dbtyp STRING
 FUNCTION insert()
 	
 	LET m_dbtyp = FGL_DB_DRIVER_TYPE()
-	IF m_dbtyp = "snc" OR m_dbtyp = "msv" THEN CALL load() RETURN END IF
+	IF m_dbtyp = "snc" OR m_dbtyp = "msv" OR m_dbtyp = "sqt" THEN CALL load() RETURN END IF
 
 	DISPLAY "Inserting test data..."
 	INSERT INTO customer VALUES(1,"NJM Software Projects Inc","Neil Martin","njm@njm-projects.com","12njm",1,1, "CC", 10000, 0 ,0)
@@ -111,6 +111,22 @@ FUNCTION insert()
 	INSERT INTO disc VALUES("DD","CC",1.45)
 	INSERT INTO disc VALUES("DD","DD",1.55)
 
+	CALL officeStore()
+	IF m_dbtyp = "ifx" THEN
+		CALL stores_demo()
+	END IF
+	CALL insSupp()
+	CALL genOrders()
+
+	CALL insert_system()
+
+	DISPLAY "Done."
+END FUNCTION
+---------------------------------------------------
+FUNCTION insert_system()
+
+	DISPLAY "Loading system users / menus ..."
+
 	LET m_ukey = 1
 	CALL addUser("neilm","Neil J.Martin","12neilm","neilm@4js.com","C",0)
 	CALL addUser("njm","N J.Martin","12njm","njm@njm-projects.com","A",1)
@@ -196,14 +212,8 @@ FUNCTION insert()
 	CALL addMenu("oeprn","oe","F","Print Invoices", "printInvoices.42r 0 ordent.4rp","")
 	CALL addMenu("oeprn","oe","F","Print Picking Notes", "printInvoices.42r picklist.4rp","")
 
-	CALL officeStore()
-	IF m_dbtyp = "ifx" THEN
-		CALL stores_demo()
-	END IF
-	CALL insSupp()
-	CALL genOrders()
-
 	DISPLAY "Done."
+
 END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION addUser(l_username,l_fullname,l_password,l_email,l_user_type,l_prog_no)
@@ -215,11 +225,11 @@ DEFINE
 		l_user_type CHAR(1),
 		l_prog_no SMALLINT
 
+	IF m_ukey IS NULL THEN LET m_ukey = 1 END IF
 	IF m_dbtyp = "pgs" THEN
 		INSERT INTO sys_users VALUES(nextval('sys_users_user_key_seq'),l_username,l_fullname,l_password,l_email,"","",0,l_user_type,l_prog_no,"Y")
 	ELSE
 		INSERT INTO sys_users VALUES(m_ukey,l_username,l_fullname,l_password,l_email,"","",0,l_user_type,l_prog_no,"Y")
-
 	END IF
 	LET m_ukey = m_ukey + 1
 END FUNCTION

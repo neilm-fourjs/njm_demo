@@ -58,7 +58,6 @@ FUNCTION checkUserRoles(l_user_key,l_role,l_verb)
 		RETURN FALSE
 	END IF
 
-
 	SELECT r.active,role_key INTO l_r_act,l_role_key 
 		FROM sys_roles r WHERE r.role_name = l_role
 	IF STATUS = NOTFOUND THEN

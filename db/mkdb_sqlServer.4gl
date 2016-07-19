@@ -11,7 +11,7 @@
 
 &include "db.inc"
 
-CONSTANT DEF_SRV_NAME="COPLAND2\\SQLEXPRESS"
+CONSTANT DEF_SRVNAME="COPLAND2\\SQLEXPRESS"
 
 DEFINE db VARCHAR(20)
 DEFINE src,drv STRING
@@ -23,17 +23,17 @@ MAIN
 	CALL startlog( base.application.getProgramName()||".log" )
 
 	LET db = fgl_getenv("DBNAME")
-	IF db IS NULL OR db = " " THEN LET db = DEF_DB_NAME END IF
+	IF db IS NULL OR db = " " THEN LET db = DEF_DBNAME END IF
 
 	LET drv = fgl_getenv("DBDRIVER")
-	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DB_DRIVER END IF
+	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DBDRIVER END IF
 
 	IF drv.subString(4,6) != "snc" AND drv.subString(4,6) != "msv" THEN
 		CALL fgl_winMessage("ERROR","This program is only intended for SQL Server!","exclamation")
 		EXIT PROGRAM
 	END IF
 
-	LET src = DEF_DB_NAME -- fgl_getenv("DNS")
+	LET src = DEF_DBNAME -- fgl_getenv("DNS")
 
 	DISPLAY "DB:",db," FGLPROFILE:",fgl_getenv("FGLPROFILE")," SRC:",src
 	LET con = db||"+driver='"||drv||"'" --,source='"||src||"'"
@@ -45,7 +45,7 @@ MAIN
 	CALL doit()
 
 END MAIN
----------------------------------------------------
+--------------------------------------------------------------------------------
 #+ Custom load routine for database specific loading
 FUNCTION load()
 	DEFINE c base.Channel

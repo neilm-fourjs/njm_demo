@@ -15,10 +15,10 @@ MAIN
 	CALL startlog( base.application.getProgramName()||".log" )
 
 	LET db = fgl_getenv("DBNAME")
-	IF db IS NULL OR db = " " THEN LET db = DEF_DB_NAME END IF
+	IF db IS NULL OR db = " " THEN LET db = DEF_DBNAME END IF
 
 	LET drv = fgl_getenv("DBDRIVER")
-	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DB_DRIVER END IF
+	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DBDRIVER END IF
 
 	IF drv.subString(4,6) != "ifx" THEN
 		CALL fgl_winMessage("ERROR","This program is only intended for Informix!","exclamation")
@@ -39,7 +39,6 @@ MAIN
 END MAIN
 ---------------------------------------------------
 FUNCTION create()
-
 	DISPLAY "Creating tables..."
 	CREATE TABLE customer (
 		customer_code CHAR(8) PRIMARY KEY,
@@ -234,4 +233,8 @@ FUNCTION create()
 			PRIMARY KEY (menu_key, role_key)
 	)
 	DISPLAY "Done."
+END FUNCTION
+--------------------------------------------------------------------------------
+FUNCTION load()
+	RUN "fglrun pop_db"
 END FUNCTION

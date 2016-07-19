@@ -1,16 +1,17 @@
 
 # Default database settings
 
-CONSTANT DEF_DB_NAME="njm_demo"
+CONSTANT DEF_DBNAME="njm_demo"
 
 # Informix
-CONSTANT DEF_DB_DRIVER="dbmifx9x"
+#CONSTANT DEF_DB_RIVER="dbmifx9x"
 
 # SQLServer
-#CONSTANT DEF_DB_DRIVER="dbmsnc90"
+#CONSTANT DEF_DBDRIVER="dbmsnc90"
 
 # MySQL
-#CONSTANT DEF_DB_DRIVER="dbmmys51x"
+#CONSTANT DEF_DBDRIVER="dbmmys51x"
 
 # SQLite
-#CONSTANT DEF_DB_DRIVER="dbmsqt3xx"
+CONSTANT DEF_DBDRIVER="dbmsqt3xx"
+CONSTANT DEF_DBDIR="../etc"
