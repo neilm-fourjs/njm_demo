@@ -61,6 +61,7 @@ GL_MODULE_ERROR_HANDLER
 	CALL oe_cursors()
 	TIMELOG
 
+	OPEN FORM ordent FROM "ordent"
 	OPEN FORM ordent2 FROM "ordent2"
 	DISPLAY FORM ordent2
 
