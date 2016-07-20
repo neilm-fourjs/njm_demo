@@ -21,6 +21,8 @@ modulum('MyLabelWidget_stat', ['LabelWidget', 'WidgetFactory'],
       /** @lends classes.MyLabelWidget_stat.prototype */
       return {
         __name: "MyLabelWidget_stat",
+				// using default LabelWidget template!
+				__templateName: "LabelWidget",
 
         /**
          * @param {string} value sets the value to display
@@ -31,8 +33,6 @@ modulum('MyLabelWidget_stat', ['LabelWidget', 'WidgetFactory'],
           // Call the parent class setValue function.
           $super.setValue.call(this,value);
             
-          // your code here
-          
           // Set the text in the ApplicationHost bar.
           //context.HostService.getApplicationHostWidget().getMenu().setText( value );
         
