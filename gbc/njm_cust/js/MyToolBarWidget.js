@@ -35,12 +35,14 @@ modulum('MyToolBarWidget', ['ToolBarWidget', 'WidgetFactory'],
           /*this._scroller = new cls.ScrollTabDecorator(this);*/
         },
           
+        // this function sets the weboeUser to the passed text value - called from custom label widget.
         setWebOEUser: function(text) {
-            this._weboeUser = this._element.getElementsByClassName("weboeUser")[0];
+            this._weboeUser = this._element.getElementsByClassName("mt-weboeUser")[0];
             this._weboeUser.innerHTML = text;
         },
+        // this function sets the weboeStat to the passed text value - called from custom label widget.
         setWebOEStat: function(text) {
-            this._weboeStat = this._element.getElementsByClassName("weboeStat")[0];
+            this._weboeStat = this._element.getElementsByClassName("mt-weboeStat")[0];
             this._weboeStat.innerHTML = text;
         }
 

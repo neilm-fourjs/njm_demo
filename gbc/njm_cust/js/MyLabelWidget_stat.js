@@ -26,10 +26,31 @@ modulum('MyLabelWidget_stat', ['LabelWidget', 'WidgetFactory'],
          * @param {string} value sets the value to display
          */
         setValue: function(value) {
-            // your code here
+          // your code here
+            
+          // Call the parent class setValue function.
           $super.setValue.call(this,value);
-            // your code here
-          context.HostService.getApplicationHostWidget().getMenu().setText( value );
+            
+          // your code here
+          
+          // Set the text in the ApplicationHost bar.
+          //context.HostService.getApplicationHostWidget().getMenu().setText( value );
+        
+          // Get the modelHelper.
+          var modelhelper=new cls.ModelHelper( this );
+          // Use the modelHelper to get the ToolBar node by first getting the Window Anchor node, then the form, then the toolbar
+          var toolbarnode = modelhelper.getAnchorNode().getAncestor("Window").getFirstChild("Form").getFirstChild("ToolBar");
+
+          // Get the tag attribute of the AUI object for this Label;
+          var tag = modelhelper.getAnchorNode().getFirstChild("Label").attribute("tag");
+          if ( tag == "user") {
+            // now we get the controller for the toolbar node, then it's widget, then we can call our custom function.
+            toolbarnode.getController().getWidget().setWebOEUser( value );
+          };
+          if ( tag == "status") {
+            // now we get the controller for the toolbar node, then it's widget, then we can call our custom function.
+            toolbarnode.getController().getWidget().setWebOEStat( value );
+          };
         }
 
       };

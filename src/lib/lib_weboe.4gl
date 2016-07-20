@@ -155,7 +155,7 @@ FUNCTION setSignInAction()
 	ELSE
 		CALL f.setElementText("signin","Sign Out")
 	END IF
-	DISPLAY g_custname TO custname
+	DISPLAY "Welcome:"||g_custname TO custname
 END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION detLine(l_sc,l_qty)

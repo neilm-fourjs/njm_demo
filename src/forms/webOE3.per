@@ -2,20 +2,16 @@
 &include "schema.inc"
 
 TOOLBAR ( STYLE="gbc_weboe")
-	ITEM cancel (TEXT="Leave", IMAGE="fa-sign-out", STYLE="gbc_weboe")
 	ITEM signin ( STYLE="gbc_weboe")
 	ITEM viewb ( STYLE="gbc_weboe")
 	ITEM gotoco ( STYLE="gbc_weboe")
 	ITEM about ( STYLE="gbc_weboe")
+	ITEM cancel (TEXT="Leave", IMAGE="fa-sign-out", STYLE="gbc_weboe")
 END -- TB
 
 LAYOUT (TEXT="Main Store Front #3", VERSION="$Id: webOE.per 960 2016-06-13 14:39:50Z neilm $")
 VBOX
-GRID
-{
-Welcome:[f001               ][" "][status                                      ][a]
-}
-END -- GRID
+
 HBOX (SPLITTER)
 VBOX
 GRID
@@ -47,6 +43,13 @@ END -- GRID
 END -- VBOX
 
 END --HBOX
+
+GRID info
+{
+[f001               ][status                                      ]
+}
+END -- GRID
+
 END --VBOX
 
 TABLES
@@ -57,9 +60,8 @@ ord_payment
 
 ATTRIBUTES
 
-LABEL f001 = FORMONLY.custname,SIZEPOLICY=DYNAMIC, STYLE="big";
-LABEL status = FORMONLY.status,SIZEPOLICY=DYNAMIC, STYLE="gbc_status";
-BUTTON a : about,STYLE="small",TEXT="";
+LABEL f001 = FORMONLY.custname,SIZEPOLICY=DYNAMIC, STYLE="gbc_status",TAG="user";
+LABEL status = FORMONLY.status,SIZEPOLICY=DYNAMIC, STYLE="gbc_status",TAG="status";
 
 IMAGE pt1 : pt1, IMAGE="fa-cc-paypal", SIZEPOLICY=FIXED, AUTOSCALE;
 IMAGE pt2 : pt2, IMAGE="fa-cc-mastercard", SIZEPOLICY=FIXED, AUTOSCALE;
