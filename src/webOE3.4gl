@@ -153,7 +153,7 @@ FUNCTION build_grids()
 	DEFINE l_hbox, n,n1, ff om.DomNode
 	DEFINE x,y, l_gw SMALLINT
 	CONSTANT l_lab1_gwidth = 12
-	CONSTANT l_lab2_gwidth = 3
+	CONSTANT l_lab2_gwidth = 4
 	CONSTANT l_qty_gwidth = 6
 	CONSTANT l_detbut_gwidth = 2
 
@@ -220,7 +220,7 @@ FUNCTION build_grids()
 		END IF
 		CALL n1.setAttribute("style", "bold")
 		CALL n1.setAttribute("gridWidth",l_lab2_gwidth)
-		CALL n1.setAttribute("width","4")
+		CALL n1.setAttribute("width","5")
 		CALL n1.setAttribute("sizePolicy","fixed")
 		CALL n1.setAttribute("posY","10")
 		CALL n1.setAttribute("posX","1")
@@ -245,10 +245,13 @@ FUNCTION build_grids()
 			CALL n1.setAttribute("posY","10")
 			CALL n1.setAttribute("posX",l_lab2_gwidth+l_qty_gwidth)
 		END IF
-		DISPLAY "Grid x:",x, " y:",y, " MOD4:",( x MOD 4 ), " len:",m_items.getLength()
+
+		--DISPLAY "Grid x:",x, " y:",y, " MOD4:",( x MOD 4 ), " len:",m_items.getLength()
+
 		IF NOT x MOD 4 THEN
 			LET l_hbox = m_vbox.createChild("HBox")
 		END IF
+
 	END FOR
 
 END FUNCTION
