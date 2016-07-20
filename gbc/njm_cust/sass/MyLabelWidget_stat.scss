@@ -1,4 +1,8 @@
 .gbc_MyLabelWidget_stat {
   display: none;
   height: 0px;
+  padding: $gbc-margin-ratio*0px;
+  .g_measured &.g_measureable{
+    width: 0%;
+  }
 }

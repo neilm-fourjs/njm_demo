@@ -13,16 +13,16 @@ $gbc-ToolBar-hover-color: $gbc-primary-light-color;
   &.mt-item {
     border-radius: 2px;
    	border-color: $gbc-primary-light-color;
-		border-right: 1px solid;
+    border-right: 1px solid;
     min-width: 56px;
     cursor: pointer;
     background-color: $gbc-primary-color;
-		color: white;
+    color: white;
 
     &:not(.disabled) {
       &:hover {
-    		background-color: $gbc-primary-medium-color;
-				color: black;
+        background-color: $gbc-primary-medium-color;
+        color: black;
       }
     }
 
@@ -50,7 +50,7 @@ $gbc-ToolBar-hover-color: $gbc-primary-light-color;
     display: flex;
     svg {
       flex: 1 1 auto;
-			fill: $text-light-87;
+      fill: $gbc-primary-background-color;
     }
     img{
       flex: 0 0 auto;

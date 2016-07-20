@@ -150,6 +150,15 @@ GL_MODULE_ERROR_HANDLER
 		LET l_use_fi = FALSE
 	END IF
 
+	IF gl_progIcon IS NOT NULL THEN
+		IF m_pics IS NOT NULL THEN
+			CALL ui.interface.setImage( m_pics.trim()||gl_progIcon )
+		ELSE
+			CALL ui.interface.setImage( gl_progIcon )
+		END IF
+		GL_DBGMSG(1, "gl_init: load progIcon '"||gl_progIcon||"'.")
+	END IF
+
 	IF l_use_fi THEN
 		GL_DBGMSG(1, "gl_init: Form Initializer 'gl_forminit'.")
 		CALL ui.form.setDefaultInitializer( "gl_forminit" )
@@ -227,15 +236,6 @@ GL_MODULE_ERROR_HANDLER
 		END IF
 	END IF
 	WHENEVER ERROR CALL gl_error
-
-	IF gl_progIcon IS NOT NULL THEN
-		IF m_pics IS NOT NULL THEN
-			CALL ui.interface.setImage( m_pics.trim()||gl_progIcon )
-		ELSE
-			CALL ui.interface.setImage( gl_progIcon )
-		END IF
-		GL_DBGMSG(1, "gl_init: load progIcon '"||gl_progIcon||"'.")
-	END IF
 
 	LET l_container = fgl_getEnv("FJS_MDICONT")
 	IF l_container IS NULL OR l_container = " " THEN
@@ -514,6 +514,16 @@ FUNCTION gl_formInit(fm) --{{{
 	GL_DBGMSG(1, "gl_formInit: start")
 
 	LET fn = fm.getNode()
+	LET win = ui.Window.getCurrent()
+
+	IF gl_progIcon IS NOT NULL THEN
+		IF m_pics IS NOT NULL THEN
+			CALL win.setImage( m_pics.trim()||gl_progIcon )
+		ELSE
+			CALL win.setImage( gl_progIcon )
+		END IF
+		GL_DBGMSG(1, "gl_forminit: load progIcon '"||gl_progIcon||"'.")
+	END IF
 
 	LET nam = fn.getAttribute("name")
 	LET styl = fn.getAttribute("style")
@@ -521,7 +531,7 @@ FUNCTION gl_formInit(fm) --{{{
 	IF tag IS NULL THEN LET tag = "(null)" END IF
 	GL_DBGMSG(0, "gl_formInit: tag='"||tag||"'")
 	IF styl IS NULL THEN -- check to see if the window had the style set.
-		LET win = ui.Window.getCurrent()
+
 		LET fn = win.getNode()
 		LET styl = fn.getAttribute("style")
 		LET fn = fm.getNode()
