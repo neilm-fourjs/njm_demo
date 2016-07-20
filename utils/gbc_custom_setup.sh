@@ -4,8 +4,8 @@
 # Arg1: custom folder name, default is njm-js
 # Arg2: GBC version for base - default is gwc-js-1.00.19
 
-CUSTDIR=${1:njm-js}
-VER=${2:-gwc-js-1.00.19}
+CUSTDIR=${1:-njm-js}
+VER=${2:-gwc-js-1.00.20}
 
 GASDIR=$(pwd)
 DTE=$( date +'%Y%m%d%H%M%S')
@@ -26,6 +26,20 @@ if [ ! -e $VER ]; then
 fi
 
 cd $VER
+
+#echo "Install 4.2.2 ..."
+#nvm install 4.2.2
+#if [ $? -ne 0 ]; then
+#	echo "Failed !"
+#	exit 1
+#fi
+#
+#echo "Setting nvm to 4.2.2 ..."
+#nvm use 4.2.2
+#if [ $? -ne 0 ]; then
+#	echo "Failed !"
+#	exit 1
+#fi
 
 NODEJS_MJVER=$(node --version | cut -c2)
 if [ $? -ne 0 ]; then
