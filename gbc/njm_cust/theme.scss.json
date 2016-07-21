@@ -11,7 +11,7 @@
   "gbc-field-disabled-background"        : "rgba(0,0,0,0.04)",
   "gbc-primary-color"                    : "#e00e0e",
   "gbc-primary-medium-color"             : "$mt-red-500",
-  "gbc-primary-light-color"              : "$mt-red-100",
+  "gbc-primary-light-color"              : "$mt-white",
   "gbc-secondary-color"                  : "$mt-red-600",
   "gbc-disabled-color"                   : "$mt-red-400",
   "gbc-separator-color"                  : "$mt-red-400",
