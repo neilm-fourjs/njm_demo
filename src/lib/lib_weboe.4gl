@@ -193,7 +193,7 @@ FUNCTION mkDesc( l_stk )
 	LET l_desc = TITLON(10)||(l_stk.description CLIPPED)||TITLOFF||"<BR>"
 	LET l_desc = l_desc.append(TITLON(8)||"Price: "||TITLOFF||l_stk.price||"<BR>")
 	LET l_desc = l_desc.append(TITLON(8)||"Stock: "||TITLOFF||l_stk.free_stock||"<BR>")
-	DISPLAY "Desc:"||l_desc
+	--DISPLAY "Desc:"||l_desc
 	RETURN l_desc
 END FUNCTION
 --------------------------------------------------------------------------------
@@ -239,7 +239,7 @@ FUNCTION oe_uiUpdate()
 			g_ordHead.total_tax,
 			g_ordHead.total_nett
 
-	DISPLAY "Your basket: "||g_ordHead.total_qty||" Items, Value: "||g_ordHead.total_nett
+	DISPLAY "oe_uiUpdate: Your basket: "||g_ordHead.total_qty||" Items, Value: "||g_ordHead.total_nett
 	DISPLAY "Your basket: "||g_ordHead.total_qty||" Items, Value: "||g_ordHead.total_nett TO status
 
 	LET l_d = ui.Dialog.getCurrent()
@@ -248,6 +248,7 @@ FUNCTION oe_uiUpdate()
 			IF g_ordHead.total_qty > 0 THEN
 				CALL l_d.setActionActive("viewb", TRUE)
 				CALL l_d.setActionActive("gotoco", TRUE)
+				DISPLAY "oe_uiUpdate: buttons live"
 			ELSE
 				CALL l_d.setActionActive("viewb", FALSE)
 				CALL l_d.setActionActive("gotoco", FALSE)

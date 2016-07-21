@@ -1,0 +1,12 @@
+
+.gbc_ModalWindowDialog  .mt-dialog-header {
+  color: $gbc-primary-light-color;
+  background-color: $gbc-primary-color;
+  .gbc_ImageWidget {
+    img {
+  		background-color: white;
+      height: 18px;
+      width: 18px;
+    }
+	}
+}

@@ -164,6 +164,7 @@ FUNCTION build_grids()
 
 	LET l_gw = l_lab1_gwidth + 1
 	DISPLAY "Build_grids:",m_csslayout
+
 	LET n = m_vbox.getParent()
 	CALL n.removeChild( m_vbox )
 	LET m_vbox = n.createChild("VBox")
@@ -176,16 +177,18 @@ FUNCTION build_grids()
 	END IF
 
 	LET y = m_items.getLength()
-	IF y MOD 4 THEN -- make sure we generate 4 grids across
-		LET y = y + (4 - ( y MOD 4  ))
+	IF NOT m_csslayout THEN
+		IF y MOD 4 THEN -- make sure we generate 4 grids across
+			LET y = y + (4 - ( y MOD 4  ))
+		END IF
+		IF y < 8 THEN LET y = 8 END IF -- make sure we have at least 12 total
 	END IF
-	IF y < 8 THEN LET y = 8 END IF -- make sure we have at least 12 total
 	FOR x = 1 TO y
 		LET n = l_hbox.createChild("Group")
 		IF x <= m_items.getLength() THEN
 			CALL n.setAttribute("style", "griditemX")
-		ELSE
-			CALL n.setAttribute("style", "noborder")
+		--ELSE
+		--	CALL n.setAttribute("style", "noborder")
 		END IF
 		LET n = n.createChild("Grid")
 		CALL n.setAttribute("gridWidth", l_gw)
@@ -295,8 +298,13 @@ FUNCTION dynDiag()
 	FOR x = 1 TO m_stock_cats.getLength()
 		CALL m_dialog.addTrigger("ON ACTION cat"||x)
 	END FOR
-	CALL m_dialog.setActionActive("viewb",FALSE)
-	CALL m_dialog.setActionActive("gotoco",FALSE)
+	IF g_ordHead.total_qty > 1 THEN
+		CALL m_dialog.setActionActive("viewb",TRUE)
+		CALL m_dialog.setActionActive("gotoco",TRUE)
+	ELSE
+		CALL m_dialog.setActionActive("viewb",FALSE)
+		CALL m_dialog.setActionActive("gotoco",FALSE)
+	END IF
 	CALL setSignInAction()
 	LET int_flag = FALSE
 	WHILE TRUE
