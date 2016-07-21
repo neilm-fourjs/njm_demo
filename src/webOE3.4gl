@@ -34,6 +34,7 @@ DEFINE m_fields DYNAMIC ARRAY OF RECORD
 		type STRING
 	END RECORD
 	DEFINE m_form ui.Form
+	DEFINE m_csslayout BOOLEAN
 MAIN
 	DEFINE l_cookie STRING
 	DEFINE l_cc LIKE customer.customer_code
@@ -56,6 +57,10 @@ MAIN
 		CALL ui.Interface.FrontCall("session","getvar","login",l_cookie)
 		DISPLAY "From Cookie:",l_cookie
 	END IF
+
+	LET m_csslayout = FALSE
+	IF fgl_getEnv("GBC_CUSTOM") = "csslayout" THEN LET m_csslayout = TRUE END IF
+	DISPLAY "GBC_CUSTOM:",fgl_getEnv("GBC_CUSTOM") 
 
 	OPEN FORM weboe FROM "webOE3"
 	DISPLAY FORM weboe
@@ -158,14 +163,18 @@ FUNCTION build_grids()
 	CONSTANT l_detbut_gwidth = 2
 
 	LET l_gw = l_lab1_gwidth + 1
-	DISPLAY "Build_grids"
+	DISPLAY "Build_grids:",m_csslayout
 	LET n = m_vbox.getParent()
 	CALL n.removeChild( m_vbox )
 	LET m_vbox = n.createChild("VBox")
 	CALL m_vbox.setAttribute("name","main_vbox")
-	CALL m_vbox.setAttribute("splitter","1")
+	CALL m_vbox.setAttribute("splitter","0")
 
 	LET l_hbox = m_vbox.createChild("HBox")
+	IF m_csslayout THEN
+		CALL l_hbox.setAttribute("style","cssLayout")
+	END IF
+
 	LET y = m_items.getLength()
 	IF y MOD 4 THEN -- make sure we generate 4 grids across
 		LET y = y + (4 - ( y MOD 4  ))
@@ -248,8 +257,10 @@ FUNCTION build_grids()
 
 		--DISPLAY "Grid x:",x, " y:",y, " MOD4:",( x MOD 4 ), " len:",m_items.getLength()
 
-		IF NOT x MOD 4 THEN
-			LET l_hbox = m_vbox.createChild("HBox")
+		IF NOT m_csslayout THEN
+			IF NOT x MOD 4 THEN
+				LET l_hbox = m_vbox.createChild("HBox")
+			END IF
 		END IF
 
 	END FOR

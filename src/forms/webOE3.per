@@ -9,7 +9,7 @@ TOOLBAR ( STYLE="gbc_weboe")
 	ITEM cancel (TEXT="Leave", IMAGE="fa-sign-out", STYLE="gbc_weboe")
 END -- TB
 
-LAYOUT (TEXT="Main Store Front #3", VERSION="$Id: webOE.per 960 2016-06-13 14:39:50Z neilm $")
+LAYOUT (TEXT="Main Store Front #3", STYLE="gbc_footer")
 VBOX
 
 HBOX --(SPLITTER)
@@ -35,7 +35,7 @@ GRID
 END --GRID
 END --VBOX
 
-VBOX main_vbox
+VBOX main_vbox (STYLE="cssLayout")
 GRID
 {
 place holder
@@ -45,7 +45,7 @@ END -- VBOX
 
 END --HBOX
 
-GRID info ( STYLE="gbc_footerxxx" )
+GRID info
 {
 [f001                            ][status                                                          ]
 }

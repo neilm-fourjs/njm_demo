@@ -2,6 +2,9 @@
 <StyleList>
   <Style name="Window">
      <StyleAttribute name="windowType" value="normal" />
+     <StyleAttribute name="actionPanelPosition" value="none" />
+     <StyleAttribute name="ringMenuPosition" value="none" />
+     <StyleAttribute name="sizable" value="yes" />
   </Style>
   <Style name="Window.main">
 		<StyleAttribute name="windowType" value="normal" />
@@ -11,11 +14,6 @@
 		<StyleAttribute name="windowMenu" value="yes" />
      <StyleAttribute name="actionPanelPosition" value="top" />
      <StyleAttribute name="ringMenuPosition" value="top" />
-  </Style>
-  <Style name="Window.main2">
-     <StyleAttribute name="windowType" value="normal" />
-     <StyleAttribute name="actionPanelPosition" value="none" />
-     <StyleAttribute name="ringMenuPosition" value="none" />
   </Style>
   <Style name="Window.dialog">
      <StyleAttribute name="windowType" value="modal" />
@@ -81,16 +79,11 @@
 		<StyleAttribute name="backgroundColor" value="#B0FFB0" />
 	</Style-->
 
-  <Style name="Table" >
-    <StyleAttribute name="headerAlignment" value="auto" />
-    <StyleAttribute name="fontSize"  value="1.2em" />
+  <Style name="Window.gbc_footer">
+     <StyleAttribute name="windowType" value="normal" />
+     <StyleAttribute name="actionPanelPosition" value="none" />
+     <StyleAttribute name="ringMenuPosition" value="none" />
   </Style>
-	<Style name="Label">
-		<StyleAttribute name="fontWeight" value="bold" />
-	</Style>
-	<Style name=".bold">
-		<StyleAttribute name="fontWeight" value="bold" />
-	</Style>
 
   <Style name="Window.about">
     <StyleAttribute name="windowType" value="modal" />
@@ -134,10 +127,6 @@
 		<StyleAttribute name="actionPanelHAlign"    value="right" />
 	</Style>
 
-	<Style name="Window.modal">
-		<StyleAttribute name="windowType"           value="modal" />
-	</Style>
-
   <Style name="Window.menu">
     <StyleAttribute name='ringMenuPosition'    value='none'/>
     <StyleAttribute name='actionPanelPosition' value='none'/>
@@ -145,6 +134,17 @@
     <StyleAttribute name="ringMenuPosition"    value="none" />
     <StyleAttribute name="toolBarPosition"    value="none" />
   </Style>
+
+  <Style name="Table" >
+    <StyleAttribute name="headerAlignment" value="auto" />
+    <StyleAttribute name="fontSize"  value="1.2em" />
+  </Style>
+	<Style name="Label">
+		<StyleAttribute name="fontWeight" value="bold" />
+	</Style>
+	<Style name=".bold">
+		<StyleAttribute name="fontWeight" value="bold" />
+	</Style>
 
   <Style name="Grid.menu">
     <StyleAttribute name="fontSize"  value="1.5em" />
