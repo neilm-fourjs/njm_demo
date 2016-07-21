@@ -157,10 +157,10 @@ END FUNCTION
 FUNCTION build_grids()
 	DEFINE l_hbox, n,n1, ff om.DomNode
 	DEFINE x,y, l_gw SMALLINT
-	CONSTANT l_lab1_gwidth = 12
+	CONSTANT l_lab1_gwidth = 16
 	CONSTANT l_lab2_gwidth = 4
 	CONSTANT l_qty_gwidth = 6
-	CONSTANT l_detbut_gwidth = 2
+	CONSTANT l_detbut_gwidth = 8
 
 	LET l_gw = l_lab1_gwidth + 1
 	DISPLAY "Build_grids:",m_csslayout
@@ -206,7 +206,6 @@ FUNCTION build_grids()
 		END IF
 		CALL n1.setAttribute("sizePolicy","fixed")
 		CALL n1.setAttribute("autoScale","1")
-
 		CALL n1.setAttribute("gridWidth", l_gw-1)
 		CALL n1.setAttribute("width", "150px")
 		CALL n1.setAttribute("height", "150px")
@@ -225,6 +224,8 @@ FUNCTION build_grids()
 		CALL n1.setAttribute("posY","5")
 		CALL n1.setAttribute("posX","1")
 		CALL n1.setAttribute("style", "html")
+		CALL n1.setAttribute("sizePolicy","fixed")
+
 
 		LET n1 = n.createChild("Label")
 		IF x <= m_items.getLength() THEN
