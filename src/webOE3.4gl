@@ -1,13 +1,12 @@
 
 #+ Web Order Entry Demo - by N.J.Martin neilm@4js.com
 #+
-#+ $Id: webOE.4gl 960 2016-06-13 14:39:50Z neilm $
 
 IMPORT FGL lib_weboe
 IMPORT FGL genero_lib1
 IMPORT FGL gl_db
 
-CONSTANT PRGNAME = "webOE3"
+CONSTANT PRGNAME = "webOE"
 CONSTANT PRGDESC = "Web Ordering Demo"
 CONSTANT PRGAUTH = "Neil J.Martin"
 
@@ -187,8 +186,8 @@ FUNCTION build_grids()
 		LET n = l_hbox.createChild("Group")
 		IF x <= m_items.getLength() THEN
 			CALL n.setAttribute("style", "griditemX")
-		--ELSE
-		--	CALL n.setAttribute("style", "noborder")
+		ELSE
+			CALL n.setAttribute("style", "noborder")
 		END IF
 		LET n = n.createChild("Grid")
 		CALL n.setAttribute("gridWidth", l_gw)

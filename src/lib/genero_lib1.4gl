@@ -46,6 +46,7 @@ DEFINE m_key STRING
 DEFINE m_pics STRING
 DEFINE m_langname, m_user_agent STRING
 DEFINE m_gitver STRING
+DEFINE m_dbtype STRING
 --------------------------------------------------------------------------------
 #+ Initialize Function
 #+
@@ -513,6 +514,9 @@ FUNCTION gl_formInit(fm) --{{{
 
 	GL_DBGMSG(1, "gl_formInit: start")
 
+	IF m_dbtype IS NULL THEN
+		LET m_dbtype = fgl_db_driver_type()
+	END IF
 	LET fn = fm.getNode()
 	LET win = ui.Window.getCurrent()
 
@@ -566,9 +570,8 @@ FUNCTION gl_formInit(fm) --{{{
 				GL_DBGMSG(0, "gl_formInit: Failed to load Topmenu '"||gl_topmenu||"'")
 			END TRY
 		END IF
+		CALL gl_titleWin(NULL)
 	END IF
-
-	CALL gl_titleWin(NULL)
 
 END FUNCTION --}}}
 ----------------------------------------------------------------------------------
@@ -641,7 +644,7 @@ FUNCTION gl_titleWin( titl ) --{{{
 -- 12345678901
 	END IF
 
-	LET new = TODAY,":"
+	LET new = TODAY," - "
 	IF titl IS NOT NULL THEN
 		LET new = new.trim(),titl.trim()
 	END IF
@@ -651,7 +654,11 @@ FUNCTION gl_titleWin( titl ) --{{{
 	IF gl_version IS NOT NULL THEN
 		LET new = new.trim()," ",gl_verFmt(gl_version)
 	ELSE
-		LET new = new.trim()," ("||gl_getGitVer()||")"
+		LET new = new.trim()," - Ver:"||gl_getGitVer()
+	END IF
+
+	IF m_dbtype IS NOT NULL THEN
+		LET new = new.trim()," - DB:",m_dbtype
 	END IF
 
 	GL_DBGMSG(1, "gl_titleWin: new '"||new||"' titl:"||titl)
@@ -1378,6 +1385,9 @@ FUNCTION gl_about(gl_ver) --{{{
 	END IF
 	LET gdcver = gl_feVer()
 	LET gver = "build ",fgl_getVersion()
+	IF m_dbtype IS NULL THEN
+		LET m_dbtype = fgl_db_driver_type()
+	END IF
 
 	IF gl_cli_os = "?" THEN
 		CALL ui.interface.frontcall("standard","feinfo",[ "ostype" ], [ gl_cli_os ] )
@@ -1479,7 +1489,7 @@ FUNCTION gl_about(gl_ver) --{{{
 	CALL gl_addLabel(g,10,y,fgl_getEnv("DBNAME"),NULL,NULL) LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.dbtype"),"right","black")
-	CALL gl_addLabel(g,10,y, fgl_db_driver_type() ,NULL,"black") LET y = y + 1
+	CALL gl_addLabel(g,10,y, m_dbtype ,NULL,"black") LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.dbdate"),"right","black")
 	CALL gl_addLabel(g,10,y,fgl_getEnv("DBDATE"),NULL,"black") LET y = y + 1
@@ -3664,8 +3674,12 @@ FUNCTION fgl_db_driver_type()
 END FUNCTION
 --------------------------------------------------------------------------------
 #+ read ../etc/gitver.txt
+#+ will return the gitversion and if it contains a tag version it returns that
+#+ instead of the last commit id, ie if it's 0.2-1-gc47dcb1 it will return 0.2-1
+#+ @returns gitver string
 FUNCTION gl_getGitver()
 	DEFINE c base.Channel
+	DEFINE x,y SMALLINT
 	IF m_gitVer IS NOT NULL THEN RETURN m_gitver END IF
 	LET c = base.Channel.create()
 	TRY
@@ -3674,6 +3688,12 @@ FUNCTION gl_getGitver()
 		RETURN "No Git Ver File!"
 	END TRY
 	LET m_gitver = c.readLine()
+	LET x = m_gitver.getIndexOf("-",1)
+	IF x > 1 THEN
+		LET y = m_gitver.getIndexOf("-",x+1 )
+		IF y > 0 THEN LET x = y END IF
+	END IF
+	LET m_gitver = m_gitver.subString(1,x-1)
 	CALL c.close()
 	RETURN m_gitver
 END FUNCTION
