@@ -7,6 +7,7 @@ LAYOUT (TEXT=%"Stock",STYLE="dialog")
 VBOX
 GRID
 {
+[titl                                            ]
 [sc       |a001    ]
 [sct      |a002                                  ]
 [sd       |a003                                  ]
@@ -32,9 +33,10 @@ TABLES
 stock
 
 ATTRIBUTES
-LABEL sc : sc, TEXT="Stock Code:",JUSTIFY=RIGHT;
-LABEL sct : sct, TEXT="Category:",JUSTIFY=RIGHT;
-LABEL sd : sd, TEXT="Description:",JUSTIFY=RIGHT;
+LABEL titl : titl,TEXT=%"Enter search parameters to find a customer:";
+LABEL sc : sc, TEXT=%"Code:",JUSTIFY=RIGHT;
+LABEL sct : sct, TEXT=%"Category:",JUSTIFY=RIGHT;
+LABEL sd : sd, TEXT=%"Description:",JUSTIFY=RIGHT;
 a001 = FORMONLY.stock_code;
 COMBOBOX a002 = FORMONLY.stock_cat,INITIALIZER=cb_stkcat;
 a003 = FORMONLY.description;

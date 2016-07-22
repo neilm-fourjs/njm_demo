@@ -4,7 +4,7 @@
 CONSTANT DEF_DBNAME="njm_demo"
 
 # Informix
-#CONSTANT DEF_DB_RIVER="dbmifx9x"
+#CONSTANT DEF_DBDRIVER="dbmifx9x"
 
 # SQLServer
 #CONSTANT DEF_DBDRIVER="dbmsnc90"

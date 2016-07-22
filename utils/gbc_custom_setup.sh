@@ -5,7 +5,7 @@
 # Arg2: GBC version for base - default is gwc-js-1.00.19
 
 CUSTDIR=${1:-njm-js}
-VER=${2:-gwc-js-1.00.20}
+VER=${2:-1.00.20}
 
 GASDIR=$(pwd)
 DTE=$( date +'%Y%m%d%H%M%S')
@@ -19,13 +19,13 @@ cd $CUSTDIR
 
 if [ ! -e $VER ]; then
 	echo $( date +'%Y%m%d%H%M%S') " unzip $VER ..."
-	unzip ../tpl/fjs-$VER*
+	unzip ../tpl/fjs-gwc-js-$VER*
 	if [ $? -ne 0 ]; then
 		exit 1
 	fi
 fi
 
-cd $VER
+cd gwc-js-*
 
 #echo "Install 4.2.2 ..."
 #nvm install 4.2.2

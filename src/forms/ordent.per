@@ -64,7 +64,7 @@ Grid head
 END
 GRID addr2 (HIDDEN)
 {
-[y] Show Addresses ...
+[y] [showaddr              ]
 }
 END 
 GRID addr
@@ -112,7 +112,8 @@ ATTRIBUTES
 BUTTON X : hideaddr,TEXT="",IMAGE="minus";
 BUTTON Y : showaddr,TEXT="",IMAGE="plus";
 LABEL welcome=formonly.welcome, justify=center, style="welcome";
-LABEL cust:custcode, TEXT=%"Customer:", justify=right;
+LABEL cust:custcode, TEXT=%"Customer:", justify=RIGHT;
+LABEL showaddr : showaddr, TEXT=%"Show Addresses ...";
 BUTTONEDIT custome=customer.customer_code, action=getcust, tabIndex=2, not null, required, upShift;
 LABEL cus1:custname, TEXT=%"Name:", justify=right;
 customer_name=customer.customer_name, tabIndex=3;
@@ -161,7 +162,7 @@ tax_r=formonly.tax_rate, tabIndex=35, title=%"Tax Rate", noEntry;
 tax_valu=formonly.tax_value, tabIndex=37, title=%"Tax Value", noEntry;
 PHANTOM ord_detail.nett_value;
 gross_va=ord_detail.gross_value, tabIndex=39, title=%"Total";
-CHECKBOX a=formonly.accepted, tabIndex=29, title=%"Ok", noEntry, valueChecked = 1, valueUnchecked = 0, style="noentry";
+CHECKBOX a=formonly.accepted, tabIndex=29, title=%"Ok ", noEntry, valueChecked = 1, valueUnchecked = 0, style="noentry";
 
 
 LABEL ordt:ordtot, TEXT=%"Items:", justify=right;

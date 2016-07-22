@@ -7,6 +7,7 @@ LAYOUT (TEXT=%"Customers",STYLE="dialog")
 VBOX
 GRID
 {
+[titl                                  ]
 [cc         ][a001    ]
 [cn         ][a002                     ]
 }
@@ -31,8 +32,9 @@ TABLES
 customer
 
 ATTRIBUTES
-LABEL cc : cc, TEXT="Customer Code:";
-LABEL cn : cn, TEXT="Customer Name:";
+LABEL titl : titl,TEXT=%"Enter search parameters to find a customer:";
+LABEL cc : cc, TEXT=%"Code:";
+LABEL cn : cn, TEXT=%"Name:";
 
 a001 = FORMONLY.customer_code;
 a002 = FORMONLY.customer_name;

@@ -4,12 +4,12 @@
 TOOLBAR
 	ITEM exit
 	ITEM save
-	ITEM delete ( TEXT="Delete User" )
+	ITEM delete ( TEXT=%"Delete User" )
 	ITEM removeroles
 	ITEM addroles
 END -- TOOLBAR
 
-LAYOUT (STYLE="main2", TEXT="User Maintenance", VERSION="$Id: user_mnt.per 597 2011-02-25 15:35:55Z  $")
+LAYOUT (STYLE="main2", TEXT=%"User Maintenance", VERSION="$Id: user_mnt.per 597 2011-02-25 15:35:55Z  $")
 HBOX (SPLITTER)
 VBOX
 TABLE users (DOUBLECLICK=dblclick,STYLE="nosel")
@@ -67,19 +67,19 @@ sys_user_roles
 
 ATTRIBUTES
 
-u001 = FORMONLY.fullname,TITLE="Users";
+u001 = FORMONLY.fullname,TITLE=%"Users";
 
-LABEL uk : uk,TEXT="User Key:", JUSTIFY=RIGHT;
-LABEL un : un,TEXT="Login:", JUSTIFY=RIGHT;
-LABEL fn : fn,TEXT="Full Name:", JUSTIFY=RIGHT;
-LABEL pw : pw,TEXT="Password:", JUSTIFY=RIGHT;
-LABEL em : em,TEXT="Email:", JUSTIFY=RIGHT;
-LABEL ot : ot,TEXT="Office Tel:", JUSTIFY=RIGHT;
-LABEL mt : mt,TEXT="Mobile:", JUSTIFY=RIGHT;
-LABEL dc : dc,TEXT="Default Cust:", JUSTIFY=RIGHT;
-LABEL ut : ut,TEXT="User Type:", JUSTIFY=RIGHT;
-LABEL pn : pn,TEXT="Program:", JUSTIFY=RIGHT;
-LABEL ac : ac,TEXT="Active:", JUSTIFY=RIGHT;
+LABEL uk : uk,TEXT=%"User Key:", JUSTIFY=RIGHT;
+LABEL un : un,TEXT=%"Login:", JUSTIFY=RIGHT;
+LABEL fn : fn,TEXT=%"Full Name:", JUSTIFY=RIGHT;
+LABEL pw : pw,TEXT=%"Password:", JUSTIFY=RIGHT;
+LABEL em : em,TEXT=%"Email:", JUSTIFY=RIGHT;
+LABEL ot : ot,TEXT=%"Office Tel:", JUSTIFY=RIGHT;
+LABEL mt : mt,TEXT=%"Mobile:", JUSTIFY=RIGHT;
+LABEL dc : dc,TEXT=%"Default Cust:", JUSTIFY=RIGHT;
+LABEL ut : ut,TEXT=%"User Type:", JUSTIFY=RIGHT;
+LABEL pn : pn,TEXT=%"Program:", JUSTIFY=RIGHT;
+LABEL ac : ac,TEXT=%"Active:", JUSTIFY=RIGHT;
 
 f001 = sys_users.user_key;
 f002 = sys_users.username;
@@ -95,11 +95,11 @@ CHECKBOX a = sys_users.active,VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
 
 PHANTOM sys_user_roles.user_key;
 PHANTOM sys_user_roles.role_key;
-ur01 = FORMONLY.role_name,TITLE="User Roles";
+ur01 = FORMONLY.role_name,TITLE=%"User Roles";
 CHECKBOX b = sys_user_roles.active,VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
 
 PHANTOM sys_roles.role_key;
-r = FORMONLY.role_type,TITLE="Typ",COMMENT="S=System,M=Menu,A=Action";
+r = FORMONLY.role_type,TITLE="Typ",COMMENT=%"S=System,M=Menu,A=Action";
 r001 = FORMONLY.role_name2,TITLE="Roles";
 CHECKBOX c =  sys_roles.active,VALUECHECKED="Y",VALUEUNCHECKED="N",NOT NULL;
 

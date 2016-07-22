@@ -92,11 +92,6 @@
         <File filePath="etc/dynmaint.4tm"/>
         <File filePath="etc/genero_lib1.str"/>
       </Library>
-      <Library binaryName="lib_logiin" dependencies="14000" id="-319008706" label="lib_logiin">
-        <File filePath="src/login.4gl"/>
-        <File filePath="src/forms/login.per"/>
-        <File filePath="src/forms/login_www.per"/>
-      </Library>
       <Library binaryName="libApplication" id="1563799204" label="libApplication">
         <VirtualFolder label="forms">
           <File filePath="src/forms/getcust.per"/>
@@ -144,10 +139,9 @@
       </Application>
     </Group>
     <Group label="menu">
-      <Application binaryName="login" commandLineArguments="MDI" dependencies="14000||-319008706||1563799204" id="1191959540" label="login">
-        <File filePath="src/login_main.4gl"/>
-      </Application>
-      <Application binaryName="menu" commandLineArguments="MDI" dependencies="14000||-319008706||1563799204" id="-130282562" label="menu">
+      <Application binaryName="menu" commandLineArguments="MDI" dependencies="14000||1563799204" id="-130282562" label="menu">
+        <File filePath="src/login.4gl"/>
+        <File filePath="src/forms/login.per"/>
         <File filePath="src/menu.4gl"/>
         <File filePath="src/forms/menu.per"/>
       </Application>
@@ -168,15 +162,7 @@
         <File filePath="src/forms/ordent2.per"/>
         <File filePath="src/forms/packshow.per"/>
       </Application>
-      <Application binaryName="webOE" compilerOptions="-DXCLOUD" dependencies="1986||570408889||1563799204||14000||2086842111" id="-361325592" label="webOE">
-        <File filePath="src/webOE.4gl"/>
-        <File filePath="src/forms/webOE.per"/>
-      </Application>
-      <Application binaryName="webOE2" dependencies="2086842111||1563799204||14000||-526112109||1986" id="-1071699716" label="webOE2">
-        <File filePath="src/webOE2.4gl"/>
-        <File filePath="src/forms/webOE2.per"/>
-      </Application>
-      <Application binaryName="webOE3" dependencies="1563799204||1986||14000||-526112109||570408889||2086842111" id="-1597972872" label="webOE3">
+      <Application binaryName="webOE" dependencies="1563799204||1986||14000||-526112109||570408889||2086842111" id="-1597972872" label="webOE">
         <File filePath="src/webOE3.4gl"/>
         <File filePath="src/forms/webOE3.per"/>
       </Application>

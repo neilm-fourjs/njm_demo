@@ -15,17 +15,17 @@ GRID (STYLE="menu")
  [                              ]
  [titl                          ]
 <T menu                          >
-[desc                           ]
-[desc                           ]
-[desc                           ]
-[desc                           ]
-[desc                           ]
-[desc                           ]
-[desc                           ]
-[desc                           ]
+ [desc                          ]
+ [desc                          ]
+ [desc                          ]
+ [desc                          ]
+ [desc                          ]
+ [desc                          ]
+ [desc                          ]
+ [desc                          ]
 <                                >
-[dte]-[lab1:f00][lab2:f001      ]
-  [accept:back   :close  :about ]
+ [dte]-[lab1:f00][lab2:f001     ]
+ [accept :back   :close  :about ]
 }
 END -- GRID
 GRID
@@ -51,11 +51,11 @@ desc = sys_menus.m_text,STYLE="menuopts",IMAGECOLUMN=m_type;
 PHANTOM sys_menus.m_item;
 PHANTOM sys_menus.m_passw;
 
-LABEL dte = FORMONLY.dte,STYLE="login";
+LABEL dte = FORMONLY.dte,STYLE="login", SIZEPOLICY=DYNAMIC;
 LABEL lab1 : lab1, TEXT=%"Comp:",STYLE="login";
 LABEL lab2 : lab2, TEXT=%"User:",STYLE="login";
 LABEL f00 = FORMONLY.m_compno;
-LABEL f001 = FORMONLY.m_user;
+LABEL f001 = FORMONLY.m_user, SIZEPOLICY=DYNAMIC;
 
 BUTTON accept : accept, TEXT="",IMAGE="ok2";
 BUTTON back : back;

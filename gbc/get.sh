@@ -1,7 +1,18 @@
+#!/bin/bash
+
+# This script copies the GBC customizations into this folder structure for git.
 
 VER=20
+CUSTOM=${1:-njm-js}
+if [ -z $FGLASDIR ]; then
+	FGLASDIR=/opt/fourjs/gas300
+fi
+CUSTFOLDER=njm_cust
 
-cp /opt/fourjs/gas300/njm-js/gwc-js-1.00.$VER/njm_cust/resources/img/* njm_cust/resources/img/
-cp /opt/fourjs/gas300/njm-js/gwc-js-1.00.$VER/njm_cust/js/* njm_cust/js/
-cp /opt/fourjs/gas300/njm-js/gwc-js-1.00.$VER/njm_cust/sass/* njm_cust/sass/
-cp /opt/fourjs/gas300/njm-js/gwc-js-1.00.$VER/njm_cust/theme.scss.json njm_cust/.
+echo "Getting customizations from $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER ..." 
+cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/resources/img/* $CUSTFOLDER/resources/img/
+cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/js/* $CUSTFOLDER/js/
+cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/sass/* $CUSTFOLDER/sass/
+cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/theme.scss.json $CUSTFOLDER/.
+
+echo "Done."

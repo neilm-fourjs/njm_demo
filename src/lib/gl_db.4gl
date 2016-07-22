@@ -28,41 +28,45 @@ GL_MODULE_ERROR_HANDLER
 	LET dbdir = fgl_getenv("DBDIR")
 	IF dbdir IS NULL OR dbdir = " " THEN LET dbdir = DEF_DBDIR END IF
 
-	LET fglprofile = FALSE
-	LET drv = fgl_getresource("dbi.database."||db||".driver")
-	IF drv IS NOT NULL AND drv != " " THEN LET fglprofile = TRUE END IF
+	LET fglprofile = TRUE
 
-	IF drv IS NULL OR drv = " " THEN LET drv = fgl_getenv("DBDRIVER") END IF
-	IF drv IS NULL OR drv = " " THEN LET drv = DEF_DBDRIVER END IF
+	LET drv = fgl_getenv("DBDRIVER") 
+	IF drv IS NOT NULL AND drv != " " THEN LET fglprofile = FALSE END IF
 
 	LET lockMode = TRUE
-	LET dbt = drv.subString(4,6)
-	LET m_dbtyp = dbt
+
 	IF fglprofile THEN
 		LET src = fgl_getresource("dbi.database."||db||".source")
-		LET con = db
-	ELSE
-		CASE dbt
-			WHEN "pgs"
-				LET src = fgl_getEnv("PGSERVER") -- ???
-				LET m_dbnam = "PostgreSQL "||drv.subString(7,9)
-				LET con = "db+driver='"||drv||"',source='"||src||"'"
-			WHEN "ifx"
-				LET src = fgl_getEnv("INFORMIXSERVER")
-				LET m_dbnam = "Informix "||drv.subString(7,9)
-				LET src = fgl_getEnv("INFORMIXSERVER")
-				LET con = db
-			WHEN "sqt"	
-				LET src = fgl_getEnv("SQLITEDB")
-				IF src IS NULL OR src = " " THEN LET src = dbdir||os.path.separator()||db||".db" END IF
-				LET lockMode = FALSE
-				LET m_dbnam = "SQLite "||drv.subString(7,9)
-				LET con = "db+driver='"||drv||"',source='"||src||"'"
-		END CASE
-		IF dbt = "ads" THEN
-			LET con = con CLIPPED,",username='",db,"',password='",db,"'"
+		LET drv = fgl_getresource("dbi.database."||db||".driver")
+		IF drv IS NULL OR drv = " " THEN
+			LET drv = fgl_getresource("dbi.default.driver")
 		END IF
+		LET con = db
+		DISPLAY "Database set from fglprofile:",drv
+	ELSE
+		IF drv IS NULL OR drv = " " THEN LET drv = DEF_DBDRIVER END IF
+		DISPLAY "Database set from environment DBDRIVER:",drv
 	END IF
+	LET dbt = drv.subString(4,6)
+	LET m_dbtyp = dbt
+
+	CASE dbt
+		WHEN "pgs"
+			LET src = fgl_getEnv("PGSERVER") -- ???
+			LET m_dbnam = "PostgreSQL "||drv.subString(7,9)
+			LET con = "db+driver='"||drv||"',source='"||src||"'"
+		WHEN "ifx"
+			LET src = fgl_getEnv("INFORMIXSERVER")
+			LET m_dbnam = "Informix "||drv.subString(7,9)
+			LET src = fgl_getEnv("INFORMIXSERVER")
+			LET con = db
+		WHEN "sqt"	
+			LET src = fgl_getEnv("SQLITEDB")
+			IF src IS NULL OR src = " " THEN LET src = dbdir||os.path.separator()||db||".db" END IF
+			LET lockMode = FALSE
+			LET m_dbnam = "SQLite "||drv.subString(7,9)
+			LET con = "db+driver='"||drv||"',source='"||src||"'"
+	END CASE
 
 	LET m_dbsrc = src
 	LET m_dbdrv = drv
