@@ -109,7 +109,7 @@ http://<your server>/gas/ua/r/gdemo_def     ( Default GBC )
 * Re-styled the window title bar for modal windows and removed the icon ( MyDialogWindowHeading.scss )
 * Table headers to use gbc-primary-light-color for color ( MyTableWidget.scss )
 
-### Javascript - with lots of help from GBC Dev team (Éric ALBER & Jean-Philippe)
+### Javascript - with lots of help from GBC Dev team (Éric & Jean-Philippe)
 * Header text / logo ( MyHeaderBarWidget )
 * Footer to be on bottom page rather than bottom window ( MyFormWidget )
 * Change the redirect on end of application to a demos page. ( RedirectApplicationEnd )
@@ -119,6 +119,6 @@ http://<your server>/gas/ua/r/gdemo_def     ( Default GBC )
 ### Major feature done by GBC Dev team (Jean-Philippe)
 * New CSS based layouter - this allows the product tiles in the weboe program to be tiled according to the size of the window. ( CssLayoutEngine, CustCssBoxWidget )
 
-What I'd like to do:
+### What I'd like to do:
 * Make page so when scroll up, the header scroll up to with the page, rather than staying fixed but have the toolbar get anchored at the top of the window, 
 
