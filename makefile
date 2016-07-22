@@ -32,6 +32,7 @@ clean:
 	find . -name \*.log -exec rm {} \;
 	find . -name \*.pdf -exec rm {} \;
 	find . -name \*.xml -exec rm {} \;
+	find . -name \*.bm -exec rm {} \;
 
 packit: gbc/njm_gbc.tgz
 	$(info Building TGZ of deployables ...) 

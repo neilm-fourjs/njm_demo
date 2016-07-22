@@ -264,6 +264,7 @@ FUNCTION gotoco()
 	DEFINe l_row SMALLINT
 	DEFINE l_add RECORD LIKE addresses.*
 	DEFINE del_amt LIKE ord_payment.del_amount
+	DEFINE l_orddet RECORD LIKE ord_detail.*
 	IF g_custcode = "Guest" THEN
 		CALL signin()
 		IF g_custcode = "Guest" THEN RETURN END IF
@@ -316,10 +317,26 @@ FUNCTION gotoco()
 				CALL DIALOG.nextField("del_address1")
 		END INPUT
 		INPUT BY NAME g_ordHead.customer_code, g_ordHead.customer_name,
-					g_ordHead.del_address1, g_ordHead.del_address2, g_ordHead.del_address3, g_ordHead.del_address4, g_ordHead.del_address5, g_ordHead.del_postcode,
-					g_ordHead.inv_address1, g_ordHead.inv_address2, g_ordHead.inv_address3, g_ordHead.inv_address4, g_ordHead.inv_address5, g_ordHead.inv_postcode,
+					g_ordHead.del_postcode,
+					g_ordHead.del_address1, g_ordHead.del_address2, g_ordHead.del_address3, g_ordHead.del_address4, g_ordHead.del_address5, 
+					g_ordHead.inv_postcode,
+					g_ordHead.inv_address1, g_ordHead.inv_address2, g_ordHead.inv_address3, g_ordHead.inv_address4, g_ordHead.inv_address5, 
 					m_pay.del_type, del_amt
 				ATTRIBUTE(WITHOUT DEFAULTS)
+
+			AFTER FIELD del_address1
+				IF g_ordHead.del_postcode IS NOT NULL AND g_ordHead.del_address1 IS NOT NULL THEN
+					SELECT * INTO l_add.* FROM addresses WHERE line1 = g_ordHead.del_address1
+						AND postal_code = g_ordHead.del_postcode
+					IF STATUS != NOTFOUND THEN
+						LET g_cust.del_addr = l_add.rec_key
+						LET g_ordHead.del_address2 = l_add.line2
+						LET g_ordHead.del_address3 = l_add.line3
+						LET g_ordHead.del_address4 = l_add.line4
+						LET g_ordHead.del_address5 = l_add.line5
+					END IF
+				END IF
+
 			ON CHANGE del_type
 				CASE m_pay.del_type
 					WHEN "0" LET m_pay.del_amount = POST_0
@@ -357,15 +374,47 @@ FUNCTION gotoco()
 	CLOSE WINDOW basket
 	IF int_flag THEN RETURN END IF
 	LET g_ordHead.order_datetime = CURRENT
--- Insert Order Here
+
+	SELECT * INTO l_add.* FROM addresses 
+		WHERE addresses.line1 = g_ordHead.del_address1
+		AND addresses.postal_code = g_ordHead.del_postcode
+	IF STATUS != NOTFOUND THEN
+		LET g_cust.del_addr = l_add.rec_key
+		DISPLAY "Del Address already exists! ",g_cust.del_addr
+	END IF
+
+	SELECT * INTO l_add.* FROM addresses 
+		WHERE addresses.line1 = g_ordHead.inv_address1
+		AND addresses.postal_code = g_ordHead.inv_postcode
+	IF STATUS != NOTFOUND THEN
+		LET g_cust.inv_addr = l_add.rec_key
+		DISPLAY "InvAddress already exists! ",g_cust.inv_addr
+	END IF
 
 	IF g_cust.del_addr = 0 THEN
-		INSERT INTO addresses VALUES(0,g_ordHead.del_address1, g_ordHead.del_address2, g_ordHead.del_address3, g_ordHead.del_address4, g_ordHead.del_address5, g_ordHead.del_postcode,"")
+		LET l_add.rec_key = 0
+		LET l_add.line1 = g_ordHead.del_address1
+		LET l_add.line2 = g_ordHead.del_address2
+		LET l_add.line3 = g_ordHead.del_address3
+		LET l_add.line4 = g_ordHead.del_address4
+		LET l_add.line5 = g_ordHead.del_address5
+		LET l_add.postal_code = g_ordHead.del_postcode
+		LET l_add.country_code = ""
+		INSERT INTO addresses VALUES  l_add.*
 		LET g_cust.del_addr = SQLCA.sqlerrd[2]
 		UPDATE customer SET del_addr = g_cust.del_addr WHERE customer_code = g_cust.customer_code
 	END IF
-	IF g_cust.inv_addr = 0 THEN
-		INSERT INTO addresses VALUES(0,g_ordHead.inv_address1, g_ordHead.inv_address2, g_ordHead.inv_address3, g_ordHead.inv_address4, g_ordHead.inv_address5, g_ordHead.inv_postcode,"")
+	IF g_cust.inv_addr = 0 AND g_ordHead.inv_address1 IS NOT NULL 
+	AND g_ordHead.inv_postcode IS NOT NULL THEN
+		LET l_add.rec_key = 0
+		LET l_add.line1 = g_ordHead.inv_address1
+		LET l_add.line2 = g_ordHead.inv_address2
+		LET l_add.line3 = g_ordHead.inv_address3
+		LET l_add.line4 = g_ordHead.inv_address4
+		LET l_add.line5 = g_ordHead.inv_address5
+		LET l_add.postal_code = g_ordHead.inv_postcode
+		LET l_add.country_code = ""
+		INSERT INTO addresses VALUES l_add.*
 		LET g_cust.inv_addr = SQLCA.sqlerrd[2]
 		UPDATE customer SET inv_addr = g_cust.inv_addr WHERE customer_code = g_cust.customer_code
 	END IF
@@ -374,23 +423,23 @@ FUNCTION gotoco()
 	INSERT INTO ord_head VALUES g_ordHead.* 
 	LET g_ordHead.order_number = SQLCA.SQLERRD[2] -- Fetch SERIAL order num
 	LET m_pay.order_number = g_ordHead.order_number
-	INSERT INTO ord_payment VALUES(m_pay.*)
+	INSERT INTO ord_payment VALUES m_pay.*
 	FOR l_row = 1 TO g_detailArray.getLength()
 		IF g_detailArray[ l_row ].stock_code IS NOT NULL THEN
-			INSERT INTO ord_detail VALUES( 
-				g_ordHead.order_number,
-				l_row,
-				g_detailArray[ l_row ].stock_code,
-				g_detailArray[ l_row ].pack_flag,
-				g_detailArray[ l_row ].price,
-				g_detailArray[ l_row ].quantity,
-				g_detailArray[ l_row ].disc_percent,
-				g_detailArray[ l_row ].disc_value,
-				g_detailArray[ l_row ].tax_code,
-				g_detailArray[ l_row ].tax_rate,
-				g_detailArray[ l_row ].tax_value,
-				g_detailArray[ l_row ].nett_value,
-				g_detailArray[ l_row ].gross_value  )
+			LET l_orddet.order_number = g_ordHead.order_number
+			LET l_orddet.line_number = l_row
+			LET l_orddet.stock_code = g_detailArray[ l_row ].stock_code
+			LET l_orddet.pack_flag = g_detailArray[ l_row ].pack_flag
+			LET l_orddet.price = g_detailArray[ l_row ].price
+			LET l_orddet.quantity = g_detailArray[ l_row ].quantity
+			LET l_orddet.disc_percent = g_detailArray[ l_row ].disc_percent
+			LET l_orddet.disc_value = g_detailArray[ l_row ].disc_value
+			LET l_orddet.tax_code = g_detailArray[ l_row ].tax_code
+			LET l_orddet.tax_rate = g_detailArray[ l_row ].tax_rate
+			LET l_orddet.tax_value = g_detailArray[ l_row ].tax_value
+			LET l_orddet.nett_value = g_detailArray[ l_row ].nett_value
+			LET l_orddet.gross_value = g_detailArray[ l_row ].gross_value
+			INSERT INTO ord_detail VALUES l_orddet.*
 		END IF
 	END FOR
 	COMMIT WORK -- Commit and end transaction.
