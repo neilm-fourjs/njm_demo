@@ -1,6 +1,4 @@
 
-
-
 .gbc_ImageWidget.gbc_fixedSvg > svg {
   min-width: 24px;
   min-height: 24px;
@@ -11,12 +9,15 @@
   >.gbc_imageContainer {
     padding:  $gbc-margin-ratio*2px;
     > .gbc_ImageWidget {
-      fill: $text-light-87;
       min-width: 24px;
       min-height: 24px;
       max-width: 64px;
       max-height: 64px;
       overflow: hidden;
     }
+  }
+	svg {
+    fill: $gbc-primary-light-color;
+    fill-opacity: 1;
   }
 }

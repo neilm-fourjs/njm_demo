@@ -165,8 +165,8 @@ one to set the *mt-weboeUser* 'span' element and the other to set the *mt-weboeS
 The custom toolbar is only used if the Genero toolbar has a style of 'gbc_weboe'.
 
 
-The MyLabelWidget_stat.js is handling the label on the form, it's specifically not using a custom .tpl.html. In the scss file 
-I use a style of 'display: none;' so label value is not actually displayed in web page.
+The MyLabelWidget_stat.js is handling the label on the form, it's specifically not using a custom .tpl.html, this done
+by using the'__templateName' entry to point to a default template. In the scss file I use a style of 'display: none;' so the label is not actually displayed in page.
 
 ```javascript
     cls.MyLabelWidget_stat = context.oo.Class(cls.LabelWidget, function($super) {

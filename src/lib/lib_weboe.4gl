@@ -181,6 +181,9 @@ FUNCTION detLine(l_sc,l_qty)
 	LET g_detailArray[l_row].description = l_stk.description
 	LET g_detailArray[l_row].price = l_stk.price
 	CALL recalcOrder()
+	IF l_qty > l_stk.free_stock THEN
+		ERROR "Warning there is not enough stock for this quantity."
+	END IF
 END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION mkDesc( l_stk )

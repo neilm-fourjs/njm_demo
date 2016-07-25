@@ -323,14 +323,15 @@ FUNCTION dynDiag()
 					m_items[x].qty1 )
 		END IF
 
-		CASE l_evt
-			WHEN "ON CHANGE qty1"
-				LET l_field = m_dialog.getCurrentItem()
-				LET x = l_field.subString(4, l_field.getLength())
-				DISPLAY "add1 GI:",l_field," X:",x
-				CALL detLine(m_items[x].stock_code1,  m_dialog.getFieldValue("qty"||x))
-				CALL m_dialog.setFieldValue("qty"||x, m_items[x].qty1)
+		IF l_evt MATCHES "ON CHANGE qty*" OR l_evt MATCHES "AFTER FIELD qty*" THEN
+			LET l_field = m_dialog.getCurrentItem()
+			LET x = l_field.subString(4, l_field.getLength())
+			DISPLAY "add1 GI:",l_field," X:",x
+			CALL detLine(m_items[x].stock_code1,  m_dialog.getFieldValue("qty"||x))
+			CALL m_dialog.setFieldValue("qty"||x, m_items[x].qty1)
+		END IF
 
+		CASE l_evt
 			WHEN "ON ACTION add1"
 				LET l_field = m_dialog.getCurrentItem()
 				LET x = l_field.subString(4, l_field.getLength())

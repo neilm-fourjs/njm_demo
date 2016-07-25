@@ -1,6 +1,6 @@
-NJM Demo Application                                                                                                                                          
-====================                                                                                                                                          
-                                                                                                                                                              
+NJM Demo Application
+====================
+
 This is a self contained demo of a simple application with a login screen / menu and various programs.                                                        
 It's currently compiled and tested with Genero 3.00 against Informix.                                                                                         
                                                                                                                                                               
@@ -125,3 +125,8 @@ For details please see the README in the gbc folder in this repo.
 ### What I'd like to do:
 * Make page so when scroll up, the header scroll up to with the page, rather than staying fixed but have the toolbar get anchored at the top of the window, 
 
+
+## Screenshots
+![red](https://github.com/neilm-fourjs/njm_demo/tree/master/gbc/gbc-red.jpg "My Red Theme")
+![teal](https://github.com/neilm-fourjs/njm_demo/tree/master/gbc/gbc-red.jpg "My Red Theme")
+![hivis](https://github.com/neilm-fourjs/njm_demo/tree/master/gbc/gbc-hivis.jpg "Color Theme Resource")
