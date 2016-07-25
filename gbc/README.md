@@ -69,26 +69,72 @@ details go here
 ## GWC-JS Customizations - Javascript
 
 ### Header text / logo ( MyHeaderBarWidget )
-
-details go here
+The header title and the logo were done using the method outlined in the GAS manual.
+The header tpl.html file was expended to have a table to align the logo/title/app counter
+To make the image work I added these 2 lines of javascript to the MyHeaderBarWidget.js file
+```
+          // find the img tag with a class of .njm-logo-top
+          this.img = this.getElement().querySelector(".njm-logo-top");
+          // replace the source for the img with our uri path and the image name
+          this.img.src = context.bootstrapInfo.gbcPath+"/img/njm_demo_logo_256.png";
+```
 
 ### Footer to be on bottom page rather than bottom window ( MyFormWidget )
 
-details go here
+Here the goal was a footer that was at the bottom of the web page rather then anchored to the bottom of the browser window.
+So I only wanted to see the footer when I scroll all the way down.
+To make this work the footer has to be part of the 'form'. I created a MyFormWidget.tpl.html of this:
+```
+<div>
+  <div class="scroller">
+    <div class="containerElement"></div>
+        <footer>
+      This is my customized GBC Demo - by neilm@4js.com
+        </footer>
+  </div>
+</div>
+```
+So the Genero 'form' will replace the 'containerElement' and below that will be the 'footer'.
+Next we need to create the MyFormWidget.js file to use this tpl.html file.
+```
+modulum('MyFormWidget', ['FormWidget', 'WidgetFactory'],
+  function(context, cls) {
+    cls.MyFormWidget = context.oo.Class(cls.FormWidget, function($super) {
+      return {
+        __name: "MyFormWidget"
+      };
+    });
+    // register the class so only forms with a style of 'gbc_footer' use this widget.
+    cls.WidgetFactory.register('Form', 'gbc_footer', cls.MyFormWidget);
+});
+```
+You can see the MyFormWidget.js doesn't actually 'do' anything - so it's inheriting all the methods
+from the default 'FormWidget' and overriding nothing. The class is registered with a style though
+so only a Form with a style of 'gbc_footer' will get the footer - otherwise all windows would get
+the footer.
+NOTE: There was an issue with this that required a fix to the base code - so this will fail in the current 1.00.20 GBC
+but should fine in the next maintenance release.
 
 ### Change the redirect on end of application to a demos page. ( RedirectApplicationEnd )
 
-details go here
+As documented here: http://4js.com/online_documentation/fjs-gas-manual-html/#t_gwc_js_custom_redirect.html
 
 ### Created a custom toolbar to show data from two custom labels, ie welcome: user and basket values ( MyLabelWidget_stat, MyToolBarWidget )
 
-details go here
+The idea was that we have a bar at the top of the page with the current user, order totals and default buttons.
+This bar should stay at the top of the screen when scrolled.
+To do this we created a custom toolBar widget and a custom Label widget. The custom Label widget is used for the information text,
+so when I display a value to the custom label it appears in a specific area in the toolBar.
+
+NOTE: MORE INFO COMING.
 
 ### Changed toolbar items to be img and text on same line ( MyToolBarItemWidget )
 
-details go here
+In addition to the toolBar changes above I decided it would look better for the text to follow the image rather than be below it.
+This was done in the SCSS file but I only wanted to override the look for my weboe program so I created an empty class of
+MyToolBarItem that inherits the methods from the default.
 
 ### CSS based layouter - this allows the product tiles in the weboe program to be tiled according to the size of the window. ( CssLayoutEngine, CustCssBoxWidget )
 
-details go here
+I didn't do this one - it was done by Jean-Philippe from the Strasbourg GBC dev team.
 
