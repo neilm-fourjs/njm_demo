@@ -25,7 +25,7 @@ customized dist path, ie  njm-js -> ../njm-js/gwc-js-1.00.20/dist/web/
 I then use the packit.sh script to pack up my files and copy the .tgz it produces to the $FGLASDIR/njm-js/gwc-js-<ver>/ 
 I then just extract that tgz into that folder ( tar xvzf njm_gbc.tgz ) and type: grunt.
 For example from the cloned repo folder I can do:
-```
+```bash
 cd gbc
 ./packit.sh
 cp gbc_custom_setup.sh $FGLASDIR/
@@ -35,36 +35,6 @@ cd njm-js/*/
 tar xvzf <repo folder>/gbc/njm_gbc.tgz
 grunt
 ```
-
-## GWC-JS Customizations - CSS
-
-### Customized the colours ( theme.scss.json & theme.scss.json.teal )
-
-details go here
-
-### Removed the sidebar ( theme.scss.json )
-
-details go here
-
-### Fixed issue with images on a button not getting correct size ( ButtonWidget.scss )
-
-details go here
-
-### Removed the applicationHostMenu ( ApplicationHostWidget.scss )
-
-details go here
-
-### Removed the next/previous images from the folder tab headings ( MyFolderWidget.scss )
-
-details go here
-
-### Re-styled the window title bar for modal windows and removed the icon ( MyDialogWindowHeading.scss )
-
-details go here
-
-### Table headers to use gbc-primary-light-color for color ( MyTableWidget.scss )
-
-details go here
 
 ## GWC-JS Customizations - Javascript
 
@@ -213,4 +183,55 @@ MyToolBarItem that inherits the methods from the default and uses the default .t
 ### CSS based layouter - this allows the product tiles in the weboe program to be tiled according to the size of the window. ( CssLayoutEngine, CustCssBoxWidget )
 
 I didn't do this one - it was done by Jean-Philippe from the Strasbourg GBC dev team.
+
+
+## GWC-JS Customizations - CSS
+
+### Customized the colours ( theme.scss.json & theme.scss.json.teal )
+
+See: http://4js.com/online_documentation/fjs-gas-manual-html/#c_gwc_js_customize_theme_settings.html
+
+### Removed the sidebar ( theme.scss.json )
+
+See: http://4js.com/online_documentation/fjs-gas-manual-html/#t_gwc_js_custom_sidebar.html
+
+### Fixed issue with images on a button not getting correct size ( ButtonWidget.scss )
+
+The image on buttons doesn't honour the scaleIcon attribute for specific sizes, ie yes/no work and 24px doesn't.
+```css
+.gbc_ImageWidget.gbc_fixedSvg > svg {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+[__ButtonWidget].mt-button {
+  >.gbc_imageContainer {
+    padding:  $gbc-margin-ratio*2px;
+    > .gbc_ImageWidget {
+      fill: $text-light-87;
+      min-width: 24px;
+      min-height: 24px;
+      max-width: 64px;
+      max-height: 64px;
+      overflow: hidden;
+    }
+  }
+}
+```
+
+### Removed the applicationHostMenu ( ApplicationHostWidget.scss )
+
+details go here
+
+### Removed the next/previous images from the folder tab headings ( MyFolderWidget.scss )
+
+details go here
+
+### Re-styled the window title bar for modal windows and removed the icon ( MyDialogWindowHeading.scss )
+
+details go here
+
+### Table headers to use gbc-primary-light-color for color ( MyTableWidget.scss )
+
+details go here
 

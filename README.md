@@ -50,7 +50,7 @@ make redeploy
 
 ## Deploying Manually
 So that folder is where to extract the njm_demo.tgz that the make packit will build, eg:
-```
+```bash
 cd <your base directory>
 mkdir -p demos/njm_demo
 cd demos/njm_demo
@@ -75,7 +75,7 @@ dbi.default.driver = "dbmifx9x"
 ```
 
 To load the Informix database
-```
+```bash
 $ cd db
 $ tar xzf njm_demo.exp.tgz
 $ export DBDATE=DMY4/
@@ -99,6 +99,8 @@ http://<your server>/gas/ua/r/gdemo_def     ( Default GBC )
 ```
 
 ## GWC-JS Customizations
+
+For details please see the README in the gbc folder in this repo.
 
 ### CSS
 * Customized the colours ( theme.scss.json & theme.scss.json.teal )
