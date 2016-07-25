@@ -132,15 +132,83 @@ This bar should stay at the top of the screen when scrolled.
 To do this we created a custom toolBar widget and a custom Label widget. The custom Label widget is used for the information text,
 so when I display a value to the custom label it appears in a specific area in the toolBar.
 
+The MyToolBarWidget.tpl.html is a copy of the default but with two additional 'span' elements, *mt-weboeUser* and *mt-weboeStat*
+which will contain the content of the custom labels in the Genero form.
+```html
+  <div class="mt-tab-titles-bar">
+    <div class="mt-tab-previous" style="display:none"><i class="zmdi zmdi-chevron-left"></i></div>
+    <div class="mt-tab-titles">
+        <span class="mt-weboeUser"></span>
+        <span class="mt-weboeStat"></span>
+        <div class="mt-tab-titles-container containerElement"></div>
+      </div>
+    <div class="mt-tab-next" style="display:none"><i class="zmdi zmdi-chevron-right"></i></div>
+  </div>
+```
+
+The MyToolBarWidget.js is inheriting all the methods of the default ToolBarWidget and adding 2 new custom methods, 
+one to set the *mt-weboeUser* 'span' element and the other to set the *mt-weboeStat* element.
+
+```javascript
+  // this function sets the weboeUser to the passed text value - called from custom label widget.
+  setWebOEUser: function(text) {
+    this._weboeUser = this._element.getElementsByClassName("mt-weboeUser")[0];
+    this._weboeUser.innerHTML = text;
+  },
+  // this function sets the weboeStat to the passed text value - called from custom label widget.
+  setWebOEStat: function(text) {
+    this._weboeStat = this._element.getElementsByClassName("mt-weboeStat")[0];
+    this._weboeStat.innerHTML = text;
+  }
+```
+The custom toolbar is only used if the Genero toolbar has a style of 'gbc_weboe'.
 
 
-**NOTE:** MORE INFO COMING.
+The MyLabelWidget_stat.js is handling the label on the form, it's specifically not using a custom .tpl.html. In the scss file 
+I use a style of 'display: none;' so label value is not actually displayed in web page.
+
+```javascript
+    cls.MyLabelWidget_stat = context.oo.Class(cls.LabelWidget, function($super) {
+      /** @lends classes.MyLabelWidget_stat.prototype */
+      return {
+        __name: "MyLabelWidget_stat",
+        // using default LabelWidget template!
+        __templateName: "LabelWidget",
+```
+
+
+The MyLabelWidget_stat.js is inheriting the methods from the default LabelWidget but overriding the 'setValue' method.
+The setValue function is finding the toobarnode in the AUI and getting the helper anchor node for the specific Label,
+then getting the 'tag' attribute from the AUI for that label and using that to decide which MyToolBarWidget method to call.
+
+```javascript
+setValue: function(value) {
+  // Call the parent class setValue function.
+  $super.setValue.call(this,value);
+
+  // Get the modelHelper.
+  var modelhelper=new cls.ModelHelper( this );
+  // Use the modelHelper to get the ToolBar node by first getting the Window Anchor node, then the form, then the toolbar
+  var toolbarnode = modelhelper.getAnchorNode().getAncestor("Window").getFirstChild("Form").getFirstChild("ToolBar");
+
+  // Get the tag attribute of the AUI object for this Label;
+  var tag = modelhelper.getAnchorNode().getFirstChild("Label").attribute("tag");
+  if ( tag == "user") {
+    // now we get the controller for the toolbar node, then it's widget, then we can call our custom function.
+    toolbarnode.getController().getWidget().setWebOEUser( value );
+  };
+  if ( tag == "status") {
+    // now we get the controller for the toolbar node, then it's widget, then we can call our custom function.
+    toolbarnode.getController().getWidget().setWebOEStat( value );
+  };
+}
+```
 
 ### Changed toolbar items to be img and text on same line ( MyToolBarItemWidget )
 
 In addition to the toolBar changes above I decided it would look better for the text to follow the image rather than be below it.
 This was done in the SCSS file but I only wanted to override the look for my weboe program so I created an empty class of
-MyToolBarItem that inherits the methods from the default.
+MyToolBarItem that inherits the methods from the default and uses the default .tpl.html file.
 
 ### CSS based layouter - this allows the product tiles in the weboe program to be tiled according to the size of the window. ( CssLayoutEngine, CustCssBoxWidget )
 

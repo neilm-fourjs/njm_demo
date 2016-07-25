@@ -7,6 +7,8 @@ modulum('MyToolBarItemWidget', ['ToolBarItemWidget', 'WidgetFactory'],
     cls.MyToolBarItemWidget = context.oo.Class(cls.ToolBarItemWidget, function($super) {
       return {
         __name: "MyToolBarItemWidget",
+        // using default ToolBarItemWidget template!
+        __templateName: "ToolBarItemWidget",
       };
     });
     cls.WidgetFactory.register('ToolBarItem','gbc_weboe', cls.MyToolBarItemWidget);
