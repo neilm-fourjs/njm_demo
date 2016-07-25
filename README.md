@@ -110,6 +110,7 @@ For details please see the README in the gbc folder in this repo.
 * Removed the next/previous images from the folder tab headings ( MyFolderWidget.scss )
 * Re-styled the window title bar for modal windows and removed the icon ( MyDialogWindowHeading.scss )
 * Table headers to use gbc-primary-light-color for color ( MyTableWidget.scss )
+* Toolbars and Buttomes to use gbc-primary-light-color for color ( ButtonWidget.scss / ToolBarItemWidget.scss )
 
 ### Javascript - with lots of help from GBC Dev team (Éric & Jean-Philippe)
 * Header text / logo ( MyHeaderBarWidget )

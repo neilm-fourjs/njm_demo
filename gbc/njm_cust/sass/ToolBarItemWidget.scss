@@ -1,0 +1,22 @@
+$gbc-ToolBar-hover-color: $gbc-primary-light-color;
+
+.gbc_ToolBarItemWidget {
+  &.mt-item {
+    background-color: $gbc-primary-color;
+    color: $gbc-primary-light-color;
+
+    &:not(.disabled) {
+      &:hover {
+        background-color: $gbc-primary-medium-color;
+        color: $gbc-primary-color;
+      }
+    }
+  }
+
+  .gbc_autoScale {
+    svg {
+      flex: 1 1 auto;
+      fill: $gbc-primary-background-color;
+    }
+  }
+}

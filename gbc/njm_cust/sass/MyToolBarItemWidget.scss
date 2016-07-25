@@ -12,17 +12,17 @@ $gbc-ToolBar-hover-color: $gbc-primary-light-color;
 
   &.mt-item {
     border-radius: 2px;
-   	border-color: $gbc-primary-light-color;
+    border-color: $gbc-primary-light-color;
     border-right: 1px solid;
     min-width: 56px;
     cursor: pointer;
     background-color: $gbc-primary-color;
-    color: white;
+    color: $gbc-primary-light-color;
 
     &:not(.disabled) {
       &:hover {
         background-color: $gbc-primary-medium-color;
-        color: black;
+        color: $gbc-primary-color;
       }
     }
 

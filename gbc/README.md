@@ -15,7 +15,7 @@ GBC Customization(sic)
 * njm_cust/sass : SCSS files ( see below )
 * theme.scss.json : My default 'red' theme.
 * theme.scss.json.teal : An alernative 'Teal' theme.
-
+--------------------------------------------------------------------------------
 ## Installing for development
 
 The way I setup my development environment for GBC is I copy the gbc_custom_setup.sh script to my $FGLASDIR folder and run it. 
@@ -36,6 +36,7 @@ tar xvzf <repo folder>/gbc/njm_gbc.tgz
 grunt
 ```
 
+--------------------------------------------------------------------------------
 ## GWC-JS Customizations - Javascript
 
 ### Header text / logo ( MyHeaderBarWidget )
@@ -185,6 +186,7 @@ MyToolBarItem that inherits the methods from the default and uses the default .t
 I didn't do this one - it was done by Jean-Philippe from the Strasbourg GBC dev team.
 
 
+--------------------------------------------------------------------------------
 ## GWC-JS Customizations - CSS
 
 ### Customized the colours ( theme.scss.json & theme.scss.json.teal )
@@ -198,6 +200,7 @@ See: http://4js.com/online_documentation/fjs-gas-manual-html/#t_gwc_js_custom_si
 ### Fixed issue with images on a button not getting correct size ( ButtonWidget.scss )
 
 The image on buttons doesn't honour the scaleIcon attribute for specific sizes, ie yes/no work and 24px doesn't.
+Also the text colour was a pale pink with my theme so I changed it to use gbc-primary-light-color
 ```css
 .gbc_ImageWidget.gbc_fixedSvg > svg {
   min-width: 24px;
@@ -205,6 +208,7 @@ The image on buttons doesn't honour the scaleIcon attribute for specific sizes, 
 }
 
 [__ButtonWidget].mt-button {
+  color: $gbc-primary-light-color;
   >.gbc_imageContainer {
     padding:  $gbc-margin-ratio*2px;
     > .gbc_ImageWidget {
@@ -221,17 +225,73 @@ The image on buttons doesn't honour the scaleIcon attribute for specific sizes, 
 
 ### Removed the applicationHostMenu ( ApplicationHostWidget.scss )
 
-details go here
+This I simply wanted to turn off completely, so I created this style file containing:
+```css
+.gbc_ApplicationHostWidget {
+  header.mt-toolbar {
+      display: none;
+  }
+}
+```
 
 ### Removed the next/previous images from the folder tab headings ( MyFolderWidget.scss )
 
-details go here
+My folders only have a couple of pages so the next/previous images are not required and don't look very nice.
+```css
+.mt-tab-next, .mt-tab-previous {
+  display: none;
+}
+```
 
 ### Re-styled the window title bar for modal windows and removed the icon ( MyDialogWindowHeading.scss )
 
-details go here
+The icon used on modal windows is not scaled ( in the 1.00.20 ) so my icon appears far to big. I decided
+actually no icon was needed so removed the icon. The actually window title was too subtle and didn't really
+stand out as a title and was not using the matrial colours, so I restyled it.
+```css
+.gbc_ModalWindowDialog  .mt-dialog-header {
+  color: $gbc-primary-light-color;
+  background-color: $gbc-header-color;
+  .gbc_ImageWidget {
+    display: none;
+  }
+}
+```
 
 ### Table headers to use gbc-primary-light-color for color ( MyTableWidget.scss )
 
-details go here
+The default table headers text were a bit 'pink' in my theme, so I changed them to use the matrial colour.
+```css
+.gbc_TableWidget .gbc_TableColumnHeader {
+  color: $gbc-primary-light-color;
+}
+```
 
+### Default toolbar colours ( ToolBarItemWidget.scss )
+
+The text and icons colour were a little too pink with my theme so I changed them to use gbc-primary-light-color
+
+```css
+$gbc-ToolBar-hover-color: $gbc-primary-light-color;
+
+.gbc_ToolBarItemWidget {
+  &.mt-item {
+    background-color: $gbc-primary-color;
+    color: $gbc-primary-light-color;
+
+    &:not(.disabled) {
+      &:hover {
+        background-color: $gbc-primary-medium-color;
+        color: $gbc-primary-color;
+      }
+    }
+  }
+
+  .gbc_autoScale {
+    svg {
+      flex: 1 1 auto;
+      fill: $gbc-primary-background-color;
+    }
+  }
+}
+```
