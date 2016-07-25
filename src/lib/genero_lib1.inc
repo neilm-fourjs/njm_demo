@@ -24,7 +24,7 @@ GLOBALS
 	DEFINE gl_noToolBar SMALLINT
 	DEFINE gl_toolbar,  gl_topmenu STRING
 
-	DEFINE gl_db CHAR(3)
+	DEFINE gl_dbtyp CHAR(3)
 	DEFINE gl_os STRING
 	DEFINE gl_cli_os STRING
 	DEFINE gl_cli_osver STRING

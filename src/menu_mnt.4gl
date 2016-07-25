@@ -1,11 +1,17 @@
 
-&include "schema.inc"
+#+ Menu Maintenance Demo - by N.J.Martin neilm@4js.com
+
+IMPORT FGL fjs_lib
+IMPORT FGL genero_lib1
+IMPORT FGL gl_db
 
 CONSTANT PRGNAME = "menu_mnt"
 CONSTANT PRGDESC = "Menu Maintenance Demo"
 CONSTANT PRGAUTH = "Neil J.Martin"
-&include "../lib/genero_lib1.inc"	
-	
+
+&include "schema.inc"
+&include "genero_lib1.inc"	
+
 &define RECNAME sys_menus.*
 
 &define TABNAMEQ "sys_menus"
@@ -43,18 +49,22 @@ MAIN
 	DEFINE dnd ui.DragDrop
 
 	LET gl_toolbar = "dynmaint"
-	CALL gl_setInfo(NULL, "njm_demo_logo_256", "njm_demo", PRGNAME, PRGDESC, PRGAUTH)
-	CALL gl_init(ARG_VAL(1),"default",TRUE)
+	CALL genero_lib1.gl_setInfo(NULL, "njm_demo_logo_256", "njm_demo", PRGNAME, PRGDESC, PRGAUTH)
+	CALL genero_lib1.gl_init(ARG_VAL(1),"default",TRUE)
 	WHENEVER ANY ERROR CALL gl_error
 	LET m_user_key = ARG_VAL(2)
 	LET m_allowedActions = ARG_VAL(3) 
 	LET m_allowedActions = (m_allowedActions CLIPPED),"YYYYY"
 	DISPLAY "AllowedActions:",m_allowedActions
 
-	CALL gldb_connect(NULL)
-
 	OPEN FORM frm FROM "menu_mnt"
 	DISPLAY FORM frm
+
+	CALL gl_db.gldb_connect(NULL)
+
+	IF NOT fjs_lib.checkUserRoles(m_user_key,"System Admin",TRUE) THEN
+		EXIT PROGRAM
+	END IF
 
 	DECLARE r_cur CURSOR FOR SELECT * FROM sys_roles
 	FOREACH r_cur INTO m_roles[m_roles.getLength()+1].*

@@ -83,7 +83,7 @@
       <Library binaryName="Databases" id="1986" label="Databases">
         <File filePath="db/db.inc"/>
         <File filePath="etc/njm_demo.4db"/>
-        <File filePath="lib/schema.inc"/>
+        <File filePath="src/lib/schema.inc"/>
       </Library>
       <Library binaryName="etc" id="570408889" label="etc" targetDirectory="$(ProjectDir)/etc">
         <File filePath="etc/default.4ad"/>
@@ -129,11 +129,11 @@
       <Application binaryName="dynMaint" commandLineArguments="S 1 stock_cat catid YYYYNN" dependencies="1986||14000||1563799204" id="195647156" label="dynMaint">
         <File filePath="src/dynMaint.4gl"/>
       </Application>
-      <Application binaryName="menu_mnt" dependencies="1986||570408889||14000||-526112109||1563799204||-211328758" id="2060528692" label="menu_mnt">
+      <Application binaryName="menu_mnt" commandLineArguments="S 1" dependencies="1986||570408889||14000||-526112109||1563799204||-211328758" id="2060528692" label="menu_mnt">
         <File filePath="src/menu_mnt.4gl"/>
         <File filePath="src/forms/menu_mnt.per"/>
       </Application>
-      <Application binaryName="user_mnt" dependencies="14000||1563799204||-211328758||-526112109" id="-1270917556" label="user_mnt">
+      <Application binaryName="user_mnt" commandLineArguments="S 1" dependencies="14000||1563799204||-211328758||-526112109" id="-1270917556" label="user_mnt">
         <File filePath="src/user_mnt.4gl"/>
         <File filePath="src/forms/user_mnt.per"/>
       </Application>

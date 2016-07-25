@@ -1,21 +1,16 @@
 
 #+ User Maintenance Demo - by N.J.Martin neilm@4js.com
-#+
-#+ $Id: user_mnt.4gl 692 2011-07-28 15:36:19Z  $
-#+
-#+ Two Preprocess variable can be set for this Project:
-#+ -DGRE this enables Genero Report Writer for invoice printing
-#+
-#+ -DgotJAVA enables java based server side printer detection
+
+IMPORT FGL fjs_lib
+IMPORT FGL genero_lib1
+IMPORT FGL gl_db
 
 CONSTANT PRGNAME = "user_mnt"
 CONSTANT PRGDESC = "User Maintenance Demo"
 CONSTANT PRGAUTH = "Neil J.Martin"
 
-&define ABOUT 		ON ACTION about \
-			CALL gl_about( VER, PRGNAME, PRGDESC, PRGAUTH)
-
 &include "schema.inc"
+&include "genero_lib1.inc"
 
 DEFINE m_user DYNAMIC ARRAY OF RECORD LIKE sys_users.*
 DEFINE m_roles DYNAMIC ARRAY OF RECORD LIKE sys_roles.*
@@ -27,24 +22,26 @@ DEFINE m_uroles DYNAMIC ARRAY OF RECORD
 		END RECORD
 DEFINE m_user_rec RECORD LIKE sys_users.*
 DEFINE m_fullname DYNAMIC ARRAY OF LIKE sys_users.fullname
-DEFINE m_user_key INTEGER
-DEFINE m_curruser INTEGER
 DEFINE m_drag_source STRING
 DEFINE m_save, m_saveUser, m_saveRoles BOOLEAN
-
+DEFINE m_user_key, m_this_user_key LIKE sys_users.user_key
 MAIN
 	DEFINE dnd ui.DragDrop
 
-	CALL gl_setInfo(NULL, "njm_demo_logo_256", "njm_demo", PRGNAME, PRGDESC, PRGAUTH)
-	CALL gl_init(ARG_VAL(1),NULL,TRUE)
+	CALL genero_lib1.gl_setInfo(NULL, "njm_demo_logo_256", "njm_demo", PRGNAME, PRGDESC, PRGAUTH)
+	CALL genero_lib1.gl_init(ARG_VAL(1),NULL,TRUE)
 	WHENEVER ANY ERROR CALL gl_error
-	LET m_curruser = ARG_VAL(2)
-
-	CALL gldb_connect(NULL)
+	LET m_this_user_key = ARG_VAL(2)
 
 	LET m_saveUser = FALSE
 	OPEN FORM um FROM "user_mnt"
 	DISPLAY FORM um
+
+	CALL gl_db.gldb_connect(NULL)
+
+	IF NOT fjs_lib.checkUserRoles(m_this_user_key,"System Admin",TRUE) THEN
+		EXIT PROGRAM
+	END IF
 
 	DECLARE u_cur CURSOR FOR SELECT * FROM sys_users
 	FOREACH u_cur INTO m_user[m_user.getLength()+1].*
@@ -145,7 +142,9 @@ MAIN
 				END IF
 			ON ACTION cancel
 				CALL setSave(FALSE)
-				LET m_user_rec.* = m_user[ DIALOG.getCurrentRow("u_arr") ].*
+				LET m_user_rec.* = m_user[ 1 ].*
+				CALL DIALOG.setCurrentRow("u_arr",1)
+				NEXT FIELD u_arr.fullname
 			AFTER INPUT
 				CALL DIALOG.setActionActive("dialogtouched",TRUE)
 		END INPUT
@@ -243,7 +242,7 @@ END FUNCTION
 FUNCTION saveRoles()
 	DEFINE x SMALLINT
 
-	IF NOT checkUserRoles(m_curruser,"System Admin Update",TRUE) THEN
+	IF NOT checkUserRoles(m_this_user_key,"System Admin Update",TRUE) THEN
 		CALL setSave(FALSE)
 		RETURN
 	END IF
