@@ -7,37 +7,37 @@ Sections in this README
 1. Files / Folders
 2. Installing for development
 3. GWC-JS Customizations - Javascript
-  * Header text / logo ( MyHeaderBarWidget )
-  * Footer to be on bottom page rather than bottom window ( MyFormWidget )
-  * Change the redirect on end of application to a demos page. ( RedirectApplicationEnd )
-  * Created a custom toolbar to show data from two custom labels, ie welcome: user and basket values ( MyLabelWidget_stat, MyToolBarWidget )
-  * Changed toolbar items to be img and text on same line ( MyToolBarItemWidget )
-  * CSS based layouter - this allows the product tiles in the weboe program to be tiled according to the size of the window. ( CssLayoutEngine, CustCssBoxWidget )
+  * Header text / logo
+  * Footer to be at bottom of page rather than bottom of window
+  * Change the redirect on end of application to a demos page.
+  * Created a custom toolbar to show data from two custom labels
+  * Changed toolbar items to be img and text on same line
+  * CSS based layouter - tiled groups in a [VH]Box
 4. GWC-JS Customizations - CSS
-  * Customized the colours ( theme.scss.json & theme.scss.json.teal )
-  * Removed the sidebar ( theme.scss.json )
-  * Fixed issue with images on a button not getting correct size ( ButtonWidget.scss )
-  * Removed the applicationHostMenu ( ApplicationHostWidget.scss )
-  * Removed the next/previous images from the folder tab headings ( MyFolderWidget.scss )
-  * Re-styled the window title bar for modal windows and removed the icon ( MyDialogWindowHeading.scss )
-  * Table headers to use gbc-primary-light-color for color ( MyTableWidget.scss )
-  * Default toolbar colours ( ToolBarItemWidget.scss )
+  * Customized the colours
+  * Removed the sidebar
+  * Fixed issue with images on a button not getting correct size
+  * Removed the applicationHostMenu
+  * Removed the next/previous images from the folder tab headings
+  * Re-styled the window title bar for modal windows and removed the icon
+  * Table headers colour change
+  * Default toolbar colours
 
 
 --------------------------------------------------------------------------------
 ## 1. Files / Folders:                                                                                                                                       
 
 * custom.json : this is the configuration file for the GBC customizations.
-* gbc_custom_setup.sh : GBC dev environment setup script
-* get.sh : script I'm using to copy the customizations file from the FGLASDIR folder to my git repo location.
-* njm_demo.html : File I place in my <webroot>/gbc/ folder on my web service - it's the page redirected to on application close.
+* gbc_custom_setup.sh : Utility script to setup the GBC dev environment
+* get.sh : script I'm using to copy the customization files from the FGLASDIR folder to my git repo location.
+* njm_demo.html : File I place in my <webroot>/gbc/ folder on my web server - custom page redirected to on app close.
 * packit.sh : script to pack the customization files into a tgz for easy coping to my GBC dev environment.
 * njm_cust/ : Core folder for my GBC customization files
 * njm_cust/js : Javascript files ( see below )
 * njm_cust/locales : Copy of default - nothing here has be changed.
 * njm_cust/resources/img : Customer gbc_logo and my app logo
 * njm_cust/sass : SCSS files ( see below )
-* theme.scss.json : My default 'red' theme.
+* theme.scss.json : My default 'Red' theme.
 * theme.scss.json.teal : An alernative 'Teal' theme.
 
 
@@ -48,19 +48,20 @@ The way I setup my development environment for GBC is I copy the gbc_custom_setu
 It should create the njm-js folder, extract the gbc source from $FGLASDIR/tpl/<source>.zip then try and run the commands to
 install and configure the default tools ( npm / bower / grunt ). It also creates the symbolic link $FGLASDIR/web to for the 
 customized dist path, ie  njm-js -> ../njm-js/gwc-js-1.00.20/dist/web/
-I then use the packit.sh script to pack up my files and copy the .tgz it produces to the $FGLASDIR/njm-js/gwc-js-<ver>/ 
-I then just extract that tgz into that folder ( tar xvzf njm_gbc.tgz ) and type: grunt.
+I then use the packit.sh script to pack up my files ready for extracting into the custom folder. 
 For example from the cloned repo folder I can do:
 ```bash
 cd gbc
 ./packit.sh
 cp gbc_custom_setup.sh $FGLASDIR/
 cd $FGLASDIR
-gbc_custom_setup.sh  ( this taks a while! )
+gbc_custom_setup.sh  ( this takes a while! )
 cd njm-js/*/
 tar xvzf <repo folder>/gbc/njm_gbc.tgz
 grunt
 ```
+
+I should then be able to run my application using the njm-js custom GBC.
 
 
 --------------------------------------------------------------------------------
@@ -68,7 +69,7 @@ grunt
 
 ### Header text / logo ( MyHeaderBarWidget )
 The header title and the logo were done using the method outlined in the GAS manual.
-The header tpl.html file was expended to have a table to align the logo/title/app counter
+The header MyHeaderBarWidget.tpl.html file was expended to have a table to align the logo/title/app counter
 
 
 To make the image work I added these 2 lines of javascript to the MyHeaderBarWidget.js file
@@ -79,7 +80,9 @@ To make the image work I added these 2 lines of javascript to the MyHeaderBarWid
           this.img.src = context.bootstrapInfo.gbcPath+"/img/njm_demo_logo_256.png";
 ```
 
-### Footer to be on bottom page rather than bottom window ( MyFormWidget )
+The image is in resources/img folder in the njm_cust folder and gets moved to the dist folder structure by grunt.
+
+### Footer to be at bottom of page rather than bottom of window ( MyFormWidget )
 
 Here the goal was a footer that was at the bottom of the web page rather then anchored to the bottom of the browser window.
 So I only wanted to see the footer when I scroll all the way down.
