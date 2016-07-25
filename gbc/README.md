@@ -72,7 +72,7 @@ details go here
 The header title and the logo were done using the method outlined in the GAS manual.
 The header tpl.html file was expended to have a table to align the logo/title/app counter
 To make the image work I added these 2 lines of javascript to the MyHeaderBarWidget.js file
-```
+```javascript
           // find the img tag with a class of .njm-logo-top
           this.img = this.getElement().querySelector(".njm-logo-top");
           // replace the source for the img with our uri path and the image name
@@ -84,7 +84,7 @@ To make the image work I added these 2 lines of javascript to the MyHeaderBarWid
 Here the goal was a footer that was at the bottom of the web page rather then anchored to the bottom of the browser window.
 So I only wanted to see the footer when I scroll all the way down.
 To make this work the footer has to be part of the 'form'. I created a MyFormWidget.tpl.html of this:
-```
+```html
 <div>
   <div class="scroller">
     <div class="containerElement"></div>
@@ -96,7 +96,7 @@ To make this work the footer has to be part of the 'form'. I created a MyFormWid
 ```
 So the Genero 'form' will replace the 'containerElement' and below that will be the 'footer'.
 Next we need to create the MyFormWidget.js file to use this tpl.html file.
-```
+```javascript
 modulum('MyFormWidget', ['FormWidget', 'WidgetFactory'],
   function(context, cls) {
     cls.MyFormWidget = context.oo.Class(cls.FormWidget, function($super) {
@@ -112,7 +112,7 @@ You can see the MyFormWidget.js doesn't actually 'do' anything - so it's inherit
 from the default 'FormWidget' and overriding nothing. The class is registered with a style though
 so only a Form with a style of 'gbc_footer' will get the footer - otherwise all windows would get
 the footer.
-NOTE: There was an issue with this that required a fix to the base code - so this will fail in the current 1.00.20 GBC
+**NOTE:** There was an issue with this that required a fix to the base code - so this will fail in the current 1.00.20 GBC
 but should fine in the next maintenance release.
 
 ### Change the redirect on end of application to a demos page. ( RedirectApplicationEnd )
