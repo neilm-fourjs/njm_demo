@@ -1,7 +1,31 @@
 GBC Customization(sic)
 =====================
-                                                                                                                                                              
-## Files / Folders:                                                                                                                                       
+
+Sections in this README
+
+
+1. Files / Folders
+2. Installing for development
+3. GWC-JS Customizations - Javascript
+  * Header text / logo ( MyHeaderBarWidget )
+  * Footer to be on bottom page rather than bottom window ( MyFormWidget )
+  * Change the redirect on end of application to a demos page. ( RedirectApplicationEnd )
+  * Created a custom toolbar to show data from two custom labels, ie welcome: user and basket values ( MyLabelWidget_stat, MyToolBarWidget )
+  * Changed toolbar items to be img and text on same line ( MyToolBarItemWidget )
+  * CSS based layouter - this allows the product tiles in the weboe program to be tiled according to the size of the window. ( CssLayoutEngine, CustCssBoxWidget )
+4. GWC-JS Customizations - CSS
+  * Customized the colours ( theme.scss.json & theme.scss.json.teal )
+  * Removed the sidebar ( theme.scss.json )
+  * Fixed issue with images on a button not getting correct size ( ButtonWidget.scss )
+  * Removed the applicationHostMenu ( ApplicationHostWidget.scss )
+  * Removed the next/previous images from the folder tab headings ( MyFolderWidget.scss )
+  * Re-styled the window title bar for modal windows and removed the icon ( MyDialogWindowHeading.scss )
+  * Table headers to use gbc-primary-light-color for color ( MyTableWidget.scss )
+  * Default toolbar colours ( ToolBarItemWidget.scss )
+
+
+--------------------------------------------------------------------------------
+## 1. Files / Folders:                                                                                                                                       
 
 * custom.json : this is the configuration file for the GBC customizations.
 * gbc_custom_setup.sh : GBC dev environment setup script
@@ -15,8 +39,10 @@ GBC Customization(sic)
 * njm_cust/sass : SCSS files ( see below )
 * theme.scss.json : My default 'red' theme.
 * theme.scss.json.teal : An alernative 'Teal' theme.
+
+
 --------------------------------------------------------------------------------
-## Installing for development
+## 2. Installing for development
 
 The way I setup my development environment for GBC is I copy the gbc_custom_setup.sh script to my $FGLASDIR folder and run it. 
 It should create the njm-js folder, extract the gbc source from $FGLASDIR/tpl/<source>.zip then try and run the commands to
@@ -36,8 +62,9 @@ tar xvzf <repo folder>/gbc/njm_gbc.tgz
 grunt
 ```
 
+
 --------------------------------------------------------------------------------
-## GWC-JS Customizations - Javascript
+## 3. GWC-JS Customizations - Javascript
 
 ### Header text / logo ( MyHeaderBarWidget )
 The header title and the logo were done using the method outlined in the GAS manual.
@@ -187,7 +214,7 @@ I didn't do this one - it was done by Jean-Philippe from the Strasbourg GBC dev 
 
 
 --------------------------------------------------------------------------------
-## GWC-JS Customizations - CSS
+## 4. GWC-JS Customizations - CSS
 
 ### Customized the colours ( theme.scss.json & theme.scss.json.teal )
 
