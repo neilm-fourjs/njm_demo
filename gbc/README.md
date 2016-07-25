@@ -71,6 +71,8 @@ details go here
 ### Header text / logo ( MyHeaderBarWidget )
 The header title and the logo were done using the method outlined in the GAS manual.
 The header tpl.html file was expended to have a table to align the logo/title/app counter
+
+
 To make the image work I added these 2 lines of javascript to the MyHeaderBarWidget.js file
 ```javascript
           // find the img tag with a class of .njm-logo-top
@@ -83,6 +85,8 @@ To make the image work I added these 2 lines of javascript to the MyHeaderBarWid
 
 Here the goal was a footer that was at the bottom of the web page rather then anchored to the bottom of the browser window.
 So I only wanted to see the footer when I scroll all the way down.
+
+
 To make this work the footer has to be part of the 'form'. I created a MyFormWidget.tpl.html of this:
 ```html
 <div>
@@ -112,6 +116,8 @@ You can see the MyFormWidget.js doesn't actually 'do' anything - so it's inherit
 from the default 'FormWidget' and overriding nothing. The class is registered with a style though
 so only a Form with a style of 'gbc_footer' will get the footer - otherwise all windows would get
 the footer.
+
+
 **NOTE:** There was an issue with this that required a fix to the base code - so this will fail in the current 1.00.20 GBC
 but should fine in the next maintenance release.
 
@@ -126,7 +132,9 @@ This bar should stay at the top of the screen when scrolled.
 To do this we created a custom toolBar widget and a custom Label widget. The custom Label widget is used for the information text,
 so when I display a value to the custom label it appears in a specific area in the toolBar.
 
-NOTE: MORE INFO COMING.
+
+
+**NOTE:** MORE INFO COMING.
 
 ### Changed toolbar items to be img and text on same line ( MyToolBarItemWidget )
 
