@@ -2,10 +2,16 @@
 # Script to attempt to setup GBC development environment
 
 # Arg1: custom folder name, default is njm-js
-# Arg2: GBC version for base - default is gwc-js-1.00.19
+# Arg2: GBC version for base - default is gwc-js-1.00.20
 
 CUSTDIR=${1:-njm-js}
 VER=${2:-1.00.20}
+
+which git
+if [ $? -ne 0 ]; then
+	echo "git is not installed!"
+	exit 1
+fi
 
 GASDIR=$(pwd)
 DTE=$( date +'%Y%m%d%H%M%S')
@@ -111,7 +117,7 @@ fi
 cd $GASDIR/web
 if [ ! -e $CUSTDIR ]; then
 	echo $( date +'%Y%m%d%H%M%S') " Adding symbolic link for $CUSTDIR in $GAS/web ..."
-	ln -s ../$CUSTDIR/$VER/dist/web/ $CUSTDIR
+	ln -s ../$CUSTDIR/gwc-js-$VER/dist/web/ $CUSTDIR
 fi
 
 echo $( date +'%Y%m%d%H%M%S') "Finished Okay"
