@@ -10,6 +10,16 @@ VER=${2:-1.00.20}
 which git
 if [ $? -ne 0 ]; then
 	echo "git is not installed!"
+	echo "Do this ( on centos / redhat ):"
+	echo "sudo yum install -y git"
+	exit 1
+fi
+
+which unzip
+if [ $? -ne 0 ]; then
+	echo "unzip is not installed!"
+	echo "Do this ( on centos / redhat ):"
+	echo "sudo yum install -y unzip"
 	exit 1
 fi
 
@@ -23,7 +33,7 @@ fi
 
 cd $CUSTDIR
 
-if [ ! -e $VER ]; then
+if [ ! -e gwc-js-$VER ]; then
 	echo $( date +'%Y%m%d%H%M%S') " unzip $VER ..."
 	unzip ../tpl/fjs-gwc-js-$VER*
 	if [ $? -ne 0 ]; then
@@ -33,13 +43,15 @@ fi
 
 cd gwc-js-*
 
+# Assuming this is already done now.
 #echo "Install 4.2.2 ..."
 #nvm install 4.2.2
 #if [ $? -ne 0 ]; then
 #	echo "Failed !"
 #	exit 1
 #fi
-#
+
+# Assuming this is already done now.
 #echo "Setting nvm to 4.2.2 ..."
 #nvm use 4.2.2
 #if [ $? -ne 0 ]; then
@@ -65,41 +77,48 @@ echo "Node JS major versions is " $NODEJS_MJVER.$NODEJS_MNVER
 
 if [ ! -e npm_install.ok ]; then
 	echo $( date +'%Y%m%d%H%M%S') " npm install ..."
-	npm install 2>&1 | tee npm_install.$DTE.out
+	npm install 2>&1 > npm_install.$DTE.out
 	if [ $? -ne 0 ]; then
+		cat npm_install.$DTE.out
 		echo "Failed!"
-		exit 1
+		#Ignoring this because it seems to fail a lot!	
+		#exit 1
 	else
 		touch npm_install.ok
 	fi
 fi
 
-if [ ! -e npm_install_grunt_cli.ok ]; then
-	echo $( date +'%Y%m%d%H%M%S') " npm install -g grunt-cli ..."
-	npm install -g grunt-cli 2>&1 | tee npm_install_grunt_cli.$DTE.out
-	if [ $? -ne 0 ]; then
-		echo "Failed!"
-		exit 1
-	else
-		touch npm_install_grunt_cli.ok
-	fi
-fi
+# Done with sudo before running this script now
+#if [ ! -e npm_install_grunt_cli.ok ]; then
+#	echo $( date +'%Y%m%d%H%M%S') " npm install -g grunt-cli ..."
+#	npm install -g grunt-cli 2>&1 > npm_install_grunt_cli.$DTE.out
+#	if [ $? -ne 0 ]; then
+#		cat npm_install_grunt_cli.$DTE.out
+#		echo "Failed!"
+#		exit 1
+#	else
+#		touch npm_install_grunt_cli.ok
+#	fi
+#fi
 
-if [ ! -e npm_install_bower.ok ]; then
-	echo $( date +'%Y%m%d%H%M%S') " npm install -g bower ..."
-	npm install -g bower 2>&1 | tee npm_install_bower.$DTE.out
-	if [ $? -ne 0 ]; then
-		echo "Failed!"
-		exit 1
-	else
-		touch npm_install_bower.ok
-	fi
-fi
+# Done with sudo before running this script now
+#if [ ! -e npm_install_bower.ok ]; then
+#	echo $( date +'%Y%m%d%H%M%S') " npm install -g bower ..."
+#	npm install -g bower 2>&1 > npm_install_bower.$DTE.out
+#	if [ $? -ne 0 ]; then
+#		cat npm_install_bower.$DTE.out
+#		echo "Failed!"
+#		exit 1
+#	else
+#		touch npm_install_bower.ok
+#	fi
+#fi
 
 if [ ! -e grunt_deps.ok ]; then
 	echo $( date +'%Y%m%d%H%M%S') " grunt deps ..."
-	grunt deps 2>&1 | tee grunt_deps.$DTE.out
+	grunt deps 2>&1 > grunt_deps.$DTE.out
 	if [ $? -ne 0 ]; then
+		cat grunt_deps.$DTE.out
 		echo "Failed!"
 		exit 1
 	else
@@ -108,8 +127,9 @@ if [ ! -e grunt_deps.ok ]; then
 fi
 
 echo $( date +'%Y%m%d%H%M%S') " grunt ..."
-grunt 2>&1 | tee grunt.$DTE.out
+grunt 2>&1 > grunt.$DTE.out
 if [ $? -ne 0 ]; then
+	cat grunt.$DTE.out
 	echo "Failed!"
 	exit 1
 fi

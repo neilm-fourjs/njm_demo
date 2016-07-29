@@ -5,15 +5,18 @@ Sections in this README
 
 
 1. Files / Folders
-2. Installing for development
-3. GWC-JS Customizations - Javascript
+2. Setting up GWC-JS dev environment 
+	* CentOS
+	* Debian
+3. Installing Demo for development
+4. GWC-JS Customizations - Javascript
   * Header text / logo
   * Footer to be at bottom of page rather than bottom of window
   * Change the redirect on end of application to a demos page.
   * Created a custom toolbar to show data from two custom labels
   * Changed toolbar items to be img and text on same line
   * CSS based layouter - tiled groups in a [VH]Box
-4. GWC-JS Customizations - CSS
+5. GWC-JS Customizations - CSS
   * Customized the colours
   * Removed the sidebar
   * Fixed issue with images on a button not getting correct size
@@ -42,7 +45,28 @@ Sections in this README
 
 
 --------------------------------------------------------------------------------
-## 2. Installing for development
+## 2. Setting up GWC-JS dev prerequisite
+
+Setting the development environment can be tricky because the default versions
+for most platforms are too old.
+
+### CentOS 7 ( and probably 6 )
+
+sudo curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+sudo yum install -y unzip git nodejs
+sudo npm install -g grunt-cli
+sudo npm install -g bower
+
+### Debian
+
+curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+sudo apt-get install -y unzip git nodejs
+sudo npm install -g grunt-cli
+sudo npm install -g bower
+
+
+--------------------------------------------------------------------------------
+## 3. Installing the Demo for development
 
 The way I setup my development environment for GBC is I copy the gbc_custom_setup.sh script to my $FGLASDIR folder and run it. 
 It should create the njm-js folder, extract the gbc source from $FGLASDIR/tpl/<source>.zip then try and run the commands to
@@ -61,11 +85,11 @@ tar xvzf <repo folder>/gbc/njm_gbc.tgz
 grunt
 ```
 
-I should then be able to run my application using the njm-js custom GBC.
+You should then be able to run the application using the njm-js custom GBC.
 
 
 --------------------------------------------------------------------------------
-## 3. GWC-JS Customizations - Javascript
+## 4. GWC-JS Customizations - Javascript
 
 ### Header text / logo ( MyHeaderBarWidget )
 The header title and the logo were done using the method outlined in the GAS manual.
@@ -217,7 +241,7 @@ I didn't do this one - it was done by Jean-Philippe from the Strasbourg GBC dev 
 
 
 --------------------------------------------------------------------------------
-## 4. GWC-JS Customizations - CSS
+## 5. GWC-JS Customizations - CSS
 
 ### Customized the colours ( theme.scss.json & theme.scss.json.teal )
 

@@ -126,7 +126,7 @@
         <File filePath="src/forms/cust_mnt.4fd"/>
         <File filePath="src/cust_mnt.4gl"/>
       </Application>
-      <Application binaryName="dynMaint" commandLineArguments="S 1 stock_cat catid YYYYNN" dependencies="1986||14000||1563799204" id="195647156" label="dynMaint">
+      <Application binaryName="dynMaint" commandLineArguments="S 1 stock stock_code YYYYNN" dependencies="1986||14000||1563799204" id="195647156" label="dynMaint">
         <File filePath="src/dynMaint.4gl"/>
       </Application>
       <Application binaryName="menu_mnt" commandLineArguments="S 1" dependencies="1986||570408889||14000||-526112109||1563799204||-211328758" id="2060528692" label="menu_mnt">

@@ -128,6 +128,9 @@ FUNCTION getItems( sc )
 
 END FUNCTION
 --------------------------------------------------------------------------------
+#+ This build my categories list of buttons
+#+ @param none
+#+ @returns none
 FUNCTION build_cats()
 	DEFINE n om.DomNode
 	DEFINE x,len SMALLINT
@@ -156,10 +159,10 @@ END FUNCTION
 FUNCTION build_grids()
 	DEFINE l_hbox, n,n1, ff om.DomNode
 	DEFINE x,y, l_gw SMALLINT
-	CONSTANT l_lab1_gwidth = 16
+	CONSTANT l_lab1_gwidth = 12
 	CONSTANT l_lab2_gwidth = 4
 	CONSTANT l_qty_gwidth = 6
-	CONSTANT l_detbut_gwidth = 8
+	CONSTANT l_detbut_gwidth = 2
 
 	LET l_gw = l_lab1_gwidth + 1
 	DISPLAY "Build_grids:",m_csslayout
@@ -254,7 +257,7 @@ FUNCTION build_grids()
 			CALL n1.setAttribute("gridWidth",l_detbut_gwidth)
 			CALL n1.setAttribute("width",l_detbut_gwidth)
 			CALL n1.setAttribute("image", "fa-info-circle")
-			CALL n1.setAttribute("text", "Details")
+			CALL n1.setAttribute("text", "")
 			CALL n1.setAttribute("posY","10")
 			CALL n1.setAttribute("posX",l_lab2_gwidth+l_qty_gwidth)
 		END IF
