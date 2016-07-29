@@ -52,17 +52,21 @@ for most platforms are too old.
 
 ### CentOS 7 ( and probably 6 )
 
+```bash
 sudo curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
 sudo yum install -y unzip git nodejs
 sudo npm install -g grunt-cli
 sudo npm install -g bower
+```
 
 ### Debian
 
+```bash
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y unzip git nodejs
 sudo npm install -g grunt-cli
 sudo npm install -g bower
+```
 
 
 --------------------------------------------------------------------------------
