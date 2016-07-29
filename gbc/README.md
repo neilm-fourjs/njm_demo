@@ -5,7 +5,7 @@ Sections in this README
 
 
 1. Files / Folders
-2. Setting up GWC-JS dev environment 
+2. Setting up GWC-JS dev prerequisites
 	* CentOS
 	* Debian
 3. Installing Demo for development
@@ -45,10 +45,10 @@ Sections in this README
 
 
 --------------------------------------------------------------------------------
-## 2. Setting up GWC-JS dev prerequisite
+## 2. Setting up GWC-JS dev prerequisites
 
-Setting the development environment can be tricky because the default versions
-for most platforms are too old.
+Setting the development environment can be tricky because the default versions for
+for most of the tools are too old on most LTS ( Long term support ) type distributions.
 
 ### CentOS 7 ( and probably 6 )
 
@@ -72,18 +72,18 @@ sudo npm install -g bower
 --------------------------------------------------------------------------------
 ## 3. Installing the Demo for development
 
-The way I setup my development environment for GBC is I copy the gbc_custom_setup.sh script to my $FGLASDIR folder and run it. 
+The way I setup the development environment for GBC is to copy the gbc_custom_setup.sh script to $FGLASDIR folder and run it. 
 It should create the njm-js folder, extract the gbc source from $FGLASDIR/tpl/<source>.zip then try and run the commands to
-install and configure the default tools ( npm / bower / grunt ). It also creates the symbolic link $FGLASDIR/web to for the 
-customized dist path, ie  njm-js -> ../njm-js/gwc-js-1.00.20/dist/web/
-I then use the packit.sh script to pack up my files ready for extracting into the custom folder. 
-For example from the cloned repo folder I can do:
+install and configure the default tools ( nodejs ). It also creates the symbolic link $FGLASDIR/web to for the customized dist 
+path, ie  njm-js -> ../njm-js/gwc-js-1.00.20/dist/web/
+You can then use the packit.sh script to pack up the custom gbc files ready for extracting into the new custom folder. 
+For example from the cloned repo folder you should be able to do this:
 ```bash
 cd gbc
 ./packit.sh
 cp gbc_custom_setup.sh $FGLASDIR/
 cd $FGLASDIR
-gbc_custom_setup.sh  ( this takes a while! )
+./gbc_custom_setup.sh  ( this takes a while! )
 cd njm-js/*/
 tar xvzf <repo folder>/gbc/njm_gbc.tgz
 grunt
