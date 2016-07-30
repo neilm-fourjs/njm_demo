@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<APPLICATION Parent="defaultgdc"
+<APPLICATION Parent="defaultgwc"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.00/cfextwa.xsd">
   <RESOURCE Id="res.genver" Source="INTERNAL">300</RESOURCE>
@@ -17,15 +17,10 @@
     <ENVIRONMENT_VARIABLE Id="DBPRINT">FGLSERVER</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="DBDATE">DMY4/</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="DBNAME">njm_demo</ENVIRONMENT_VARIABLE>
-    <ENVIRONMENT_VARIABLE Id="FJS_GL_DBGLEV">3</ENVIRONMENT_VARIABLE>
+    <ENVIRONMENT_VARIABLE Id="FJS_GL_DBGLEV">0</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="SDIMDI">M</ENVIRONMENT_VARIABLE>
     <PATH>$(res.path.njm_demo.obj)</PATH>
     <MODULE>menu.42r</MODULE>
     <WEB_COMPONENT_DIRECTORY>$(res.path.njm_demo)/etc</WEB_COMPONENT_DIRECTORY>
   </EXECUTION>
-  <UA_OUTPUT>
-     <PROXY>$(res.uaproxy.cmd)</PROXY>
-     <PUBLIC_IMAGEPATH>$(res.public.resources)</PUBLIC_IMAGEPATH>
-     <GWC-JS>njm-js</GWC-JS>
-  </UA_OUTPUT>
 </APPLICATION>

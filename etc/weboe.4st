@@ -167,10 +167,10 @@
 		<StyleAttribute name="textColor" value="red" />
 	</Style>
 	<Style name=".big">
-		<StyleAttribute name="fontSize" value="14pt" />
+		<StyleAttribute name="fontSize" value="1.5em" />
 	</Style>
 	<Style name=".vbig">
-		<StyleAttribute name="fontSize" value="18pt" />
+		<StyleAttribute name="fontSize" value="2em" />
 	</Style>
 	<Style name=".buttononly">
 		<StyleAttribute name="fontSize" value="0.1em" />

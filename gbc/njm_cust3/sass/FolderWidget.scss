@@ -1,0 +1,31 @@
+
+.mt-tabs[__FolderWidget] {
+	background-color: $gbc-header-color;
+
+	.mt-tabs .mt-tab-titles {
+		padding-top: 2px;
+		font-size: 1.5em;
+	}
+	
+	.mt-tab-titles-container[__FolderWidget=top] .mt-tab-title {
+		background-color: $gbc-header-color;
+		border-top: solid 2px $gbc-header-color;
+		border-bottom: solid 1px $gbc-header-color;
+	}
+	
+	.mt-tab-titles-container[__FolderWidget=top] .mt-tab-title.mt-tab-current {
+		background-color: $gbc-primary-light-color;
+		border-top: solid 2px $gbc-primary-color;
+		border-bottom: solid 1px $gbc-primary-light-color;
+	}
+	
+	.mt-tab-items[__FolderWidget] {
+		background-color: $gbc-primary-light-color;
+		padding: 0px 3px 3px 3px;
+	}
+
+}
+
+.mt-tab-next, .mt-tab-previous {
+  display: none;
+}

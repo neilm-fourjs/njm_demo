@@ -1,0 +1,12 @@
+
+.gbc_ModalWindowDialog  .mt-dialog-header {
+  color: $gbc-primary-light-color;
+  background-color: $gbc-header-color;
+  .gbc_ImageWidget {
+    display: none;
+  }
+}
+
+.gbc_ModalWindowDialog  .mt-dialog-pane {
+  background-color: $gbc-secondary-background-color;
+}

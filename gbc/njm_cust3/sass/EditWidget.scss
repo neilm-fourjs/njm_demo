@@ -1,0 +1,10 @@
+.gbc_ButtonEditWidget > .gbc_EditWidget, .gbc_DummyButtonEditWidget > .gbc_EditWidget {
+  border-bottom: solid 3px $gbc-primary-light-color;
+}
+.gbc_ButtonEditWidget.gbc_Focus > .gbc_EditWidget, .gbc_DummyButtonEditWidget.gbc_Focus > .gbc_EditWidget {
+  border-bottom: solid 3px $gbc-primary-color;
+}
+
+.mt-field.gbc_Focus {
+  border-bottom: solid 3px $gbc-primary-color;
+}

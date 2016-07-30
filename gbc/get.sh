@@ -7,12 +7,12 @@ CUSTOM=${1:-njm-js}
 if [ -z $FGLASDIR ]; then
 	FGLASDIR=/opt/fourjs/gas300
 fi
-CUSTFOLDER=njm_cust
 
-echo "Getting customizations from $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER ..." 
-cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/resources/img/* $CUSTFOLDER/resources/img/
-cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/js/* $CUSTFOLDER/js/
-cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/sass/* $CUSTFOLDER/sass/
-cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/$CUSTFOLDER/theme.scss.json $CUSTFOLDER/.
+cp -r $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/njm_cust1 ./
+cp -r $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/njm_cust2 ./
+cp -r $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/njm_cust3 ./
+
+cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/set_cust.sh .
+cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/custom?.json .
 
 echo "Done."

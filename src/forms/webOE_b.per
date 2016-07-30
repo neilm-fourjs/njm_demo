@@ -49,41 +49,35 @@ GRID
 END -- GRID
 END -- PAGE d
 PAGE p (TEXT=%"Payment Details",HIDDEN)
-VBOX
-GRID
-{
-[cl01           ][c001                  ]
-[""]
-}
-END -- GRID
 GRID
 {
 <G gpayt              ><G gcarddets                            >
 [p001                ]  [plab1   ][p002                       ]
 [                    ]  [plab2   ][p003                       ]
 [                    ]  [plab3   ][pm]/[py    ] mm/yyyy
-                        [plab4   ][p005]
-<                     ><                                       >
-[pt1 ][pt2 ][pt3 ]
+[pt1 ][pt2 ][pt3 ]      [plab4   ][p005]
 [    ][    ][    ]
+<                     ><                                       >
+<G gref                                                        >
+ [c001                                                        ]
 }
 END -- GRID
 
-END -- VBOX
 END -- PAGE p
 END -- FOLDER
 
 GRID
 {
-[lordtots                         ]
-[cl02           ][c002            ]
-[cl03           ][c003            ]
-[cl04           ][c004            ]
-[cl05           ][c005            ]
-[cl06           ][c006            ]
------------------------------------
-[cl07           ][c007            ]
------------------------------------
+<G gordtots                         >
+ [cl02           ][c002            ]
+ [cl03           ][c003            ]
+ [cl04           ][c004            ]
+ [cl05           ][c005            ]
+ [cl06           ][c006            ]
+ -----------------------------------
+ [cl07           ][c007            ]
+ -----------------------------------
+<                                   >
                  [confirm         ]
 }
 END -- GRID
@@ -116,7 +110,6 @@ LABEL plab2 : lnumb,TEXT=%"Number:",JUSTIFY=RIGHT;
 LABEL plab3 : lexpr,TEXT=%"Expires:",JUSTIFY=RIGHT;
 LABEL plab4 : lissu,TEXT=%"Issue:",JUSTIFY=RIGHT;
 
-LABEL cl01 : oref ,TEXT=%"Your Reference:",JUSTIFY=RIGHT;
 LABEL cl02 : itms ,TEXT=%"Total Items:",JUSTIFY=RIGHT;
 LABEL cl03 : gros ,TEXT=%"Gross Value:",JUSTIFY=RIGHT;
 LABEL cl04 : taxv ,TEXT=%"Total Tax:",JUSTIFY=RIGHT;
@@ -173,8 +166,10 @@ IMAGE pt1 : pt1, IMAGE="fa-cc-paypal", SIZEPOLICY=FIXED, AUTOSCALE;
 IMAGE pt2 : pt2, IMAGE="fa-cc-mastercard", SIZEPOLICY=FIXED, AUTOSCALE;
 IMAGE pt3 : pt3, IMAGE="fa-cc-visa", SIZEPOLICY=FIXED, AUTOSCALE;
 
-LABEL lordtots : lordtots,TEXT=%"Your Order so far:";
+GROUP gref : oref ,TEXT=%"Your Reference:";
 c001 = ord_head.order_ref;
+
+GROUP gordtots : gordtots,TEXT=%"Your Order:";
 c002 = ord_head.total_qty, NOENTRY;
 c003 = ord_head.total_gross, NOENTRY;
 c004 = ord_head.total_tax, NOENTRY;

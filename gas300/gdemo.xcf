@@ -22,9 +22,4 @@
     <MODULE>menu.42r</MODULE>
     <WEB_COMPONENT_DIRECTORY>$(res.path.njm_demo)/etc</WEB_COMPONENT_DIRECTORY>
   </EXECUTION>
-  <UA_OUTPUT>
-     <PROXY>$(res.uaproxy.cmd)</PROXY>
-     <PUBLIC_IMAGEPATH>$(res.public.resources)</PUBLIC_IMAGEPATH>
-     <GWC-JS>njm-js</GWC-JS>
-  </UA_OUTPUT>
 </APPLICATION>

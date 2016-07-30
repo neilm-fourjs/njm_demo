@@ -356,11 +356,11 @@ FUNCTION gotoco()
 				CALL f.setElementText("next","Confirm")
 				CALL f.setElementImage("next","smiley")
 		END INPUT
-		INPUT BY NAME g_ordHead.order_ref,
-									m_pay.payment_type, 
+		INPUT BY NAME m_pay.payment_type, 
 									m_pay.card_type, m_pay.card_no, 
 									m_pay.expires_m, m_pay.expires_y, 
-									m_pay.issue_no
+									m_pay.issue_no,
+									g_ordHead.order_ref
 				ATTRIBUTE(WITHOUT DEFAULTS)
 			ON ACTION next
 				EXIT DIALOG

@@ -1,0 +1,20 @@
+
+.gbc_GroupTitleWidget {
+	font-size: 1.5em;
+	font-weight: normal;
+	background-color: $gbc-header-color
+}
+
+.gbc_style_cats {
+
+	.gbc_GroupTitleWidget {
+		background-color: $gbc-primary-medium-color;
+		font-size: 1em;
+	}
+
+	.gbc_GroupWidgetContainer {
+		background-color: $gbc-primary-medium-color;
+		color: $gbc-primary-light-color;
+	}
+	
+}
