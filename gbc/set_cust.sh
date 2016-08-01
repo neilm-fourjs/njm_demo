@@ -1,6 +1,10 @@
 
 CUST=${1:-1}
 
+if [ ! -e dist$CUST ]; then
+	mkdir dist$CUST
+fi
+
 rm dist
 rm custom.json
 
