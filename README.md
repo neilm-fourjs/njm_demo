@@ -127,6 +127,5 @@ For details please see the README in the gbc folder in this repo.
 
 
 ## Screenshots
-![red](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-red.jpg "My Red Theme")
-![teal](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-teal.jpg "My Teal Theme")
-![hivis](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-hivis.jpg "Color Theme Resource")
+![scr1](https://github.com/neilm-fourjs/njm_demo/raw/master/pics/screenshot_oe_gdc.jpg "Order Enter program in the GDC")
+![scr2](https://github.com/neilm-fourjs/njm_demo/raw/master/pics/screenshot_oe_gbc.jpg "Order Enter program in the GBC aka GWC-JS")

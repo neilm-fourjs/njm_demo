@@ -25,6 +25,7 @@ Sections in this README
   * Re-styled the window title bar for modal windows and removed the icon
   * Table headers colour change
   * Default toolbar colours
+6. Screenshots
 
 
 --------------------------------------------------------------------------------
@@ -353,3 +354,16 @@ $gbc-ToolBar-hover-color: $gbc-primary-light-color;
   }
 }
 ```
+
+## 6. Screenshots
+An Orange and Grey Theme
+![org1](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-org1.jpg "My Orange Theme")
+![org2](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-org2.jpg "My Orange Theme")
+![org3](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-org3.jpg "My Orange Theme")
+A Red Theme
+![red](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-red.jpg "My Red Theme")
+A Teal Theme
+![teal](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-teal.jpg "My Teal Theme")
+A version to show the colours and matrial theme.
+![hivis](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-hivis.jpg "Color Theme Resource")
+
