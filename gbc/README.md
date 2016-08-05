@@ -36,14 +36,15 @@ Sections in this README
 * get.sh : script I'm using to copy the customization files from the FGLASDIR folder to my git repo location.
 * njm_demo.html : File I place in my <webroot>/gbc/ folder on my web server - custom page redirected to on app close.
 * packit.sh : script to pack the customization files into a tgz for easy coping to my GBC dev environment.
-* njm_cust/ : Core folder for my GBC customization files
-* njm_cust/js : Javascript files ( see below )
-* njm_cust/locales : Copy of default - nothing here has be changed.
-* njm_cust/resources/img : Customer gbc_logo and my app logo
-* njm_cust/sass : SCSS files ( see below )
-* theme.scss.json : My default 'Red' theme.
-* theme.scss.json.teal : An alernative 'Teal' theme.
-
+* njm_cust1/ : Core folder for my GBC Red customization files
+* njm_cust2/ : Core folder for my GBC Teal customization files
+* njm_cust3/ : Core folder for my GBC Orange customization files
+* njm_custX/js : Javascript files ( see below )
+* njm_custX/locales : Copy of default - nothing here has be changed.
+* njm_custX/resources/img : Customer gbc_logo and my app logo
+* njm_custX/sass : SCSS files ( see below )
+* screenshots : Screen shot images for this readme.md
+* set_cust : Script to switch symbolic links for customX.json and distX for active customization
 
 --------------------------------------------------------------------------------
 ## 2. Setting up GWC-JS dev prerequisites
@@ -87,11 +88,11 @@ cd $FGLASDIR
 ./gbc_custom_setup.sh  ( this takes a while! )
 cd njm-js/*/
 tar xvzf <repo folder>/gbc/njm_gbc.tgz
-grunt
+./set_cust.sh 1   ( setup links for njm_cust1 folder )
 ```
 
 You should then be able to run the application using the njm-js custom GBC.
-
+To do the build for njm_cust2 and njm_cust3 just run the ./set_cust.sh 2 and ./set_cust.sh 3
 
 --------------------------------------------------------------------------------
 ## 4. GWC-JS Customizations - Javascript
@@ -357,13 +358,13 @@ $gbc-ToolBar-hover-color: $gbc-primary-light-color;
 
 ## 6. Screenshots
 An Orange and Grey Theme
-![org1](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-org1.jpg "My Orange Theme")
-![org2](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-org2.jpg "My Orange Theme")
-![org3](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-org3.jpg "My Orange Theme")
+![org1](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-org1.jpg "My Orange Theme")
+![org2](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-org2.jpg "My Orange Theme")
+![org3](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-org3.jpg "My Orange Theme")
 A Red Theme
-![red](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-red.jpg "My Red Theme")
+![red](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-red.jpg "My Red Theme")
 A Teal Theme
-![teal](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-teal.jpg "My Teal Theme")
+![teal](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-teal.jpg "My Teal Theme")
 A version to show the colours and matrial theme.
-![hivis](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/gbc-hivis.jpg "Color Theme Resource")
+![hivis](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-hivis.jpg "Color Theme Resource")
 
