@@ -1,0 +1,34 @@
+
+//$gbc-TableWidget-selected-color: $gbc-primary-color !default;
+//$gbc-TableWidget-headers-color: $gbc-primary-medium-color !default;
+
+.gbc_TableWidget {
+
+	.gbc_TableColumnHeader {
+
+		background-color: $gbc-primary-medium-color;
+		color: $gbc-primary-light-color;
+
+		.headerText {
+			font-size: 1.1em;
+		}
+	}
+
+	&:not(.multiRowSelection) {
+		&:not(.disabled) {
+			&:not(.gbc_TreeAnchor) {
+				.highlightRow > .currentRow {
+					background-color: $gbc-primary-color;
+					color: $gbc-field-background-color;
+				}
+				.currentColumn.highlightCell > .currentRow {
+					background-color: $gbc-primary-color;
+					color: $gbc-field-background-color;
+					fill: $gbc-field-background-color;
+				}
+
+			}
+		}
+	}
+}
+
