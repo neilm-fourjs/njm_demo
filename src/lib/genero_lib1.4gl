@@ -132,7 +132,10 @@ GL_MODULE_ERROR_HANDLER
 	ELSE
 		GL_DBGMSG(1, "gl_init: m_pics='"||m_pics||"'")
 	END IF
-
+	DISPLAY fgl_getversion()
+	IF fgl_getversion() MATCHES "30*" THEN
+		CALL gl_chkImgPath()
+	END IF
 	IF l_key IS NULL THEN LET l_key = "default" END IF
 	LET m_key = l_key
 	IF gl_toolbar IS NULL THEN LET gl_toolbar = m_key END IF
@@ -3696,4 +3699,47 @@ FUNCTION gl_getGitver()
 	LET m_gitver = m_gitver.subString(1,x-1)
 	CALL c.close()
 	RETURN m_gitver
+END FUNCTION
+--------------------------------------------------------------------------------
+#+ Check FGLIMAGEPATH for FontAwesome
+FUNCTION gl_chkImgPath()
+	DEFINE l_imgPath, l_tmp, l_file, l_msg STRING
+	DEFINE l_fntA, l_img2txt STRING
+	DEFINE l_gotimg2fnt BOOLEAN
+	DEFINE l_gotfntAwe BOOLEAN
+	DEFINE l_st base.StringTokenizer
+	LET l_gotimg2fnt = FALSE
+	LET l_gotfntAwe = FALSE
+	LET l_imgPath = fgl_getEnv("FGLIMAGEPATH")
+
+	IF l_imgPath.getLength() = 0 THEN RETURN END IF
+	LET l_fntA = "FontAwesome.ttf" 
+	LET l_img2txt = "image2font.txt"
+	LET l_st = base.StringTokenizer.create(l_imgPath,os.path.pathSeparator())
+	WHILE l_st.hasMoreTokens()
+		LET l_tmp = l_st.nextToken()
+		LET l_msg = l_msg.append("\n"||NVL(l_tmp,"NULL"))
+		LET l_file = os.Path.baseName( l_tmp ) 
+		IF l_file = l_img2txt THEN
+			IF os.path.exists( l_tmp ) THEN
+				LET l_gotimg2fnt = TRUE
+			END IF
+		ELSE
+			IF os.path.dirName( l_tmp ) THEN
+				IF os.path.exists( os.path.join( l_tmp, l_fntA ) )THEN
+					LET l_gotfntAwe = TRUE
+				END IF
+			END IF
+		END IF
+	END WHILE
+	IF NOT l_gotimg2fnt OR NOT l_gotfntAwe THEN
+		IF NOT l_gotimg2fnt THEN
+			LET l_msg = l_msg.append("\nError: "||l_img2txt||" is missing!")
+		END IF
+		IF NOT l_gotfntAwe THEN
+			LET l_msg = l_msg.append("\nError: A folder containing "||l_fntA||" is missing!")
+		END IF
+		CALL fgl_winMessage("Image Path Issue","The FGLIMAGEPATH contains:"||l_msg,"exclamation")
+	END IF
+
 END FUNCTION
