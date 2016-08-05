@@ -31,11 +31,6 @@ Sections in this README
 --------------------------------------------------------------------------------
 ## 1. Files / Folders:                                                                                                                                       
 
-* custom.json : this is the configuration file for the GBC customizations.
-* gbc_custom_setup.sh : Utility script to setup the GBC dev environment
-* get.sh : script I'm using to copy the customization files from the FGLASDIR folder to my git repo location.
-* njm_demo.html : File I place in my <webroot>/gbc/ folder on my web server - custom page redirected to on app close.
-* packit.sh : script to pack the customization files into a tgz for easy coping to my GBC dev environment.
 * njm_cust1/ : Core folder for my GBC Red customization files
 * njm_cust2/ : Core folder for my GBC Teal customization files
 * njm_cust3/ : Core folder for my GBC Orange customization files
@@ -44,7 +39,12 @@ Sections in this README
 * njm_custX/resources/img : Customer gbc_logo and my app logo
 * njm_custX/sass : SCSS files ( see below )
 * screenshots : Screen shot images for this readme.md
-* set_cust : Script to switch symbolic links for customX.json and distX for active customization
+* customX.json : these are the configuration files for the GBC customizations.
+* gbc_custom_setup.sh : Utility script to setup the GBC dev environment
+* get.sh : script I'm using to copy the customization files from the FGLASDIR folder to my git repo location.
+* njm_demo.html : File I place in my <webroot>/gbc/ folder on my web server - custom page redirected to on app close.
+* packit.sh : script to pack the customization files into a tgz for easy coping to my GBC dev environment.
+* set_cust.sh : Script to switch symbolic links for customX.json and distX for active customization
 
 --------------------------------------------------------------------------------
 ## 2. Setting up GWC-JS dev prerequisites

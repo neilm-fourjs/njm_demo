@@ -3,16 +3,18 @@
 # This script copies the GBC customizations into this folder structure for git.
 
 VER=20
-CUSTOM=${1:-njm-js}
+CUSTNAME=${1:-njm}
 if [ -z $FGLASDIR ]; then
 	FGLASDIR=/opt/fourjs/gas300
 fi
 
-cp -r $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/njm_cust1 ./
-cp -r $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/njm_cust2 ./
-cp -r $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/njm_cust3 ./
+for f in $FGLASDIR/$CUSTNAME-js/gwc-js-1.00.$VER/${CUSTNAME}_cust?
+do
+	echo cp -r $f ./
+	cp -r $f ./
+done
 
-cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/set_cust.sh .
-cp $FGLASDIR/$CUSTOM/gwc-js-1.00.$VER/custom?.json .
+cp $FGLASDIR/$CUSTNAME-js/gwc-js-1.00.$VER/set_cust.sh .
+cp $FGLASDIR/$CUSTNAME-js/gwc-js-1.00.$VER/custom?.json .
 
 echo "Done."
