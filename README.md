@@ -127,5 +127,16 @@ For details please see the README in the gbc folder in this repo.
 
 
 ## Screenshots
+Order Enter program in the GDC
 ![scr1](https://github.com/neilm-fourjs/njm_demo/raw/master/pics/screenshot_oe_gdc.jpg "Order Enter program in the GDC")
-![scr2](https://github.com/neilm-fourjs/njm_demo/raw/master/pics/screenshot_oe_gbc.jpg "Order Enter program in the GBC aka GWC-JS")
+
+Customer Maint program in the GDC
+![scr2](https://github.com/neilm-fourjs/njm_demo/raw/master/pics/screenshot_custmnt_gdc.jpg "Customer Maint program in the GDC")
+
+Order Enter program in the GBC aka GWC-JS
+![scr3](https://github.com/neilm-fourjs/njm_demo/raw/master/pics/screenshot_oe_gbc.jpg "Order Enter program in the GBC aka GWC-JS")
+
+Customer Maint program in the GBC
+![scr4](https://github.com/neilm-fourjs/njm_demo/raw/master/pics/screenshot_custmnt_gbc.jpg "Customer Maint program in the GBC aka GWC-JS")
+
+
