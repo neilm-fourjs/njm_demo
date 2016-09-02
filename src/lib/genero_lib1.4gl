@@ -57,7 +57,7 @@ DEFINE m_dbtype STRING
 FUNCTION gl_init(mdi_sdi, l_key, l_use_fi) --{{{
 	DEFINE mdi_sdi CHAR(1)
 	DEFINE l_key,l_desc,fe_typ,fe_ver,l_container,l_sttype STRING
-	DEFINE l_use_fi,x SMALLINT
+	DEFINE l_use_fi,x, l_loc SMALLINT
 
 --If not set then use ARG_VAL(0) and remove path and extensions from it
 	IF gl_progname IS NULL THEN
@@ -114,6 +114,15 @@ GL_MODULE_ERROR_HANDLER
 	GL_DBGMSG(1, "gl_init: FGLPROFILE="||fgl_getEnv("FGLPROFILE"))
 	GL_DBGMSG(1, "gl_init: DBPATH="||fgl_getEnv("DBPATH"))
 	GL_DBGMSG(1, "gl_init: DBDATE="||fgl_getEnv("DBDATE"))
+
+	LET l_loc = fgl_getResource("fglrun.localization.file.count")
+	IF l_loc > 0 THEN
+		FOR x = 1 TO l_loc
+			GL_DBGMSG(1,"gl_init: Localization file "||x||" = "||fgl_getResource("fglrun.localization.file."||x||".name"))
+		END FOR
+	ELSE
+		GL_DBGMSG(1,"gl_init: No Localization files in fglprofile.")
+	END IF
 
 	IF fgl_getEnv("FGLIMAGEPATH") = " " THEN
 		LET m_pics = fgl_getEnv("FJS_PICS")

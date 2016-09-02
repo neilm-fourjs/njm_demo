@@ -65,9 +65,9 @@ MAIN
 			BEFORE DISPLAY
 				IF m_save THEN
 					IF fgl_winQuestion("Confirm","Save these changes?","No","Yes|No","question",1) = "Yes" THEN
-						CALL saveRoles()
+						CALL saveRoles_user()
 					ELSE
-						CALL setSave(FALSE)
+						CALL setSave_user(FALSE)
 					END IF
 				END IF
 			BEFORE ROW
@@ -93,10 +93,10 @@ MAIN
 			ON ACTION dblclick
 				IF fgl_winQuestion("Confirm","Toggle activate state for users role?","No","Yes|No","question",1) = "Yes" THEN
 					LET m_uroles[ ARR_CURR() ].active = toggle(m_uroles[ ARR_CURR() ].active)
-					CALL setSave(TRUE)
+					CALL setSave_user(TRUE)
 				END IF
 			ON ACTION removeRoles
-				CALL removeRoles(DIALOG)
+				CALL removeRoles_user(DIALOG)
 			ON DRAG_ENTER(dnd)
 				IF m_drag_source = "roles" THEN
 					CALL dnd.setOperation("copy")
@@ -104,7 +104,7 @@ MAIN
 					CALL dnd.setOperation(NULL)
 				END IF
 			ON DROP(dnd)
-				CALL addRoles(DIALOG)
+				CALL addRoles_user(DIALOG)
 			ON DRAG_FINISHED(dnd)
 				LET m_drag_source = NULL
 		END DISPLAY
@@ -116,14 +116,14 @@ MAIN
 			ON DRAG_START(dnd)
 				LET m_drag_source = "roles"
 			ON ACTION addRoles
-				CALL addRoles(DIALOG)
+				CALL addRoles_user(DIALOG)
 		END DISPLAY
 
 		INPUT m_user_rec.* FROM sys_users.* ATTRIBUTE(WITHOUT DEFAULTS)
 			ON ACTION dialogTouched
 				CALL DIALOG.setActionActive("dialogtouched",FALSE)
 				LET m_saveUser = TRUE
-				CALL setSave(TRUE)
+				CALL setSave_user(TRUE)
 				DISPLAY "Touched!"
 			BEFORE INPUT
 				CALL DIALOG.setactionActive("save",FALSE)
@@ -138,10 +138,10 @@ MAIN
 					CONTINUE DIALOG
 				ELSE
 					CALL checkSave()
-					CALL setSave(FALSE)
+					CALL setSave_user(FALSE)
 				END IF
 			ON ACTION cancel
-				CALL setSave(FALSE)
+				CALL setSave_user(FALSE)
 				LET m_user_rec.* = m_user[ 1 ].*
 				CALL DIALOG.setCurrentRow("u_arr",1)
 				NEXT FIELD u_arr.fullname
@@ -162,7 +162,7 @@ MAIN
 	END DIALOG
 END MAIN
 --------------------------------------------------------------------------------
-FUNCTION removeRoles(d)
+FUNCTION removeRoles_user(d)
 	DEFINE d ui.Dialog
 	DEFINE x SMALLINT
 	FOR x = 1 TO m_roles.getLength()
@@ -175,7 +175,7 @@ FUNCTION removeRoles(d)
 	CALL d.setactionActive("save",m_save)
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION addRoles(d)
+FUNCTION addRoles_user(d)
 	DEFINE d ui.Dialog
 	DEFINE x,y SMALLINT
 	FOR x = 1 TO m_roles.getLength()
@@ -196,7 +196,7 @@ FUNCTION addRoles(d)
 	CALL d.setactionActive("save",m_save)
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION setSave(tf)
+FUNCTION setSave_user(tf)
 	DEFINE tf BOOLEAN
 	DEFINE d ui.Dialog
 	DISPLAY "setSave:",tf
@@ -209,7 +209,7 @@ FUNCTION checkSave()
 	IF m_save THEN 
 		IF fgl_winQuestion("Confirm","Save these changes?","No","Yes|No","question",1) = "Yes" THEN
 			IF m_saveUser THEN CALL saveUser() END IF	
-			IF m_saveRoles THEN CALL saveRoles() END IF
+			IF m_saveRoles THEN CALL saveRoles_user() END IF
 		END IF
 	END IF
 END FUNCTION
@@ -239,11 +239,11 @@ FUNCTION saveUser()
 
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION saveRoles()
+FUNCTION saveRoles_user()
 	DEFINE x SMALLINT
 
 	IF NOT checkUserRoles(m_this_user_key,"System Admin Update",TRUE) THEN
-		CALL setSave(FALSE)
+		CALL setSave_user(FALSE)
 		RETURN
 	END IF
 
@@ -253,7 +253,7 @@ FUNCTION saveRoles()
 		INSERT INTO sys_user_roles VALUES( m_user_key,m_uroles[x].role_key,m_uroles[x].active )
 	END FOR
 	COMMIT WORK
-	CALL setSave(FALSE)
+	CALL setSave_user(FALSE)
 -- Need to actually update tables here!
 END FUNCTION
 --------------------------------------------------------------------------------

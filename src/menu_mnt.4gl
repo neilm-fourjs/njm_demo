@@ -84,9 +84,9 @@ MAIN
 			BEFORE DISPLAY
 				IF m_save THEN
 					IF fgl_winQuestion("Confirm","Save these changes?","No","Yes|No","question",1) = "Yes" THEN
-						CALL saveRoles()
+						CALL saveRoles_menu()
 					ELSE
-						CALL setSave("FALSE")
+						CALL setSave_menu("FALSE")
 					END IF
 				END IF
 			BEFORE ROW 
@@ -102,10 +102,10 @@ MAIN
 			ON ACTION dblclick
 				IF fgl_winQuestion("Confirm","Toggle activate state for users role?","No","Yes|No","question",1) = "Yes" THEN
 					LET m_mroles[ ARR_CURR() ].active = toggle(m_mroles[ ARR_CURR() ].active)
-					CALL setSave(TRUE)
+					CALL setSave_menu(TRUE)
 				END IF
 			ON ACTION removeRoles
-				CALL removeRoles(DIALOG)
+				CALL removeRoles_menu(DIALOG)
 			ON DRAG_ENTER(dnd)
 				IF m_drag_source = "roles" THEN
 					CALL dnd.setOperation("copy")
@@ -113,7 +113,7 @@ MAIN
 					CALL dnd.setOperation(NULL)
 				END IF
 			ON DROP(dnd)
-				CALL addRoles(DIALOG)
+				CALL addRoles_menu(DIALOG)
 			ON DRAG_FINISHED(dnd)
 				LET m_drag_source = NULL
 		END DISPLAY
@@ -122,16 +122,16 @@ MAIN
 			ON DRAG_START(dnd)
 				LET m_drag_source = "roles"
 			ON ACTION addRoles
-				CALL addRoles(DIALOG)
+				CALL addRoles_menu(DIALOG)
 		END DISPLAY
 
 		BEFORE DIALOG
 			CALL gl2_setActions(m_row,m_recs.getLength(), m_allowedActions)
-			CALL setSave(FALSE)
+			CALL setSave_menu(FALSE)
 
 		ON ACTION exit EXIT DIALOG
 		ON ACTION close EXIT DIALOG
-		ON ACTION save CALL saveRoles()
+		ON ACTION save CALL saveRoles_menu()
 		ON ACTION enquire LET m_func = "E"
 			IF NOT query() THEN CONTINUE DIALOG END IF
 			IF m_recs.getLength() > 0 THEN
@@ -327,7 +327,7 @@ FUNCTION insert()
 	RETURN FALSE
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION removeRoles(d)
+FUNCTION removeRoles_menu(d)
 	DEFINE d ui.Dialog
 	DEFINE x SMALLINT
 	FOR x = 1 TO m_roles.getLength()
@@ -336,10 +336,10 @@ FUNCTION removeRoles(d)
 			LET m_save = TRUE
 		END IF
 	END FOR
-	CALL setSave(m_save)
+	CALL setSave_menu(m_save)
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION addRoles(d)
+FUNCTION addRoles_menu(d)
 	DEFINE d ui.Dialog
 	DEFINE x,y SMALLINT
 	FOR x = 1 TO m_roles.getLength()
@@ -356,7 +356,7 @@ FUNCTION addRoles(d)
 			LET m_save = TRUE
 		END IF
 	END FOR
-	CALL setSave(m_save)
+	CALL setSave_menu(m_save)
 END FUNCTION
 --------------------------------------------------------------------------------
 FUNCTION rpt1()
@@ -380,7 +380,7 @@ FUNCTION rpt1()
 	END IF
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION setSave(tf)
+FUNCTION setSave_menu(tf)
 	DEFINE tf BOOLEAN
 	DEFINE d ui.Dialog
 	LET m_save = tf
@@ -388,10 +388,10 @@ FUNCTION setSave(tf)
 	CALL d.setactionActive("save",m_save)
 END FUNCTION
 --------------------------------------------------------------------------------
-FUNCTION saveRoles()
+FUNCTION saveRoles_menu()
 	DEFINE x SMALLINT
 	IF NOT checkUserRoles(m_user_key,"System Admin Update",TRUE) THEN
-		CALL setSave(FALSE)
+		CALL setSave_menu(FALSE)
 		RETURN
 	END IF
 	BEGIN WORK
@@ -400,7 +400,7 @@ FUNCTION saveRoles()
 		INSERT INTO sys_menu_roles VALUES( m_menu_key,m_mroles[x].role_key,m_mroles[x].active )
 	END FOR
 	COMMIT WORK
-	CALL setSave(FALSE)
+	CALL setSave_menu(FALSE)
 END FUNCTION
 --------------------------------------------------------------------------------
 REPORT trad_rpt(l_row,l_rec)
