@@ -5,7 +5,7 @@
 # Arg2: GBC version for base - default is gwc-js-1.00.20
 
 CUSTDIR=${1:-njm-js}
-VER=${2:-1.00.20}
+VER=${2:-1.00.21}
 
 which git
 if [ $? -ne 0 ]; then
@@ -41,7 +41,7 @@ if [ ! -e gwc-js-$VER ]; then
 	fi
 fi
 
-cd gwc-js-*
+cd gwc-js-$VER
 
 # Assuming this is already done now.
 #echo "Install 4.2.2 ..."
@@ -75,7 +75,9 @@ if [ $NODEJS_MNVER -lt 2 ]; then
 fi
 echo "Node JS major versions is " $NODEJS_MJVER.$NODEJS_MNVER
 
-if [ ! -e npm_install.ok ]; then
+if [ -e npm_install.ok ]; then
+	echo $( date +'%Y%m%d%H%M%S') " npm install already done."
+else
 	echo $( date +'%Y%m%d%H%M%S') " npm install ..."
 	npm install 2>&1 > npm_install.$DTE.out
 	if [ $? -ne 0 ]; then
@@ -114,7 +116,9 @@ fi
 #	fi
 #fi
 
-if [ ! -e grunt_deps.ok ]; then
+if [ -e grunt_deps.ok ]; then
+	echo $( date +'%Y%m%d%H%M%S') " grunt deps already done."
+else
 	echo $( date +'%Y%m%d%H%M%S') " grunt deps ..."
 	grunt deps 2>&1 > grunt_deps.$DTE.out
 	if [ $? -ne 0 ]; then
@@ -137,7 +141,7 @@ fi
 cd $GASDIR/web
 if [ ! -e $CUSTDIR ]; then
 	echo $( date +'%Y%m%d%H%M%S') " Adding symbolic link for $CUSTDIR in $GAS/web ..."
-	ln -s ../$CUSTDIR/gwc-js-$VER/dist/web/ $CUSTDIR
+	ln -s ../$CUSTDIR/gwc-js-$VER/dist/$CUSTDIR $CUSTDIR
 fi
 
 echo $( date +'%Y%m%d%H%M%S') "Finished Okay"

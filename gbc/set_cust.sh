@@ -10,16 +10,6 @@ if [ ! -e custom$CUSTNO.json ]; then
 	exit 1
 fi
 
-if [ ! -e dist$CUSTNO ]; then
-	mkdir dist$CUSTNO
-fi
-
-# If dist is not a link then remove it.
-if [ ! -L dist ]; then
-	rm -r dist
-else
-	rm -f dist
-fi
 
 # If custom.json is not a link then save it
 if [ ! -L custom.json ]; then
@@ -29,7 +19,6 @@ else
 fi
 
 ln -s custom$CUSTNO.json custom.json
-ln -s dist$CUSTNO dist
 
 echo "Using Custom $CUSTNO grunt ..."
 grunt
