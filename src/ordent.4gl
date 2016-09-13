@@ -16,7 +16,7 @@ CONSTANT PRGDESC = "Order Entry Demo"
 CONSTANT PRGAUTH = "Neil J.Martin"
 
 &define ABOUT 		ON ACTION about \
-			CALL gl_about( NULL )
+			CALL gl_about( )
 &define TIMELOG CALL timeLogIt(PRGNAME,__LINE__)
 &include "schema.inc"
 &include "ordent.inc"

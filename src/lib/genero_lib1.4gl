@@ -493,6 +493,9 @@ FUNCTION gl_setInfo(p_version, p_splash, p_progicon, p_progname, p_progdesc, p_p
 	DEFINE p_version, p_splash, p_progicon, p_progname, p_progdesc, p_progauth STRING
 
 	LET gl_version = p_version
+	IF gl_version IS NULL THEN
+		LET gl_version = gl_getGitver()
+	END IF
 	LET gl_splash = p_splash
 	LET gl_progicon = p_progicon
 	LET gl_progname = p_progname
@@ -510,7 +513,7 @@ FUNCTION gl_setAppInfo(app_name, app_build) --{{{
 	DEFINE app_name, app_build STRING
 
 	LET gl_app_name = app_name
-	LET gl_app_build = gl_verFmt( app_build )
+	LET gl_app_build = app_build
 
 END FUNCTION --}}}
 ----------------------------------------------------------------------------------
@@ -664,7 +667,7 @@ FUNCTION gl_titleWin( titl ) --{{{
 		LET new = new.trim()," - ",gl_progname.trim()
 	END IF
 	IF gl_version IS NOT NULL THEN
-		LET new = new.trim()," ",gl_verFmt(gl_version)
+		LET new = new.trim()," - Ver:",gl_version
 	ELSE
 		LET new = new.trim()," - Ver:"||gl_getGitVer()
 	END IF
@@ -1381,8 +1384,7 @@ END FUNCTION --}}}
 #+
 #+ @param gl_ver a version string
 #+ @return Nothing.
-FUNCTION gl_about(gl_ver) --{{{
-	DEFINE gl_ver STRING
+FUNCTION gl_about() --{{{
 	DEFINE f,n,g,w om.DomNode
 	DEFINE nl om.nodeList
 	DEFINE gdcver,gver,logname, servername, info, txt STRING
@@ -1399,6 +1401,12 @@ FUNCTION gl_about(gl_ver) --{{{
 	LET gver = "build ",fgl_getVersion()
 	IF m_dbtype IS NULL THEN
 		LET m_dbtype = fgl_db_driver_type()
+	END IF
+	IF gl_progname IS NULL THEN
+		LET gl_progname = base.Application.getProgramName()
+	END IF
+	IF gl_version IS NULL THEN
+		LET gl_version = gl_getGitver()
 	END IF
 
 	IF gl_cli_os = "?" THEN
@@ -1453,14 +1461,8 @@ FUNCTION gl_about(gl_ver) --{{{
 	CALL g.setAttribute("posX","0" )
 	CALL g.setAttribute("style","about")
 
-	IF gl_progname IS NULL THEN
-		LET gl_progname = base.Application.getProgramName()
-	END IF
-	IF gl_ver IS NULL THEN
-		LET gl_ver = gl_getGitver()
-	END IF
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.program"),"right","black")
-	CALL gl_addLabel(g,10,y,gl_progname||" - "||gl_ver,NULL,"black") LET y = y + 1
+	CALL gl_addLabel(g,10,y,gl_progname||" - "||gl_version,NULL,"black") LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.progdesc"),"right","black")
 	CALL gl_addLabel(g,10,y,gl_progdesc,NULL,"black") LET y = y + 1
@@ -1469,10 +1471,10 @@ FUNCTION gl_about(gl_ver) --{{{
 	CALL gl_addLabel(g,10,y,gl_progauth,NULL,"black") LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.generolib1"),"right","black")
-	CALL gl_addLabel(g,10,y,gl_verFmt(gl_genlibver),NULL,"black") LET y = y + 1
+	CALL gl_addLabel(g,10,y,gl_genlibver,NULL,"black") LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.generolibd1"),"right","black")
-	CALL gl_addLabel(g,10,y,gl_verFmt(gl_genlibdte),NULL,"black") LET y = y + 1
+	CALL gl_addLabel(g,10,y,gl_genlibdte,NULL,"black") LET y = y + 1
 
 	CALL gl_addLabel(g, 0,y,LSTR("lib.about.genlibauth"),"right","black")
 	CALL gl_addLabel(g,10,y,gl_libauth,NULL,"black") LET y = y + 1
@@ -1582,19 +1584,6 @@ FUNCTION gl_about(gl_ver) --{{{
 	END MENU
 	CLOSE WINDOW about
 
-END FUNCTION --}}}
-----------------------------------------------------------------------------------
-#+ Format revision string
-#+
-#+ @param ver = String : a cvs revisions string ie : $Revision: 344 $
-#+ @return String.
-FUNCTION gl_verFmt( ver ) --{{{
-	DEFINE ver STRING
-	DEFINE x SMALLINT
-
-	LET x = ver.getIndexOf(":",1)
-
-	RETURN ver.subString(X+2, ver.getLength() - 1 )||"("||gl_getGitver()||")"
 END FUNCTION --}}}
 ----------------------------------------------------------------------------------
 #+ Get FrontEnd type and Version String.
@@ -3704,8 +3693,8 @@ FUNCTION gl_getGitver()
 	IF x > 1 THEN
 		LET y = m_gitver.getIndexOf("-",x+1 )
 		IF y > 0 THEN LET x = y END IF
+		LET m_gitver = m_gitver.subString(1,x-1)
 	END IF
-	LET m_gitver = m_gitver.subString(1,x-1)
 	CALL c.close()
 	RETURN m_gitver
 END FUNCTION

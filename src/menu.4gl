@@ -141,7 +141,7 @@ MAIN
 					CALL DIALOG.setCurrentRow("menu",1)
 			END CASE
 		ON ACTION about
-			CALL gl_about( NULL )
+			CALL gl_about( )
 		ON ACTION exit 
 			IF ARG_VAL(1) = "MDI" THEN
 				IF ui.Interface.getChildCount() > 0 THEN

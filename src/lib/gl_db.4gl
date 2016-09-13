@@ -83,7 +83,7 @@ GL_MODULE_ERROR_HANDLER
 			RUN "echo $LD_LIBRARY_PATH;ldd $FGLDIR/dbdrivers/"||drv||".so"
 		END IF
 		CALL fgl_winMessage("Fatal Error",msg,"exclamation")
-		CALL gl_about( VER ) --, PRG, PRGDESC, PRGAUTH)
+		CALL gl_about( ) --, PRG, PRGDESC, PRGAUTH)
 		EXIT PROGRAM
 	END TRY
 

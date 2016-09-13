@@ -2,7 +2,6 @@
 IMPORT FGL genero_lib1
 IMPORT FGL fjs_lib
 
-CONSTANT VER = "$Rev: 747 $"
 CONSTANT PRGNAME = "Login"
 CONSTANT PRGDESC = "Fjs Demos Suite"
 CONSTANT PRGAUTH = "Neil J.Martin"
@@ -10,7 +9,7 @@ CONSTANT PRGAUTH = "Neil J.Martin"
 CONSTANT D_IDLETIME = 300
 
 &define ABOUT 		ON ACTION about \
-			CALL gl_about( VER )
+			CALL gl_about( )
 
 &include "schema.inc"
 

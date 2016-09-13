@@ -355,7 +355,7 @@ FUNCTION dynDiag()
 
 			WHEN "ON ACTION viewb" CALL lib_weboe.viewb()
 			WHEN "ON ACTION gotoco" CALL gotoco()
-			WHEN "ON ACTION about" CALL genero_lib1.gl_about( NULL )
+			WHEN "ON ACTION about" CALL genero_lib1.gl_about( )
 		END CASE
 	END WHILE
 	IF int_flag THEN LET int_flag = FALSE END IF
