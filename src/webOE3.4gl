@@ -245,6 +245,7 @@ FUNCTION build_grids()
 			CALL ff.setAttribute("name","formonly.qty"||x)
 			CALL ff.setAttribute("colName","qty"||x)
 			LET n1 = ff.createChild("ButtonEdit")
+			--LET n1 = ff.createChild("SpinEdit")
 			CALL n1.setAttribute("gridWidth",l_qty_gwidth)
 			CALL n1.setAttribute("width",l_qty_gwidth)
 			CALL n1.setAttribute("action","add1")
@@ -329,7 +330,7 @@ FUNCTION dynDiag()
 		IF l_evt MATCHES "ON CHANGE qty*" OR l_evt MATCHES "AFTER FIELD qty*" THEN
 			LET l_field = m_dialog.getCurrentItem()
 			LET x = l_field.subString(4, l_field.getLength())
-			DISPLAY "add1 GI:",l_field," X:",x
+			DISPLAY "Event:",l_evt, "  fld:",l_field," X:",x 
 			CALL detLine(m_items[x].stock_code1,  m_dialog.getFieldValue("qty"||x))
 			CALL m_dialog.setFieldValue("qty"||x, m_items[x].qty1)
 		END IF

@@ -16,6 +16,7 @@ Sections in this README
   * Created a custom toolbar to show data from two custom labels
   * Changed toolbar items to be img and text on same line
   * CSS based layouter - tiled groups in a [VH]Box
+  * A Genero style to have the 'comment' appear as 'placeholder' text in a field
 5. GWC-JS Customizations - CSS
   * Customized the colours
   * Removed the sidebar
@@ -245,6 +246,24 @@ MyToolBarItem that inherits the methods from the default and uses the default .t
 
 I didn't do this one - it was done by Jean-Philippe from the Strasbourg GBC dev team.
 
+### A Genero style to have the 'comment' appear as 'placeholder' text in a field
+
+A common feature for entry screens is to have some text in the field as a hint of what is required. In HTML this is an attribute on the 'input' tag of 'placeholder'. I created the MyEditWidget.js to be a replacement for the EditWidget when the Genero form item has STYLE="gbc_hint".
+In the javascript I have added this:
+```javascript
+          setTitle: function(title) {
+            $(this.getElement()).find(".gbc_hint").attr('placeholder',title);
+          },
+```
+The MyEditWidget.tpl.html just has this:
+```html
+<div>
+  <div class="gbc_dataContentPlaceholder">
+    <input type="text" class="gbc_hint" placeholder="test" />
+  </div>
+</div>
+```
+See the screenshot at the bottom of this page.
 
 --------------------------------------------------------------------------------
 ## 5. GWC-JS Customizations - CSS
@@ -367,4 +386,5 @@ A Teal Theme
 ![teal](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-teal.jpg "My Teal Theme")
 A version to show the colours and matrial theme.
 ![hivis](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc-hivis.jpg "Color Theme Resource")
-
+Signin window showing 'comment' as a 'placeholder'
+![comment](https://github.com/neilm-fourjs/njm_demo/raw/master/gbc/screenshots/gbc_signin.jpg "'comment' as a 'placeholder'")
