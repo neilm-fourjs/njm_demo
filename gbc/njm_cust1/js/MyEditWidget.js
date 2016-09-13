@@ -29,12 +29,8 @@ modulum('MyEditWidget', ['EditWidget', 'WidgetFactory'],
           __dataContentPlaceholderSelector: '.gbc_dataContentPlaceholder',
 
           setTitle: function(title) {
-            $(this.getElement()).find(".title").text(title);
+            $(this.getElement()).find(".gbc_hint").attr('placeholder',title);
           },
-
-          getTitle: function() {
-            return $(this.getElement()).find(".title").text();
-          }
 
         };
       });

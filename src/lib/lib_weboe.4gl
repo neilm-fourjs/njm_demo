@@ -55,7 +55,9 @@ FUNCTION signin()
 			CALL ui.Interface.FrontCall("session","setvar",["login",l_cookie],l_result)
 			DISPLAY "login: Setting cookie:",l_cookie, " Ret:",l_result
 		END IF
+		LET g_custcode = "Guest"
 		CALL initAll()
+		CALL setSignInAction()
 		RETURN
 	END IF
 
