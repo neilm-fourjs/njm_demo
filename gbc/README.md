@@ -251,9 +251,9 @@ I didn't do this one - it was done by Jean-Philippe from the Strasbourg GBC dev 
 A common feature for entry screens is to have some text in the field as a hint of what is required. In HTML this is an attribute on the 'input' tag of 'placeholder'. I created the MyEditWidget.js to be a replacement for the EditWidget when the Genero form item has STYLE="gbc_hint".
 In the javascript I have added this:
 ```javascript
-          setTitle: function(title) {
-            $(this.getElement()).find(".gbc_hint").attr('placeholder',title);
-          },
+setTitle: function(title) {
+  $(this.getElement()).find(".gbc_hint").attr('placeholder',title);
+},
 ```
 The MyEditWidget.tpl.html just has this:
 ```html
