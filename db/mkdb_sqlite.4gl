@@ -10,8 +10,8 @@ IMPORT os
 
 CONSTANT DB_EXP = "../db/njm_demo.exp/"
 
-DEFINE db VARCHAR(20)
-DEFINE dbdir,dbfil, drv STRING
+DEFINE db,dbfil  VARCHAR(20)
+DEFINE dbdir, drv STRING
 
 MAIN
   DEFINE con VARCHAR(300)

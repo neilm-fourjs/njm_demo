@@ -1,0 +1,41 @@
+
+body {
+	background: -webkit-gradient(linear, left top, left bottom, from(#B7B7CC), to(#F2F2F9));
+	background: -moz-linear-gradient(top,	#B7B7CC,	#F2F2F9);
+}
+
+#main_container {
+	margin-left:auto;
+	margin-right:auto;
+	width:1024px;
+	min-height: 768;
+}
+
+#gGridLayoutRoot {
+	margin-left:auto;
+	margin-right:auto;
+	width:1024px;
+	background: -webkit-gradient(linear, left top, left bottom, to(#B7B7CC), from(#F2F2F9));
+	background: -moz-linear-gradient(top, #F2F2F9, #B7B7CC);
+}
+
+.navigation-style {
+	background: #B7B7CC;
+	color: black;
+}
+
+.gToolBar {
+	text-align: left;
+	background: -webkit-gradient(linear, left top, left bottom, from(#B7B7CC), to(#F2F2F9));
+	background: -moz-linear-gradient(top,	#B7B7CC,	#F2F2F9);
+}
+
+.gButton, .gAction {
+	background: -webkit-gradient(linear, left top, left bottom, from(#B7B7CC), to(#F2F2F9));
+	background: -moz-linear-gradient(top,	#B7B7CC,	#F2F2F9);
+}
+
+.modal-window-title-line-style {
+	color: white;
+	background-color: darkblue;
+}
