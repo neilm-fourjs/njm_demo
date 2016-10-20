@@ -2,7 +2,7 @@
 
 # This script copies the GBC customizations into this folder structure for git.
 
-VER=20
+VER=24
 CUSTNAME=${1:-njm}
 if [ -z $FGLASDIR ]; then
 	FGLASDIR=/opt/fourjs/gas300
