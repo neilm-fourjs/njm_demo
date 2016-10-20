@@ -265,11 +265,10 @@ GL_MODULE_ERROR_HANDLER
 			CALL ui.Interface.setContainer(l_container)
 		WHEN "M" -- MDI Container
 			GL_DBGMSG(2, "gl_init: Container:"||l_container)
-			CALL ui.Interface.setText(l_desc)
 			CALL ui.Interface.setType("container")
 			CALL ui.Interface.setName(l_container)
 	END CASE
-
+	CALL ui.Interface.setText( gl_progdesc )
 	IF gl_progname IS NOT NULL AND gl_progname != " " THEN
 		CALL gl_titleApp( gl_progname.trim() )
 	END IF

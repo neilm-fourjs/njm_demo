@@ -10,6 +10,7 @@ CONSTANT PRGNAME = "webOE"
 CONSTANT PRGDESC = "Web Ordering Demo"
 CONSTANT PRGAUTH = "Neil J.Martin"
 
+&include "genero_lib1.inc" -- Contains GL_DBGMSG & g_dbgLev
 &include "schema.inc"
 &include "ordent.inc"
 
@@ -51,7 +52,7 @@ MAIN
 	IF m_arg1 IS NULL OR m_arg1 = " " THEN LET m_arg1 = "SDI" END IF
 
 	LET m_dbtyp = gldb_getDBType()
-
+	CALL ui.Interface.setText( gl_progdesc )
 	IF ui.Interface.getFrontEndName() != "GDC" THEN
 		CALL ui.Interface.FrontCall("session","getvar","login",l_cookie)
 		DISPLAY "From Cookie:",l_cookie
