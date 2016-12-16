@@ -35,12 +35,13 @@ grunt deps
 grunt
 
 # Setup My symbolic links for My customizations
-ln -s /opt/users/neilm/all/njm_demo/gbc/custom1.json
-ln -s /opt/users/neilm/all/njm_demo/gbc/custom2.json
-ln -s /opt/users/neilm/all/njm_demo/gbc/custom3.json
+cd customization
 ln -s /opt/users/neilm/all/survey/gbc_mrh/
 ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust1/
-ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust2
-ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust3
-ln -s /opt/users/neilm/all/njm_demo/gbc/set_cust.sh
+ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust2/
+ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust3/
+ln -s /opt/users/neilm/all/gCloud_dev/GC-243-Genero-3.00-support/node/infrastructure/gpaas_core_genero_programs/gbc/gbc-gc
+cd ..
 
+# Build all customizations
+grunt --customization=ALL
