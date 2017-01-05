@@ -26,7 +26,7 @@ modulum('MyEditWidget', ['EditWidget', 'WidgetFactory'],
         /** @lends classes.MyEditWidget.prototype */
         return {
           __name: "MyEditWidget",
-          __dataContentPlaceholderSelector: '.gbc_dataContentPlaceholder',
+        /*  __dataContentPlaceholderSelector: '.gbc_dataContentPlaceholder', */
 
           setTitle: function(title) {
             $(this.getElement()).find(".gbc_hint").attr('placeholder',title);

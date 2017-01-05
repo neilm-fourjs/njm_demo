@@ -26,7 +26,7 @@ grunt
 if [ ! -z $FGLASDIR ]; then
 	if [ ! -L $FGLASDIR/web/$CUSTNAME$CUSTNO-js ]; then
 		echo "Link created for $CUSTNAME$CUSTNO-js"
-		ln -s ../$CUSTNAME-js/$VER/dist/${CUSTNAME}_cust$CUSTNO $FGLASDIR/web/$CUSTNAME$CUSTNO-js
+		ln -s $FGLASDIR/tpl/dev/current/dist/${CUSTNAME}_cust$CUSTNO $FGLASDIR/web/$CUSTNAME$CUSTNO-js
 	else
 		echo "Link for $CUSTNAME$CUSTNO-js exists."
 	fi
