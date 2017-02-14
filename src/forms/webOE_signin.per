@@ -33,11 +33,11 @@ LABEL lab5 : lab5, TEXT="Email:",JUSTIFY=RIGHT;
 LABEL lab6 : lab6, TEXT="Password:",JUSTIFY=RIGHT;
 LABEL lab7 : lab7, TEXT="Password:",JUSTIFY=RIGHT;
 
-f001 = FORMONLY.l_em, COMMENT="Your Email Address", STYLE="gbc_hint";
+f001 = FORMONLY.l_em, COMMENT="Your Email Address";
 f002 = FORMONLY.l_pwd, INVISIBLE;
 LABEL msg = FORMONLY.msg;
 BUTTON accept : accept,TEXT="Sign In",IMAGE="next";
-BUTTON newuser : newuser,TEXT="Create Account";
+BUTTON newuser : newuser;
 BUTTON cancel : cancel,TEXT="Go Back",IMAGE="prev";
 
 f003 = FORMONLY.l_cust_name, NOT NULL;

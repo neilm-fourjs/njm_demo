@@ -46,6 +46,8 @@
 	<ActionDefault name="list" text="List" image="zoom" acceleratorName="l" contextMenu="no"/>
 	<ActionDefault name="sameaddr" text="Default" image="" contextMenu="no"/>
 
+	<ActionDefault name="newuser" text="Create Account" image="user" contextMenu="no"/>
+
 	<ActionDefault name="back"	image="fa-arrow-left" acceleratorName="Escape" defaultView="no" />
 	<ActionDefault name="showlicence" text="Show License" image="key" contextMenu="yes"/>
 </ActionDefaultList>
