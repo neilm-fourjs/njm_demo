@@ -43,18 +43,15 @@ gbc/njm_gbc.tgz:
 
 gar: $(GARFILE)
 
+# NOTE: can't use fglgar because it assumes a lazy folder layout where 
+# everything is dumped into a single folder!! ( including the MANIFEST file )
+#	fglgar --gar --input-source ./messy
 $(GARFILE): clean all MANIFEST gas300/gdemo.xcf
 	$(info Building Genero Archive ...)
 	@zip -qr $(GARNAME)-$(GITVER).gar MANIFEST gas300/g*.xcf bin300/* etc/* pics/*
 	ln -s $(GARNAME)-$(GITVER).gar $(GARFILE)
 	$(info Done)
 	
-
-
-# NOTE: can't use fglgar because it assumes a lazy folder layout where 
-# everything is dumped into a single folder!! ( including the MANIFEST file )
-#	fglgar --gar --input-source ./messy
-
 undeploy:
 	gasadmin --disable-archive $(GARNAME)
 	gasadmin --undeploy-archive $(GARNAME)

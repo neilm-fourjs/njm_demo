@@ -2,7 +2,8 @@
 <APPLICATION Parent="defaultgdc"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="http://www.4js.com/ns/gas/3.00/cfextwa.xsd">
-  <RESOURCE Id="res.gre" Source="INTERNAL">/opt/fourjs/gre300</RESOURCE>
+  <RESOURCE Id="res.genver" Source="INTERNAL">300</RESOURCE>
+  <RESOURCE Id="res.gre" Source="INTERNAL">/opt/fourjs/gre$(res.genver)</RESOURCE>
   <!--RESOURCE Id="res.path.isv" Source="INTERNAL">/home/neilm/all</RESOURCE-->
   <RESOURCE Id="res.path.njm_demo" Source="INTERNAL">$(res.deployment.path)</RESOURCE>
   <RESOURCE Id="res.path.njm_demo.obj" Source="INTERNAL">$(res.deployment.path)</RESOURCE>
@@ -18,7 +19,7 @@
     <ENVIRONMENT_VARIABLE Id="DBNAME">njm_demo</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="FJS_GL_DBGLEV">0</ENVIRONMENT_VARIABLE>
     <ENVIRONMENT_VARIABLE Id="SDIMDI">M</ENVIRONMENT_VARIABLE>
-    <PATH>$(res.path.njm_demo.obj)/bin300</PATH>
+    <PATH>$(res.path.njm_demo.obj)/bin$(res.genver)</PATH>
     <MODULE>webOE.42r</MODULE>
     <WEB_COMPONENT_DIRECTORY>$(res.path.njm_demo)/etc</WEB_COMPONENT_DIRECTORY>
   </EXECUTION>
