@@ -2,16 +2,19 @@
 
 export FGLLDPATH=$(GREDIR)/lib
 GITVER=$(shell git describe --always)
-GARNAME=njm_demo
-GARFILE=$(GARNAME)-$(GENVER).gar
+GARNAME=njm_demo-$(GENVER)
+GARFILE=$(GARNAME).gar
 
 all: etc/gitver.txt app 
 
 etc/gitver.txt:
 	echo $(GITVER) > etc/gitver.txt
 
-app:
+bin$(GENVER)/weboe.42r:
 	gsmake njm_demo$(GENVER).4pw
+
+app: bin$(GENVER)/weboe.42r
+	$(info Done)
 
 run: all
 	run.sh menu.42r
@@ -41,16 +44,17 @@ packit: gbc/njm_gbc.tgz
 gbc/njm_gbc.tgz:
 	cd gbc ; ./packit.sh
 
-gar: $(GARFILE)
+gar: app $(GARFILE)
 	$(info Done)
 
 # NOTE: can't use fglgar because it assumes a lazy folder layout where 
 # everything is dumped into a single folder!! ( including the MANIFEST file )
 #	fglgar --gar --input-source ./messy
-$(GARFILE): MANIFEST gas$(GENVER)/gdemo.xcf
+$(GARFILE): gas$(GENVER)/MANIFEST gas$(GENVER)/gdemo.xcf
 	$(info Building Genero Archive $(GARFILE) ...)
-	@zip -qr $(GARNAME)-$(GENVER)-$(GITVER).gar MANIFEST gas$(GENVER)/g*.xcf bin$(GENVER)/* etc/* pics/*
-	ln -s $(GARNAME)-$(GENVER)-$(GITVER).gar $(GARFILE)
+	@cp gas$(GENVER)/MANIFEST .
+	@zip -qr $(GARNAME)-$(GITVER).gar MANIFEST gas$(GENVER)/g*.xcf bin$(GENVER)/* etc/* pics/*
+	ln -s $(GARNAME)-$(GITVER).gar $(GARFILE)
 	$(info Done)
 	
 
