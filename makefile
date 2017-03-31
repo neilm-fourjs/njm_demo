@@ -69,6 +69,9 @@ deploy: $(GARFILE)
 	gasadmin --deploy-archive $(GARFILE)
 	gasadmin --enable-archive $(GARNAME)
 
+redeploy: undeploy deploy
+	$(info Done)
+
 # ----------------------
 # GAS Deploy 3.10
 
@@ -80,7 +83,6 @@ deploy310: $(GARFILE)
 	gasadmin gar --deploy-archive $(GARFILE)
 	gasadmin gar --enable-archive $(GARNAME)
 
-
-redeploy: undeploy deploy
+redeploy310: undeploy310 deploy310
 	$(info Done)
 
