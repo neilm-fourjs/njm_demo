@@ -3,7 +3,7 @@
 export FGLLDPATH=$(GREDIR)/lib
 GITVER=$(shell git describe --always)
 GARNAME=njm_demo
-GARFILE=$(GARNAME).gar
+GARFILE=$(GARNAME)-$(GENVER).gar
 
 all: etc/gitver.txt app 
 
@@ -11,7 +11,7 @@ etc/gitver.txt:
 	echo $(GITVER) > etc/gitver.txt
 
 app:
-	gsmake njm_demo300.4pw
+	gsmake njm_demo$(GENVER).4pw
 
 run: all
 	run.sh menu.42r
@@ -36,29 +36,46 @@ clean:
 
 packit: gbc/njm_gbc.tgz
 	$(info Building TGZ of deployables ...) 
-	tar cvzf njm_demo-$(GITVER).tgz bin300 gas300 etc pics db/njm_demo.exp.tgz db/imp.sh gbc/njm_gbc.tgz gbc/njm_demo.html
+	tar cvzf njm_demo-$(GENVER)-$(GITVER).tgz bin$(GENVER) gas$(GENVER) etc pics db/njm_demo.exp.tgz db/imp.sh gbc/njm_gbc.tgz gbc/njm_demo.html
 
 gbc/njm_gbc.tgz:
 	cd gbc ; ./packit.sh
 
 gar: $(GARFILE)
+	$(info Done)
 
 # NOTE: can't use fglgar because it assumes a lazy folder layout where 
 # everything is dumped into a single folder!! ( including the MANIFEST file )
 #	fglgar --gar --input-source ./messy
-$(GARFILE): clean all MANIFEST gas300/gdemo.xcf
-	$(info Building Genero Archive ...)
-	@zip -qr $(GARNAME)-$(GITVER).gar MANIFEST gas300/g*.xcf bin300/* etc/* pics/*
-	ln -s $(GARNAME)-$(GITVER).gar $(GARFILE)
+$(GARFILE): MANIFEST gas$(GENVER)/gdemo.xcf
+	$(info Building Genero Archive $(GARFILE) ...)
+	@zip -qr $(GARNAME)-$(GENVER)-$(GITVER).gar MANIFEST gas$(GENVER)/g*.xcf bin$(GENVER)/* etc/* pics/*
+	ln -s $(GARNAME)-$(GENVER)-$(GITVER).gar $(GARFILE)
 	$(info Done)
 	
+
+# ----------------------
+# GAS Deploy 3.00
+
 undeploy:
 	gasadmin --disable-archive $(GARNAME)
 	gasadmin --undeploy-archive $(GARNAME)
 
-deploy: $(GARFILE) packit
+deploy: $(GARFILE)
 	gasadmin --deploy-archive $(GARFILE)
 	gasadmin --enable-archive $(GARNAME)
+
+# ----------------------
+# GAS Deploy 3.10
+
+undeploy310:
+	gasadmin gar --disable-archive $(GARNAME)
+	gasadmin gar --undeploy-archive $(GARNAME)
+
+deploy310: $(GARFILE)
+	gasadmin gar --deploy-archive $(GARFILE)
+	gasadmin gar --enable-archive $(GARNAME)
+
 
 redeploy: undeploy deploy
 	$(info Done)
