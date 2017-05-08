@@ -6,26 +6,28 @@
 
 if [ $# -eq 0 ]; then
 	echo "Pass version to GBC to setup."
-	ls -1 ../fjs-gwc*project.zip
+	echo "eg: $0 1.00.30 build201702091156"
+	ls -1 ../fjs-g*project.zip
 	exit -1
 fi
 
 VER=$1
 BUILD=$2
+PRD=gbc
 
-if [ ! -e ../fjs-gwcjs-${VER}-${BUILD}-project.zip ]; then
-	echo "../fjs-gwcjs-${VER}-${BUILD}-project.zip Doesn't Exist!"
+if [ ! -e ../fjs-${PRD}-${VER}-${BUILD}-project.zip ]; then
+	echo "../fjs-${PRD}-${VER}-${BUILD}-project.zip Doesn't Exist!"
 	exit -1
 fi
 
-unzip ../fjs-gwcjs-${VER}-${BUILD}-project.zip
+unzip ../fjs-${PRD}-${VER}-${BUILD}-project.zip
 
-if [ ! -d gwc-js-$VER ]; then
-	echo "gwc-js-$VER Doesn't Exist!"
+if [ ! -d ${PRD}-$VER ]; then
+	echo "${PRD}-$VER Doesn't Exist!"
 	exit -1
 fi
 
-cd gwc-js-$VER
+cd ${PRD}-$VER
 
 # Setup the GBC ready for development.
 npm install
@@ -36,11 +38,13 @@ grunt
 
 # Setup My symbolic links for My customizations
 cd customization
-ln -s /opt/users/neilm/all/survey/gbc_mrh/
-ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust1/
-ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust2/
-ln -s /opt/users/neilm/all/njm_demo/gbc/njm_cust3/
-ln -s /opt/users/neilm/all/gCloud_dev/GC-243-Genero-3.00-support/node/infrastructure/gpaas_core_genero_programs/gbc/gbc-gc
+MYGPAAS=/opt/users/neilm/all/gCloud_dev/GC-243-Genero-3.00-support
+MYGIT=/opt/users/neilm/all/my_github
+ln -s $MYGIT/survey/gbc_mrh/
+ln -s $MYGIT/njm_demo/gbc/njm_cust1/
+ln -s $MYGIT/njm_demo/gbc/njm_cust2/
+ln -s $MYGIT/njm_demo/gbc/njm_cust3/
+ln -s $MYGPAAS/node/infrastructure/gpaas_core_genero_programs/gbc/gbc-gc
 cd ..
 
 # Build all customizations

@@ -37,7 +37,7 @@ MAIN
 	END IF
 
 	LET dbfil = dbdir||os.path.separator()||db||".db"
-	RUN "sqlite3 ||dbfil" WITHOUT WAITING
+--	RUN "sqlite3 "||"dbfil" WITHOUT WAITING
 
 	DISPLAY "DB:",db," DBDir:",dbdir," SRC:",dbfil
 	LET con = "db+driver='"||drv||"',source='"||dbfil||"'"

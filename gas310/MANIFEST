@@ -1,0 +1,8 @@
+<MANIFEST>
+	<DESCRIPTION>This archive contains demo and weboe applications</DESCRIPTION>
+	<RESOURCES>pics</RESOURCES>
+	<APPLICATION xcf='gas310/gdemo1.xcf' />
+	<APPLICATION xcf='gas310/gdemo.xcf' />
+	<APPLICATION xcf='gas310/gweboe1.xcf' />
+	<APPLICATION xcf='gas310/gweboe.xcf' />
+</MANIFEST>
