@@ -20,3 +20,11 @@ $gbc-ToolBar-hover-color: $gbc-primary-light-color;
     }
   }
 }
+
+.gbc_MyToolBarItemWidget.mt-item {
+  background: linear-gradient( $gbc-primary-medium-color, $gbc-primary-color );
+}
+
+.gbc_barsContainer {
+  background: linear-gradient( $gbc-primary-medium-color, $gbc-primary-color );
+}

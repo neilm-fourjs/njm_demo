@@ -93,7 +93,7 @@
 		<StyleAttribute name="toolBarPosition" value="none" />
 		<StyleAttribute name="statusBarType" value="none" />
 		<StyleAttribute name="position" value="center" />
-		<StyleAttribute name="fontSize"	value=".8em" />
+		<StyleAttribute name="fontSize"	value="1em" />
 	</Style>
 
 	<Style name="Window.ordent">
