@@ -167,10 +167,10 @@
 		<StyleAttribute name="textColor" value="red" />
 	</Style>
 	<Style name=".big">
-		<StyleAttribute name="fontSize" value="1.5em" />
+		<StyleAttribute name="fontSize" value="1.2em" />
 	</Style>
 	<Style name=".vbig">
-		<StyleAttribute name="fontSize" value="2em" />
+		<StyleAttribute name="fontSize" value="1.5em" />
 	</Style>
 	<Style name=".buttononly">
 		<StyleAttribute name="fontSize" value="0.1em" />
@@ -211,8 +211,8 @@
 	</Style>
 
 	<Style name=".gbc_status">
-		<StyleAttribute name="fontWeight" value="bold" />
+		<StyleAttribute name="fontWeight" value="normal" />
 		<StyleAttribute name="border" value="none" />
-		<StyleAttribute name="fontSize" value="14pt" />
+		<StyleAttribute name="fontSize" value="4pt" />
 	</Style>
 </StyleList>

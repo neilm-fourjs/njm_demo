@@ -1,9 +1,9 @@
 /// FOURJS_START_COPYRIGHT(D,2015)
 /// Property of Four Js*
-/// (c) Copyright Four Js 2015, 2016. All Rights Reserved.
+/// (c) Copyright Four Js 2015, 2017. All Rights Reserved.
 /// * Trademark of Four Js Development Tools Europe Ltd
 ///   in the United States and elsewhere
-///
+/// 
 /// This file can be modified by licensees according to the
 /// product manual.
 /// FOURJS_END_COPYRIGHT
@@ -17,21 +17,32 @@ modulum('MyEditWidget', ['EditWidget', 'WidgetFactory'],
      */
     function(context, cls) {
 
+      /**
+       * Edit widget always displaying its tooltip
+       * @class classes.MyEditWidget
+       * @extends classes.EditWidget
+       */
       cls.MyEditWidget = context.oo.Class(cls.EditWidget, function($super) {
+        /** @lends classes.MyEditWidget.prototype */
         return {
           __name: "MyEditWidget",
-          __templateName: "EditWidget",
+          __dataContentPlaceholderSelector: '.gbc_dataContentPlaceholder',
 
           setTitle: function(title) {
-          var elt = this._element.querySelector(".gwcjs-label-text-container")
-          if (title === "") {
-            elt.removeAttribute("placeholder");
-          } else {
-            elt.setAttribute("placeholder", title);
+            $(this.getElement()).find(".title").text(title);
+          },
+
+          getTitle: function() {
+            return $(this.getElement()).find(".title").text();
           }
-        }
-      };
+        };
+      });
+
+      /*
+       *  This is a sample widget that would replace the default one in GBC
+       *  To activate it, please uncomment the line below. This will override
+       *  the original widget registration to this one.
+       */
+
+      // cls.WidgetFactory.register('Edit', cls.MyEditWidget);
     });
- 
-    cls.WidgetFactory.register('Edit', cls.MyEditWidget);
-});

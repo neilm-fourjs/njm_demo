@@ -7,13 +7,13 @@
 
 [__ButtonWidget].mt-button {
 	color: $gbc-primary-light-color;
+  padding:  $gbc-margin-ratio*2px;
   >.gbc_imageContainer {
-    padding:  $gbc-margin-ratio*2px;
     > .gbc_ImageWidget {
       min-width: 24px;
       min-height: 24px;
-      max-width: 64px;
-      max-height: 64px;
+      max-width: 32px;
+      max-height: 32px;
       overflow: hidden;
     }
   }
