@@ -5,7 +5,7 @@ GITVER=$(shell git describe --always)
 GARNAME=njm_demo-$(GENVER)
 GARFILE=$(GARNAME).gar
 
-all: etc/gitver.txt app 
+all: etc/gitver.txt app $(GARFILE)
 
 etc/gitver.txt:
 	echo $(GITVER) > etc/gitver.txt
@@ -53,7 +53,7 @@ gar: app $(GARFILE)
 $(GARFILE): gas$(GENVER)/MANIFEST gas$(GENVER)/gdemo.xcf
 	$(info Building Genero Archive $(GARFILE) ...)
 	@cp gas$(GENVER)/MANIFEST .
-	@zip -qr $(GARNAME)-$(GITVER).gar MANIFEST gas$(GENVER)/g*.xcf bin$(GENVER)/* etc/* pics/*
+	@zip -qr $(GARNAME)-$(GITVER).gar MANIFEST gas$(GENVER)/g*.xcf bin$(GENVER) etc pics
 	ln -s $(GARNAME)-$(GITVER).gar $(GARFILE)
 	$(info Done)
 	

@@ -188,3 +188,4 @@ FUNCTION gldb_showInfo(stat,dbname) --{{{
 	CLOSE WINDOW info
 
 END FUNCTION --}}}
+--------------------------------------------------------------------------------

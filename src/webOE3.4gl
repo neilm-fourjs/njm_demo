@@ -101,7 +101,7 @@ MAIN
 
 	CALL build_cats()
 
-	LET l_cat = 1
+	LET l_cat = 3
 	WHILE l_cat > 0
 		CALL getItems( m_stock_cats[ l_cat ].id )
 		LET l_cat = dynDiag()

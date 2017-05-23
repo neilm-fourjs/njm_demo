@@ -3658,20 +3658,7 @@ FUNCTION gl_floatKeys(o_c) --{{{
 	END FOR
 
 END FUNCTION --}}}
---------------------------------------------------------------------------------
-#+ Special - this function is built in to 2.3x
-FUNCTION fgl_db_driver_type()
-	DEFINE dbname, dbdrv STRING
 
-	LET dbname = fgl_getEnv("DBNAME")
-	IF dbname IS NULL THEN LET dbname = "unknown" END IF
-	GL_DBGMSG(0, "fgl_db_driver_type, dbname:"||dbname)
-	LET dbdrv = fgl_getresource("dbi.database."||dbname||".driver")
-	IF dbdrv IS NULL THEN
-		LET dbdrv = fgl_getresource("dbi.default.driver")
-	END IF
-	RETURN dbdrv
-END FUNCTION
 --------------------------------------------------------------------------------
 #+ read ../etc/gitver.txt
 #+ will return the gitversion and if it contains a tag version it returns that

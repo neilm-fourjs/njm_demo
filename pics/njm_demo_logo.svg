@@ -10,11 +10,11 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="64"
-   height="24"
+   width="66.804268"
+   height="16.40069"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="njm_demo_logo.svg"
    inkscape:export-filename="/opt/users/neilm/all/njms_demos/njm_demo/pics/njm_demo_logo_256.png"
    inkscape:export-xdpi="366.40271"
@@ -74,7 +74,7 @@
        fx="39.866867"
        fy="806.80664"
        r="39.09478"
-       gradientTransform="matrix(0.69453966,0,0,0.23940046,0.69567016,962.36868)"
+       gradientTransform="matrix(0.35536353,0,0,0.12249005,1.9583674,1095.1441)"
        gradientUnits="userSpaceOnUse" />
     <radialGradient
        inkscape:collect="always"
@@ -85,7 +85,7 @@
        fx="29.608656"
        fy="1095.9523"
        r="28.902328"
-       gradientTransform="matrix(0.67587021,0,0,0.20961771,0.33697854,1371.0531)"
+       gradientTransform="matrix(0.40640289,0,0,0.12604379,42.701938,769.8015)"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -96,20 +96,20 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.6"
-     inkscape:cx="56.557768"
-     inkscape:cy="-11.862202"
+     inkscape:cx="57.600109"
+     inkscape:cy="-20.01509"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1600"
-     inkscape:window-height="853"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
+     inkscape:window-height="844"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-top="2"
+     fit-margin-left="2"
+     fit-margin-right="2"
+     fit-margin-bottom="2" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -126,44 +126,44 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-0.49107058,-991.47888)">
+     transform="translate(0.55127023,-990.9253)">
     <text
        xml:space="preserve"
-       style="font-size:22.28821182px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#radialGradient3775);fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Medium"
-       x="0.33951703"
-       y="1161.2429"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.4038372px;line-height:125%;font-family:'URW Chancery L';-inkscape-font-specification:'URW Chancery L Medium';letter-spacing:0px;word-spacing:0px;fill:url(#radialGradient3775);fill-opacity:1;stroke:none"
+       x="1.7761403"
+       y="1196.8988"
        id="text2997"
        sodipodi:linespacing="125%"
-       transform="scale(1.1551041,0.86572284)"><tspan
+       transform="scale(1.1971801,0.83529619)"><tspan
          sodipodi:role="line"
          id="tspan2999"
-         x="0.33951703"
-         y="1161.2429"
+         x="1.7761403"
+         y="1196.8988"
          style="fill:url(#radialGradient3775);fill-opacity:1">NJM's</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:19.32661057px;font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:url(#radialGradient3787);fill-opacity:1;stroke:none;font-family:URW Chancery L;-inkscape-font-specification:URW Chancery L Medium"
-       x="-0.84651631"
-       y="1606.5879"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.62115288px;line-height:125%;font-family:'URW Chancery L';-inkscape-font-specification:'URW Chancery L Medium';letter-spacing:0px;word-spacing:0px;fill:url(#radialGradient3787);fill-opacity:1;stroke:none"
+       x="41.990303"
+       y="911.42926"
        id="text3777"
        sodipodi:linespacing="125%"
-       transform="scale(1.5897579,0.6290266)"><tspan
+       transform="scale(0.91073976,1.0980085)"><tspan
          sodipodi:role="line"
          id="tspan3779"
-         x="-0.84651631"
-         y="1606.5879"
+         x="41.990303"
+         y="911.42926"
          style="fill:url(#radialGradient3787);fill-opacity:1">Demo</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:3.08587193px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Century Gothic;-inkscape-font-specification:Century Gothic"
-       x="0.74632174"
-       y="1267.5149"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.08587193px;line-height:125%;font-family:'Century Gothic';-inkscape-font-specification:'Century Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="0.88916588"
+       y="1256.13"
        id="text3789"
        sodipodi:linespacing="125%"
        transform="scale(1.2501138,0.79992718)"><tspan
          sodipodi:role="line"
          id="tspan3791"
-         x="0.74632174"
-         y="1267.5149">Four Js Development Tools (EMEA)</tspan></text>
+         x="0.88916588"
+         y="1256.13">Four Js Development Tools (EMEA)</tspan></text>
   </g>
 </svg>
