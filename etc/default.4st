@@ -124,7 +124,7 @@
 	<Style name="Table.menu">
 		<StyleAttribute name="headerHidden" value="yes" />
 		<StyleAttribute name="fontWeight" value="bold" />
-		<StyleAttribute name="fontSize" value="14pt" />
+		<StyleAttribute name="fontSize" value="1.2em" />
 	</Style>
 
 	<Style name="Label.login">
@@ -138,12 +138,14 @@
 		<StyleAttribute name="textColor" value="red" />
 	</Style>
 	<Style name=".big">
-		<StyleAttribute name="fontSize" value="14pt" />
+		<StyleAttribute name="fontSize" value="1.2em" />
 	</Style>
-
+	<Style name=".small">
+		<StyleAttribute name="fontSize" value=".8em" />
+	</Style>
 	<Style name=".title">
 		<StyleAttribute name="fontWeight" value="bold" />
-		<StyleAttribute name="fontSize" value="16pt" />
+		<StyleAttribute name="fontSize" value="1.5em" />
 		<StyleAttribute name="textColor" value="darkRed" />
 	</Style>
 
@@ -159,4 +161,11 @@
 	<Style name="UserInterface">
 		<StyleAttribute name="browserMultiPage" value="yes" />
 	</Style>
+	<Style name=".center">
+		<StyleAttribute name="alignment" value="center" />
+	</Style>
+	<Style name=".noborder">
+		<StyleAttribute name="border" value="none" />
+	</Style>
+
 </StyleList>
