@@ -1,24 +1,24 @@
 
-
 .gbc_ImageWidget.gbc_fixedSvg > svg {
-  min-width: 24px;
-  min-height: 24px;
+	min-width: 24px;
+	min-height: 24px;
+	margin: auto;
 }
 
 [__ButtonWidget].mt-button {
-	color: $gbc-primary-light-color;
-  >.gbc_imageContainer {
-    padding:  $gbc-margin-ratio*2px;
-    > .gbc_ImageWidget {
-      min-width: 24px;
-      min-height: 24px;
-      max-width: 64px;
-      max-height: 64px;
-      overflow: hidden;
-    }
-  }
+	padding: $gbc-margin-ratio*2px;
+	padding-right: 4px;
+	>.gbc_imageContainer {
+		> .gbc_ImageWidget {
+			min-width: 24px;
+			min-height: 24px;
+			max-width: 48px;
+			max-height: 48px;
+			overflow: hidden;
+		}
+	}
 	svg {
-    fill: $gbc-primary-light-color;
-    fill-opacity: 1;
-  }
+		fill: $gbc-primary-light-color;
+		fill-opacity: 1;
+	}
 }

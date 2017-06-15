@@ -1,6 +1,6 @@
 /// FOURJS_START_COPYRIGHT(D,2015)
 /// Property of Four Js*
-/// (c) Copyright Four Js 2015, 2016. All Rights Reserved.
+/// (c) Copyright Four Js 2015, 2017. All Rights Reserved.
 /// * Trademark of Four Js Development Tools Europe Ltd
 ///   in the United States and elsewhere
 /// 
@@ -46,7 +46,7 @@ modulum('MyApplicationHostMenuWidget', ['ApplicationHostMenuWidget', 'WidgetFact
     });
 
     /*
-     *  This is a sample widget that would replace the default one in GWC-JS
+     *  This is a sample widget that would replace the default one in GBC
      *  To activate it, please uncomment the line below. This will override
      *  the original widget registration to this one.
      */

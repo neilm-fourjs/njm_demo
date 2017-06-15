@@ -1,5 +1,5 @@
 {
-  "gbc-font-size-ratio"    : ".8",
+  "gbc-font-size-ratio"    : "0.8",
   "gbc-margin-ratio"       : "0.6",
   "gbc-field-height-ratio" : "0.7",
   "gbc-radiobutton-size"   : "14px",

@@ -21,6 +21,9 @@ modulum('MyHeaderBarWidget', ['WidgetBase', 'WidgetFactory'],
      * @class classes.MyHeaderBarWidget
      * @extends classes.WidgetBase
      */
+
+    var elb; // define var for the banner object
+
     cls.MyHeaderBarWidget = context.oo.Class(cls.WidgetBase, function($super) {
       /** @lends classes.MyHeaderBarWidget.prototype */
       return {
@@ -29,7 +32,7 @@ modulum('MyHeaderBarWidget', ['WidgetBase', 'WidgetFactory'],
         _model: null,
         /** @type {number} */
         _appsCount: null,
-
+				
         constructor: function() {
           $super.constructor.call(this);
           this._appsCount = 0;
@@ -38,8 +41,10 @@ modulum('MyHeaderBarWidget', ['WidgetBase', 'WidgetFactory'],
           this._model.addCloseApplicationListener(this.onCloseApplication.bind(this));
           this._model.addCurrentWindowChangeListener(this.onCurrentWindowChanged.bind(this));
 
-          this.img = this.getElement().querySelector(".logo-top");
-          this.img.src = context.bootstrapInfo.gbcPath+"/img/demo_logo.png";
+          this.img = this.getElement().querySelector(".njm-logo-top");
+          this.img.src = context.bootstrapInfo.gbcPath+"/img/njm_demo_logo_256.png";
+          // get the banner object
+          elb = this.getElement().querySelector(".MyHeaderBarWidget-banner");
         },
 
         onNewApplication: function(application) {
@@ -56,6 +61,9 @@ modulum('MyHeaderBarWidget', ['WidgetBase', 'WidgetFactory'],
 
         onCurrentWindowChanged: function(windowNode) {
           var elt = this.getElement().querySelector(".MyHeaderBarWidget-title");
+          // Set the banner text to the value set by ui.interface.setText()
+          elb.textContent = windowNode.getAncestor("UserInterface").attribute('text');
+          // Set the header sub title to the window text.
           if (windowNode) {
             elt.textContent = windowNode.attribute('text');
           } else {

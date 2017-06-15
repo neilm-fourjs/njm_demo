@@ -29,14 +29,4 @@
      <PUBLIC_IMAGEPATH>$(res.public.resources)</PUBLIC_IMAGEPATH>
      <GWC-JS>njm2-js</GWC-JS>
   </UA_OUTPUT>
-  <OUTPUT>
-    <MAP Id="DUA_HTML5">
-      <PICTURE>
-        <PATH Id="njm_html5" Type="APPSERVER" ExtensionFilter=".css;.gif;.png;.jpg" DVMFallbackAllowed="TRUE">$(res.path.njm_demo.tpl)</PATH>
-      </PICTURE>
-      <THEME>
-        <TEMPLATE Id="_default">$(res.path.njm_demo.tpl)/main.xhtml</TEMPLATE>
-      </THEME>
-    </MAP>
-  </OUTPUT>
 </APPLICATION>
