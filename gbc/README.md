@@ -56,6 +56,7 @@ for most of the tools are too old on most LTS ( Long term support ) type distrib
 ### CentOS 7 ( and probably 6 )
 
 ```bash
+sudo yum remove nodejs
 sudo curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 sudo yum install -y unzip git nodejs
 sudo npm install -g grunt-cli
